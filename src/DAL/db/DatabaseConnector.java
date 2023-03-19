@@ -33,6 +33,7 @@ public class DatabaseConnector {
         ds.setTrustServerCertificate(true);
     }
 
+
     public Connection getConnection() throws SQLServerException {
         return ds.getConnection();
     }
