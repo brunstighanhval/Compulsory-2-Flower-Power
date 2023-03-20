@@ -1,4 +1,4 @@
 package DAL.db;
 
-public class EventDAO {
+public class EventDAO implements IEvent {
 }
