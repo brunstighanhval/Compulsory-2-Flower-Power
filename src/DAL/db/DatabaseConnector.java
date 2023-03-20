@@ -13,8 +13,9 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static final String PROP_FILE = "Config/database.settings";
     private final SQLServerDataSource ds;
+    private static DatabaseConnector instance = null;
 
-    public DatabaseConnector() throws IOException {
+    private DatabaseConnector() throws IOException {
 
 
         Properties databaseProperties = new Properties();
@@ -32,6 +33,14 @@ public class DatabaseConnector {
         ds.setPassword(password);
         ds.setTrustServerCertificate(true);
     }
+
+    public static DatabaseConnector getInstance() throws IOException {
+        if (instance == null){
+            instance = new DatabaseConnector();
+        }
+        return instance;
+    }
+
 
 
     public Connection getConnection() throws SQLServerException {

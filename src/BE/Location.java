@@ -3,13 +3,13 @@ package BE;
 public class Location {
     private int id;
     private String name;
-    private String adress;
+    private String address;
     private int zip_code;
 
     public Location(int id, String name, String adress, int zip_code) {
         this.id = id;
         this.name = name;
-        this.adress = adress;
+        this.address = adress;
         this.zip_code = zip_code;
     }
 
@@ -30,11 +30,11 @@ public class Location {
     }
 
     public String getAdress() {
-        return adress;
+        return address;
     }
 
     public void setAdress(String adress) {
-        this.adress = adress;
+        this.address = adress;
     }
 
     public int getZip_code() {
@@ -44,4 +44,10 @@ public class Location {
     public void setZip_code(int zip_code) {
         this.zip_code = zip_code;
     }
+
+    public String toString(){
+
+        return name;
+    }
+
 }

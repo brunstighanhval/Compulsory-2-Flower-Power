@@ -9,7 +9,7 @@
    <children>
       <TextField fx:id="txtfNameOfLocation" layoutX="28.0" layoutY="59.0" promptText="Name Of Location" />
       <TextField fx:id="txtfAddress" layoutX="28.0" layoutY="111.0" promptText="Address" />
-      <TextField fx:id="txtfCity" layoutX="28.0" layoutY="161.0" promptText="City" />
+      <TextField fx:id="txtZip_Code" layoutX="28.0" layoutY="161.0" promptText="City" />
       <Button fx:id="btnAdd" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAdd" text="Add" />
    </children>
 </AnchorPane>
