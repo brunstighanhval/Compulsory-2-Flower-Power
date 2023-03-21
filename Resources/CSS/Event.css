@@ -2,8 +2,8 @@
 
 
 #imgLogo{
-    -fx-image: url("Pictures/logo.png");
+
 }
-#imgBackground{
+#acpBackground{
     -fx-background-color: #f67835;
 }

@@ -18,7 +18,7 @@ public class Main extends Application {
 
 
         primaryStage.setTitle("Event Tickets EASV Bar");
-        primaryStage.setScene(new Scene(root));
+       // primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

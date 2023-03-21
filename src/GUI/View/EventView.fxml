@@ -23,10 +23,9 @@
       <Button fx:id="btnEditEvent" layoutX="389.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleEditEvent" text="EditEvent" />
       <Button fx:id="btnDeleteSelectedEvent" layoutX="489.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
       <Label fx:id="lblTicketsLeft" layoutX="486.0" layoutY="143.0" text="TicketsLeft" />
-      <ImageView fx:id="imgBackground" fitHeight="406.0" fitWidth="369.0" layoutX="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgLogo" fitHeight="127.0" fitWidth="200.0" layoutX="-2.0" layoutY="-34.0" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Resources/Pictures/logo.png" />
+            <Image url="@Pictures/logo.png" />
          </image>
       </ImageView>
    </children>

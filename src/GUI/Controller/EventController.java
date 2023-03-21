@@ -50,6 +50,11 @@ public class EventController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+    }
+/*
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Image logo;
         try {
             logo =  new Image(new FileInputStream(("/Pictures/logo.png")));
@@ -60,4 +65,6 @@ public class EventController implements Initializable {
 
 
     }
+
+ */
 }
