@@ -1,0 +1,9 @@
+
+
+
+#imgLogo{
+    -fx-image: url("Pictures/logo.png");
+}
+#imgBackground{
+    -fx-background-color: #f67835;
+}

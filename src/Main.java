@@ -12,6 +12,9 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
         Parent root = loader.load();
+        primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().getStylesheets().add(getClass().getResource("CSS/Event.css").toExternalForm());
+
 
 
         primaryStage.setTitle("Event Tickets EASV Bar");
