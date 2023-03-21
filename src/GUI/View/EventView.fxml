@@ -3,15 +3,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
+<AnchorPane fx:id="acpBackground" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
    <children>
-      <ListView fx:id="lstAllEvents" layoutX="40.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="btnCreateNewEvent" layoutX="79.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleCreateNewEvent" text="Create new Event" />
-      <Text layoutX="98.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" />
+      <ListView fx:id="lstAllEvents" layoutX="33.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="btnCreateNewEvent" layoutX="79.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleCreateNewEvent" text="Create new Event" />
+      <Text layoutX="98.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" />
       <Text layoutX="406.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information" />
       <Label fx:id="lblEventuate" layoutX="439.0" layoutY="84.0" text="EventName" />
       <Label fx:id="lblDate" layoutX="406.0" layoutY="111.0" text="Date" />
@@ -22,5 +23,10 @@
       <Button fx:id="btnEditEvent" layoutX="389.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleEditEvent" text="EditEvent" />
       <Button fx:id="btnDeleteSelectedEvent" layoutX="489.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
       <Label fx:id="lblTicketsLeft" layoutX="486.0" layoutY="143.0" text="TicketsLeft" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Pictures/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -3,16 +3,24 @@ package GUI.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class EventController {
+public class EventController implements Initializable {
+    public ImageView imgLogo;
     @FXML
     private ListView lstAllEvents;
     @FXML
@@ -39,4 +47,24 @@ public class EventController {
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+/*
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Image logo;
+        try {
+            logo =  new Image(new FileInputStream(("/Pictures/logo.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        imgLogo.setImage(logo);
+
+
+    }
+
+ */
 }
