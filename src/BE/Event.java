@@ -91,6 +91,8 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import GUI.Model.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,27 @@ public class EventController implements Initializable {
     @FXML
     private Label lblEventuate, lblDate,lblLocation, lblNotes, lblEventCoordinator, lblStartTime, lblTicketsLeft;
 
+    private EventModel eventModel;
+
+
+    public EventController() {
+        try {
+            eventModel=new EventModel();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        lstAllEvents.setItems(eventModel.getObservableEvents());
+
+
+
+    }
+
     @FXML
     private void handleEditEvent(ActionEvent actionEvent) {
     }
@@ -48,10 +70,7 @@ public class EventController implements Initializable {
         stage.showAndWait();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-    }
 /*
     @Override
     public void initialize(URL location, ResourceBundle resources) {

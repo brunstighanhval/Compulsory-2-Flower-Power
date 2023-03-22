@@ -1,6 +1,7 @@
 package DAL.db;
 
 
+import GUI.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnector {
@@ -15,7 +17,7 @@ public class DatabaseConnector {
     private final SQLServerDataSource ds;
     private static DatabaseConnector instance = null;
 
-    private DatabaseConnector() throws IOException {
+    DatabaseConnector() throws IOException {
 
 
         Properties databaseProperties = new Properties();
@@ -46,5 +48,25 @@ public class DatabaseConnector {
     public Connection getConnection() throws SQLServerException {
         return ds.getConnection();
     }
+
+    public static void main(String[] args) throws Exception {
+
+     //   DatabaseConnector databaseConnector = new DatabaseConnector();
+
+       // try (Connection connection = databaseConnector.getConnection())
+        {
+
+         //   System.out.println("Is it open? " + !connection.isClosed());
+
+            EventModel eventModel = new EventModel();
+
+            System.out.println(eventModel.getObservableEvents());
+
+
+
+
+        } //Connection gets closed here
+    }
+
 
 }

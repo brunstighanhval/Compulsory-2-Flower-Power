@@ -2,6 +2,7 @@ package DAL.db;
 
 import BE.Event;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +17,8 @@ public class EventDAO {
 
     private DatabaseConnector databaseConnector;
 
-    public EventDAO() {
-        this.databaseConnector = databaseConnector;
+    public EventDAO() throws IOException {
+        databaseConnector = new DatabaseConnector();
     }
 
     public List<Event> getAllEvents(int user) throws Exception {
