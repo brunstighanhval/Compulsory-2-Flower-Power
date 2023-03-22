@@ -1,27 +1,46 @@
 package BE;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Event {
 
-    private int id;
-    private Date date;
-    private Time start_time;
-    private Time end_time;
-    private String max_tickets;
-    private String notes;
+    private int id,EvKId,max_tickets;
+    private LocalDate date;
+    private LocalTime start_time;
+
+    private String notes,name;
+
     private int venue_id;
 
 
-    private Event(int ID, Date date, Time start_time, Time end_time, String max_tickets, String notes, int venue_id){
+    public Event(int ID, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id){
         this.id = id;
+        this.name=name;
+        this.EvKId=EvKId;
         this.date = date;
         this.start_time = start_time;
-        this.end_time = end_time;
         this.max_tickets = max_tickets;
         this.notes = notes;
         this.venue_id = venue_id;
+    }
+
+    public int getEvKId() {
+        return EvKId;
+    }
+
+    public void setEvKId(int evKId) {
+        EvKId = evKId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -32,35 +51,27 @@ public class Event {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Time getStart_time() {
+    public LocalTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Time start_time) {
+    public void setStart_time(LocalTime start_time) {
         this.start_time = start_time;
     }
 
-    public Time getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(Time end_time) {
-        this.end_time = end_time;
-    }
-
-    public String getMax_tickets() {
+    public int getMax_tickets() {
         return max_tickets;
     }
 
-    public void setMax_tickets(String max_tickets) {
+    public void setMax_tickets(int max_tickets) {
         this.max_tickets = max_tickets;
     }
 
@@ -79,4 +90,7 @@ public class Event {
     public void setVenue_id(int venue_id) {
         this.venue_id = venue_id;
     }
+
+
+
 }

@@ -1,7 +1,7 @@
 package GUI.Controller;
 
 import BE.Location;
-import GUI.Model.EventModel;
+import GUI.Model.LocationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,13 +26,13 @@ public class CreateEventController implements Initializable {
     private Button btnCreateNewLocation;
 
 
-    EventModel model;
+    LocationModel model;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            model = new EventModel();
+            model = new LocationModel();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

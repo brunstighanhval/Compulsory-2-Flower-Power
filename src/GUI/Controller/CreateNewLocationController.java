@@ -1,6 +1,6 @@
 package GUI.Controller;
 
-import GUI.Model.EventModel;
+import GUI.Model.LocationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 public class CreateNewLocationController {
 
-   private EventModel model;
+   private LocationModel model;
 
    @FXML
     private TextField txtfNameOfLocation, txtfAddress, txtZip_Code;
@@ -16,7 +16,7 @@ public class CreateNewLocationController {
     private Button btnAdd;
 
     public void handleAdd(ActionEvent actionEvent) throws Exception {
-     model = new EventModel();
+     model = new LocationModel();
 
      String name = txtfNameOfLocation.getText();
      String address = txtfAddress.getText();

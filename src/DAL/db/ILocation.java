@@ -4,7 +4,7 @@ import BE.Location;
 
 import java.util.List;
 
-public interface IEvent {
+public interface ILocation {
 
     Location createLocation(String name, String address, int zipCode) throws Exception;
 

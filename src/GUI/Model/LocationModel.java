@@ -1,22 +1,19 @@
 package GUI.Model;
 
 import BE.Location;
-import BLL.EventManager;
+import BLL.LocationManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.time.LocalDate;
+public class LocationModel {
 
-public class EventModel {
-
-    private EventManager eventManager;
+    private LocationManager eventManager;
     public Location createdLocation;
 
     private ObservableList<Location> observableLocations;
 
-    public EventModel() throws Exception {
-        eventManager = new EventManager();
+    public LocationModel() throws Exception {
+        eventManager = new LocationManager();
         observableLocations = FXCollections.observableArrayList();
         observableLocations.addAll(eventManager.getAllLocations());
     }
