@@ -55,6 +55,7 @@ public class CreateEventController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Create new event");
         stage.setScene(new Scene(root));
+        root.getStylesheets().add(getClass().getResource("/CSS/CreateNewLocation.css").toExternalForm());
         stage.showAndWait();
     }
 

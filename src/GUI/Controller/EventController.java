@@ -9,15 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class EventController implements Initializable {
@@ -27,7 +25,7 @@ public class EventController implements Initializable {
     @FXML
     private Button btnCreateNewEvent, btnEditEvent, btnDeleteSelectedEvent;
     @FXML
-    private Label lblEventuate, lblDate,lblLocation, lblNotes, lblEventCoordinator, lblStartTime, lblTicketsLeft;
+    private TextField txtfEventName, txtfDate,txtfLocation, txtfNotes, txtfEVK, txtfStartTime, txtfEndTime ,txtfTicketsLeft;
     @FXML
     private String errorText;
     @FXML
@@ -67,19 +65,33 @@ public class EventController implements Initializable {
 
     private void labelsToShow()
     {
-        //lblEventuate.setText();
-        lblDate.setText(selectedEvent.getDate().toString());
+        txtfEventName.setText(selectedEvent.getName());
+        txtfDate.setText(selectedEvent.getDate().toString());
         //lblLocation.setText();
-        lblNotes.setText(selectedEvent.getNotes());
-        lblEventCoordinator.setText(selectedEvent.getId()+"");
-        lblStartTime.setText(selectedEvent.getStart_time().toString());
-        lblTicketsLeft.setText(selectedEvent.getMax_tickets()+"");
+        txtfNotes.setText(selectedEvent.getNotes());
+        //txtfEVK.setText(selectedEvent.getId()+"");
+        txtfStartTime.setText(selectedEvent.getStart_time().toString());
+        txtfEndTime.setText(selectedEvent.getEnd_time().toString());
+        txtfTicketsLeft.setText(String.valueOf(selectedEvent.getMax_tickets()));
     }
 
 
 
     @FXML
     private void handleEditEvent(ActionEvent actionEvent) {
+       try{
+            Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
+            updatedEvent.setName(txtfEventName.getText());
+            updatedEvent.setDate(LocalDate.parse(txtfDate.getText()));
+            updatedEvent.setStart_time(LocalTime.parse(txtfStartTime.getText()));
+            updatedEvent.setEnd_time(LocalTime.parse(txtfEndTime.getText()));
+            updatedEvent.setMax_tickets(Integer.parseInt(txtfTicketsLeft.getText()));
+            updatedEvent.setNotes(txtfNotes.getText());
+            eventModel.updateEvent(updatedEvent);
+        } catch (Exception e){
+           displayError(e);
+           e.printStackTrace();
+       }
     }
 
     @FXML
@@ -110,6 +122,7 @@ public class EventController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Create new event");
         stage.setScene(new Scene(root));
+        root.getStylesheets().add(getClass().getResource("/CSS/CreateEvent.css").toExternalForm());
         stage.showAndWait();
     }
 

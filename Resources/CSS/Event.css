@@ -2,3 +2,6 @@
 #acpBackground{
     -fx-background-color: f67835;
 }
+.text-field{
+    -fx-background-color: TRANSPARENT;
+}

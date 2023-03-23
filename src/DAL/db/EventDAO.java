@@ -106,8 +106,24 @@ public class EventDAO implements IEventDataAccess{
     }
 
     @Override
-    public void editEvent(Event event) throws Exception {
+    public void updateEvent(Event updatedEvent) throws Exception {
+        String sql = "UPDATE Event SET Name = ?, Date = ?, Start_Time = ?, End_Time = ?, Max_Tickets = ?, Notes = ? WHERE Event_ID = ?";
+        try(Connection conn = DatabaseConnector.getInstance().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
+            stmt.setString(1, updatedEvent.getName());
+            stmt.setDate(2, Date.valueOf(updatedEvent.getDate()));
+            stmt.setTime(3, Time.valueOf(updatedEvent.getStart_time()));
+            stmt.setTime(4, Time.valueOf(updatedEvent.getEnd_time()));
+            stmt.setInt(5, updatedEvent.getMax_tickets());
+            stmt.setString(6, updatedEvent.getNotes());
+            stmt.setInt(7, updatedEvent.getId());
+
+            stmt.execute();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not edit the event", ex);
+        }
     }
 
 

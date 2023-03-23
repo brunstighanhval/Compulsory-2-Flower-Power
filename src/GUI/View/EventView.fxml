@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="acpBackground" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f67835;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
+<AnchorPane fx:id="acpBackground" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
    <children>
       <ListView fx:id="lstAllEvents" layoutX="33.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="btnCreateNewEvent" layoutX="79.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleCreateNewEvent" text="Create new Event" />
       <Text layoutX="98.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" />
       <Text layoutX="406.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information" />
-      <Label fx:id="lblEventuate" layoutX="439.0" layoutY="84.0" text="EventName" />
-      <Label fx:id="lblDate" layoutX="406.0" layoutY="111.0" text="Date" />
-      <Label fx:id="lblLocation" layoutX="406.0" layoutY="143.0" text="Location" />
-      <Label fx:id="lblNotes" layoutX="406.0" layoutY="173.0" text="Notes" />
-      <Label fx:id="lblEventCoordinator" layoutX="406.0" layoutY="211.0" text="EventCoordinator" />
-      <Label fx:id="lblStartTime" layoutX="473.0" layoutY="111.0" text="StartTime" />
-      <Button fx:id="btnEditEvent" layoutX="389.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleEditEvent" text="EditEvent" />
-      <Button fx:id="btnDeleteSelectedEvent" layoutX="489.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
-      <Label fx:id="lblTicketsLeft" layoutX="486.0" layoutY="143.0" text="TicketsLeft" />
+      <Button fx:id="btnEditEvent" layoutX="384.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleEditEvent" text="EditEvent" />
+      <Button fx:id="btnDeleteSelectedEvent" layoutX="496.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Pictures/logo.png" />
+            <Image url="@/Pictures/logo.png" />
          </image>
       </ImageView>
       <Button fx:id="btnSignOut" layoutX="7.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleSignOut" text="Sign Out" />
+      <TextField fx:id="txtfEventName" alignment="CENTER" layoutX="384.0" layoutY="78.0" prefHeight="26.0" prefWidth="138.0" />
+      <TextField fx:id="txtfDate" layoutX="350.0" layoutY="106.0" prefHeight="26.0" prefWidth="77.0" />
+      <TextField fx:id="txtfStartTime" layoutX="430.0" layoutY="106.0" prefHeight="26.0" prefWidth="66.0" />
+      <TextField fx:id="txtfLocation" layoutX="396.0" layoutY="146.0" prefHeight="26.0" prefWidth="138.0" />
+      <TextField fx:id="txtfEndTime" layoutX="496.0" layoutY="106.0" prefHeight="26.0" prefWidth="62.0" />
+      <TextField fx:id="txtfNotes" layoutX="353.0" layoutY="264.0" prefHeight="26.0" prefWidth="200.0" />
+      <TextField fx:id="txtfEvK" layoutX="465.0" layoutY="187.0" prefHeight="26.0" prefWidth="69.0" />
+      <TextField fx:id="txtfTicketsLeft" layoutX="465.0" layoutY="225.0" prefHeight="26.0" prefWidth="69.0" />
+      <Text layoutX="315.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Name:" wrappingWidth="69.60000000000014" />
+      <Text layoutX="315.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Text layoutX="342.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" />
+      <Text layoutX="399.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created by:" />
+      <Text layoutX="394.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total tickets:" />
+      <Text layoutX="311.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes:" />
    </children>
 </AnchorPane>

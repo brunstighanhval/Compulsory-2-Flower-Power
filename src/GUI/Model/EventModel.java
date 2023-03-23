@@ -38,6 +38,10 @@ public class EventModel {
         eventsToBeViewed.remove(event);
     }
 
+    public void updateEvent(Event updatedEvent) throws Exception {
+        eventManager.updateEvent(updatedEvent);
+    }
+
 
     public void showList() throws Exception {
         //Update the listview

@@ -24,12 +24,15 @@ public class LoginController {
     private AnchorPane acpBackground;
 
     public void handleSignIn(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
         stage.setTitle("Event Tickets EASV Bar");
         stage.setScene(new Scene(root));
-        stage.showAndWait();
+        root.getStylesheets().add(getClass().getResource("/CSS/Event.css").toExternalForm());
+        stage.show();
+        Stage stage1 = (Stage) btnSignIn.getScene().getWindow();
+        stage1.close();
     }
 }

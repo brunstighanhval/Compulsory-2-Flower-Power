@@ -28,6 +28,10 @@ public class EventManager {
         eventDAO.deleteEvent(event);
     }
 
+    public void updateEvent(Event updatedEvent) throws Exception {
+        eventDAO.updateEvent(updatedEvent);
+    }
+
 
 
 
