@@ -22,14 +22,15 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
-
     @FXML
     private ComboBox<Location> cbbSelectedLocation;
     @FXML
     private TextField txtfEventName, txtfDate, txtfStartTime, txtfEndTime, txtfTicketAmount, txtfNotes;
     @FXML
-    private Button btnCreateNewLocation;
+    private Button btnCreateNewLocation, btnSaveNewEvent;
+    @FXML
     private LocationModel locationModel;
+    @FXML
     private EventModel eventModel;
 
     @Override

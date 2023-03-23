@@ -26,10 +26,9 @@ public class LoginController {
     public void handleSignIn(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
-        Stage stage = new Stage();
         Parent root = loader.load();
+        Stage stage = new Stage();
         stage.setTitle("Event Tickets EASV Bar");
-        stage.setTitle("Create new event");
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }

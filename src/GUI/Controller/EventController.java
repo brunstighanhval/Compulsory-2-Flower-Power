@@ -31,8 +31,9 @@ public class EventController implements Initializable {
     private Button btnCreateNewEvent, btnEditEvent, btnDeleteSelectedEvent;
     @FXML
     private Label lblEventuate, lblDate,lblLocation, lblNotes, lblEventCoordinator, lblStartTime, lblTicketsLeft;
-
+    @FXML
     private String errorText;
+    @FXML
     private EventModel eventModel;
 
     Event selectedEvent;
@@ -106,6 +107,9 @@ public class EventController implements Initializable {
         alert.setTitle(errorText);
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
+    }
+    @FXML
+    public void handleSignOut(ActionEvent actionEvent) {
     }
 /*
     @Override
