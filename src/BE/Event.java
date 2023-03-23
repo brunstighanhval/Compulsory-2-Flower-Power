@@ -7,19 +7,20 @@ public class Event {
 
     private int id,EvKId,max_tickets;
     private LocalDate date;
-    private LocalTime start_time;
+    private LocalTime start_time, end_time;
 
     private String notes,name;
 
     private int venue_id;
 
 
-    public Event(int ID, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id){
+    public Event(int id, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id){
         this.id = id;
         this.name=name;
         this.EvKId=EvKId;
         this.date = date;
         this.start_time = start_time;
+        this.end_time = end_time;
         this.max_tickets = max_tickets;
         this.notes = notes;
         this.venue_id = venue_id;
@@ -63,6 +64,14 @@ public class Event {
 
     public void setStart_time(LocalTime start_time) {
         this.start_time = start_time;
+    }
+
+    public LocalTime getEnd_time(){
+        return end_time;
+    }
+
+    public void setEnd_time(LocalTime end_time){
+        this.end_time = end_time;
     }
 
     public int getMax_tickets() {
