@@ -2,6 +2,7 @@ package DAL.db;
 
 import BE.Event;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -93,7 +94,15 @@ public class EventDAO implements IEventDataAccess{
 
     @Override
     public void deleteEvent(Event event) throws Exception {
-
+        String sql = "DELETE FROM Event WHERE Event_ID = ?";
+        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, event.getId());
+            stmt.execute();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not delete this event", ex);
+        }
     }
 
     @Override

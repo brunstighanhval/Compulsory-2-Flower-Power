@@ -33,6 +33,11 @@ public class EventModel {
         showList();
     }
 
+    public void deleteEvent(Event event) throws Exception{
+        eventManager.deleteEvent(event);
+        eventsToBeViewed.remove(event);
+    }
+
 
     public void showList() throws Exception {
         //Update the listview
