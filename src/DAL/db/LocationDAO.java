@@ -1,7 +1,6 @@
 package DAL.db;
 
 import BE.Location;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,19 +10,10 @@ public class LocationDAO implements ILocation {
 
     private DatabaseConnector databaseConnector;
 
-    public LocationDAO() throws IOException {
-        DatabaseConnector.getInstance();
-    }
-
-
-
-
-
+    public LocationDAO() throws IOException {DatabaseConnector.getInstance();}
 
     @Override
     public Location createLocation(String name, String address, int zipCode) throws Exception {
-
-        //Creating a location in the database by using a SQL query.
 
         String sql = "INSERT INTO Location (Name, Address, Zip_Code) VALUES (?,?,?);";
         try(Connection conn = DatabaseConnector.getInstance().getConnection()) {
@@ -54,6 +44,7 @@ public class LocationDAO implements ILocation {
             throw new Exception("Could not create location", ex);
         }
     }
+
     @Override
     public List<Location> getAllLocations() throws Exception {
         ArrayList<Location> allLocations = new ArrayList<>();
@@ -80,5 +71,4 @@ public class LocationDAO implements ILocation {
             throw new Exception("Could not get locations from database", ex);
         }
     }
-
 }

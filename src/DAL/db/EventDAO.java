@@ -1,8 +1,7 @@
 package DAL.db;
 
 import BE.Event;
-
-import javax.xml.crypto.Data;
+import BE.Ticket;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,24 +9,19 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class EventDAO implements IEventDataAccess{
-
     private DatabaseConnector databaseConnector;
 
-    public EventDAO() throws IOException {
-        databaseConnector = new DatabaseConnector();
-    }
+    public EventDAO() throws IOException {databaseConnector = new DatabaseConnector();}
+
 @Override
     public List<Event> getAllEvents() throws Exception {
         ArrayList<Event> allEvents = new ArrayList<>();
-
 
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
             String sql = "SELECT * FROM dbo.Event;";
-
 
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -45,21 +39,47 @@ public class EventDAO implements IEventDataAccess{
                 String notes = rs.getString("Notes");
                 int VenueID = rs.getInt("Venue_ID");
 
-
-
                 Event event = new Event(eventId, name, evKId, date, startTime, endTime,maxTickets,notes,VenueID);
-
                 allEvents.add(event);
             }
-
             return allEvents;
-
         }
         catch (SQLException ex)
         {
             ex.printStackTrace();
             throw new Exception("Could not get Songs from database", ex);
         }
+    }
+
+    @Override
+    public List<Ticket> getTicketsFromEvent(Event event) throws Exception {
+        ArrayList<Ticket> ticketsFromEvent = new ArrayList<>();
+        try (Connection conn = databaseConnector.getConnection()){
+
+            String sql = "SELECT * FROM Ticket WHERE Event_ID = ?";
+
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             stmt.setInt(1, event.getId());
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int ticket_Id = rs.getInt("Ticket_ID");
+                int event_Id = rs.getInt("Event_ID");
+                String firstName = rs.getString("First_Name");
+                String lastName =rs.getString("Last_Name");
+                String mail = rs.getString("Mail");
+                int type_Id = rs.getInt("Type_ID");
+
+                Ticket ticket = new Ticket(ticket_Id, event_Id, firstName, lastName, mail, type_Id);
+                ticketsFromEvent.add(ticket);
+            }
+        }catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception("Could not get Tickets from database", ex);
+        }
+        return ticketsFromEvent;
     }
 
     @Override
@@ -125,6 +145,4 @@ public class EventDAO implements IEventDataAccess{
             throw new Exception("Could not edit the event", ex);
         }
     }
-
-
 }

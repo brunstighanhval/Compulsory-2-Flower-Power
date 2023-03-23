@@ -4,7 +4,8 @@ public class ZipCode {
     private int id;
     private int zip_code;
 
-    public ZipCode(int id, int zip_code) {
+    public ZipCode(int id, int zip_code)
+    {
         this.id = id;
         this.zip_code = zip_code;
     }

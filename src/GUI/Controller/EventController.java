@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Event;
+import BE.Ticket;
 import GUI.Model.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -20,6 +20,10 @@ import java.util.ResourceBundle;
 
 public class EventController implements Initializable {
     public ImageView imgLogo;
+    @FXML
+    private Button btnNewTicket;
+    @FXML
+    private ListView <Ticket> lstEventTickets;
     @FXML
     private ListView<Event> lstAllEvents;
     @FXML
@@ -36,7 +40,7 @@ public class EventController implements Initializable {
 
     public EventController() {
         try {
-            eventModel=new EventModel();
+            eventModel = new EventModel();
         } catch (Exception e) {
             displayError(e);
         }
@@ -44,23 +48,25 @@ public class EventController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void initialize(URL location, ResourceBundle resources)
+    {
         lstAllEvents.setItems(eventModel.getObservableEvents());
         listenerLstAllEvents();
-
     }
-
 
     public void listenerLstAllEvents() {
         lstAllEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
 
             selectedEvent  = lstAllEvents.getSelectionModel().getSelectedItem();
+
+            try {
+                lstEventTickets.setItems(eventModel.getTicketsFromEvent(selectedEvent));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             labelsToShow();
-
         });
-
     }
 
     private void labelsToShow()
@@ -75,10 +81,9 @@ public class EventController implements Initializable {
         txtfTicketsLeft.setText(String.valueOf(selectedEvent.getMax_tickets()));
     }
 
-
-
     @FXML
-    private void handleEditEvent(ActionEvent actionEvent) {
+    private void handleEditEvent(ActionEvent actionEvent)
+    {
        try{
             Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
             updatedEvent.setName(txtfEventName.getText());
@@ -95,7 +100,8 @@ public class EventController implements Initializable {
     }
 
     @FXML
-    public void handleDeleteSelectedEvent(ActionEvent actionEvent) {
+    public void handleDeleteSelectedEvent(ActionEvent actionEvent)
+    {
         selectedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
         if(selectedEvent!= null){
             try {
@@ -114,7 +120,8 @@ public class EventController implements Initializable {
     }
 
     @FXML
-    private void handleCreateNewEvent(ActionEvent actionEvent) throws IOException {
+    private void handleCreateNewEvent(ActionEvent actionEvent) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateEventView.fxml"));
         Parent root = loader.load();
@@ -126,29 +133,29 @@ public class EventController implements Initializable {
         stage.showAndWait();
     }
 
-    private void displayError(Throwable t) {
+    private void displayError(Throwable t)
+    {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
         alert.setTitle(errorText);
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
     }
+
     @FXML
     public void handleSignOut(ActionEvent actionEvent) {
     }
-/*
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Image logo;
-        try {
-            logo =  new Image(new FileInputStream(("/Pictures/logo.png")));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        imgLogo.setImage(logo);
 
+    public void createTicket(ActionEvent actionEvent) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/GUI/View/CreateTicketView.fxml"));
+        Parent root = loader.load();
 
+        Stage stage = new Stage();
+        stage.setTitle("Create new Ticket");
+        stage.setScene(new Scene(root));
+        //root.getStylesheets().add(getClass().getResource("/CSS/CreateEvent.css").toExternalForm());
+        stage.showAndWait();
     }
-
- */
 }

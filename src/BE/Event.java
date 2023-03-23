@@ -8,11 +8,8 @@ public class Event {
     private int id,EvKId,max_tickets;
     private LocalDate date;
     private LocalTime start_time, end_time;
-
     private String notes,name;
-
     private int venue_id;
-
 
     public Event(int id, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id){
         this.id = id;

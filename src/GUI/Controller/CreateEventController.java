@@ -1,6 +1,5 @@
 package GUI.Controller;
 
-import BE.EventKoordinator;
 import BE.Location;
 import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
@@ -14,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -33,8 +31,8 @@ public class CreateEventController implements Initializable {
     private EventModel eventModel;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void initialize(URL location, ResourceBundle resources)
+    {
         try {
             locationModel = new LocationModel();
             eventModel = new EventModel();
@@ -44,10 +42,10 @@ public class CreateEventController implements Initializable {
         }
 
         cbbSelectedLocation.setItems(locationModel.getObservableLocations());
-
     }
 
-    public void handleCreateNewLocation(ActionEvent actionEvent) throws IOException {
+    public void handleCreateNewLocation(ActionEvent actionEvent) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateNewLocationView.fxml"));
         Parent root = loader.load();
@@ -59,7 +57,8 @@ public class CreateEventController implements Initializable {
         stage.showAndWait();
     }
 
-    public void handleCreateEvent(ActionEvent actionEvent) {
+    public void handleCreateEvent(ActionEvent actionEvent)
+    {
         String name = txtfEventName.getText();
         int EvKId = 1;
         LocalDate date = LocalDate.parse(txtfDate.getText());

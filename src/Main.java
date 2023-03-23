@@ -15,14 +15,9 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("GUI/View/LoginView.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
-
-
-
         primaryStage.setTitle("Login page");
         root.getScene().getStylesheets().add(getClass().getResource("CSS/Login.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
-
     }
-
 }

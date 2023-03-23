@@ -8,7 +8,8 @@ public class Ticket {
     private String mail;
     private int type_id;
 
-    public Ticket(int id, int event_id, String first_name, String last_name, String mail, int type_id) {
+    public Ticket(int id, int event_id, String first_name, String last_name, String mail, int type_id)
+    {
         this.id = id;
         this.event_id = event_id;
         this.first_name = first_name;
@@ -63,5 +64,11 @@ public class Ticket {
 
     public void setType_id(int type_id) {
         this.type_id = type_id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return first_name + last_name;
     }
 }

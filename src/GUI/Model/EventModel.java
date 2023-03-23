@@ -1,30 +1,38 @@
 package GUI.Model;
 
 import BE.Event;
+import BE.Ticket;
 import BLL.EventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 public class EventModel {
-
     private ObservableList<Event> eventsToBeViewed;
-    private EventManager eventManager;
+    private ObservableList<Ticket> ticketsToBeViewed;
     private Event createdEvent;
+    private EventManager eventManager;
 
     int user=1;
 
-    public EventModel() throws Exception  {
+    public EventModel() throws Exception
+    {
         eventManager = new EventManager();
         eventsToBeViewed = FXCollections.observableArrayList();
         eventsToBeViewed.addAll(eventManager.getAllEvents());
+        ticketsToBeViewed = FXCollections.observableArrayList();
     }
 
     public ObservableList<Event> getObservableEvents() {
         return eventsToBeViewed;
+    }
+
+    public ObservableList<Ticket> getTicketsFromEvent(Event event) throws Exception
+    {
+        ticketsToBeViewed.clear();
+        ticketsToBeViewed.addAll(eventManager.getTicketsFromEvent(event));
+        return ticketsToBeViewed;
     }
 
     public void createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
@@ -48,8 +56,4 @@ public class EventModel {
         eventsToBeViewed.clear();
         eventsToBeViewed.addAll(eventManager.getAllEvents());
     }
-
-
-
-
 }

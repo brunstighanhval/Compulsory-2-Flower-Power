@@ -5,7 +5,8 @@ public class TicketType {
     private String type_name;
     private int price;
 
-    public TicketType(int id, String type_name, int price) {
+    public TicketType(int id, String type_name, int price)
+    {
         this.id = id;
         this.type_name = type_name;
         this.price = price;

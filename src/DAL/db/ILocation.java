@@ -1,7 +1,6 @@
 package DAL.db;
 
 import BE.Location;
-
 import java.util.List;
 
 public interface ILocation {

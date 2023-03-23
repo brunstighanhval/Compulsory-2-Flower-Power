@@ -6,7 +6,8 @@ public class Location {
     private String address;
     private int zip_code;
 
-    public Location(int id, String name, String adress, int zip_code) {
+    public Location(int id, String name, String adress, int zip_code)
+    {
         this.id = id;
         this.name = name;
         this.address = adress;
@@ -45,9 +46,8 @@ public class Location {
         this.zip_code = zip_code;
     }
 
-    public String toString(){
-
+    public String toString()
+    {
         return name;
     }
-
 }

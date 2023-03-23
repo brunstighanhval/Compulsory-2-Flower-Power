@@ -6,10 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class LocationModel {
-
     private LocationManager eventManager;
     public Location createdLocation;
-
     private ObservableList<Location> observableLocations;
 
     public LocationModel() throws Exception {
@@ -28,7 +26,6 @@ public class LocationModel {
     public ObservableList<Location> getObservableLocations(){
         return observableLocations;
     }
-
     }
 
 

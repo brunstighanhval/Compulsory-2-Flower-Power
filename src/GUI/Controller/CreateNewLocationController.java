@@ -22,8 +22,6 @@ public class CreateNewLocationController {
      String address = txtfAddress.getText();
      int zip_Code = Integer.parseInt(txtZip_Code.getText());
 
-
         model.createLocation(name, address,zip_Code);
-
     }
 }

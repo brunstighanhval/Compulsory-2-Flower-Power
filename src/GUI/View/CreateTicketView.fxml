@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateTicketController">
+   <children>
+      <Text layoutX="62.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event" />
+      <Text layoutX="62.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="first Name" />
+      <Text layoutX="62.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+      <Text layoutX="65.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
+      <Text layoutX="64.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Type" />
+      <ComboBox fx:id="cbEventList" layoutX="118.0" layoutY="66.0" prefWidth="150.0" />
+      <TextField fx:id="txtFirstName" layoutX="146.0" layoutY="118.0" />
+      <TextField fx:id="txtLastName" layoutX="146.0" layoutY="173.0" />
+      <TextField fx:id="txtMail" layoutX="128.0" layoutY="219.0" />
+      <RadioButton fx:id="rbVIP" layoutX="147.0" layoutY="283.0" mnemonicParsing="false" onAction="#vipAction" text="VIP" />
+      <RadioButton fx:id="rbStandard" layoutX="209.0" layoutY="283.0" mnemonicParsing="false" onAction="#standardAction" text="Standard" />
+      <Button fx:id="btnFinish" layoutX="419.0" layoutY="143.0" mnemonicParsing="false" onAction="#createTicket" text="Finish" />
+   </children>
+</AnchorPane>
