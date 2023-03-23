@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -87,6 +84,21 @@ public class EventController implements Initializable {
 
     @FXML
     public void handleDeleteSelectedEvent(ActionEvent actionEvent) {
+        selectedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
+        if(selectedEvent!= null){
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Are you sure you wanna delete " + selectedEvent.getName());
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    eventModel.deleteEvent(selectedEvent);
+
+                }
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

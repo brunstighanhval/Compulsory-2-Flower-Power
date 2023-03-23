@@ -24,6 +24,10 @@ public class EventManager {
         return eventDAO.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id);
     }
 
+    public void deleteEvent(Event event) throws Exception{
+        eventDAO.deleteEvent(event);
+    }
+
 
 
 

@@ -28,7 +28,6 @@ public class CreateEventController implements Initializable {
     private TextField txtfEventName, txtfDate, txtfStartTime, txtfEndTime, txtfTicketAmount, txtfNotes;
     @FXML
     private Button btnCreateNewLocation, btnSaveNewEvent;
-    @FXML
     private LocationModel locationModel;
     @FXML
     private EventModel eventModel;
@@ -71,6 +70,8 @@ public class CreateEventController implements Initializable {
 
         try {
             eventModel.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id);
+            Stage stage = (Stage) btnSaveNewEvent.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
