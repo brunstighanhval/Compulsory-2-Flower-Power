@@ -6,8 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
-
 <AnchorPane fx:id="acpBackground" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: f67835;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
 
    <children>

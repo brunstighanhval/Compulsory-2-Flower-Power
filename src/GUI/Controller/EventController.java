@@ -102,7 +102,7 @@ public class EventController implements Initializable {
     }
 
     @FXML
-    public void handleCreateNewEvent(ActionEvent actionEvent) throws IOException {
+    private void handleCreateNewEvent(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateEventView.fxml"));
         Parent root = loader.load();
