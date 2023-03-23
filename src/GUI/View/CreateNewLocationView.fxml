@@ -4,8 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="270.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateNewLocationController">
+<AnchorPane fx:id="acpBackground" prefHeight="270.0" prefWidth="202.0" style="-fx-background-color: f67835;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateNewLocationController">
    <children>
       <TextField fx:id="txtfNameOfLocation" layoutX="28.0" layoutY="59.0" promptText="Name Of Location" />
       <TextField fx:id="txtfAddress" layoutX="28.0" layoutY="111.0" promptText="Address" />

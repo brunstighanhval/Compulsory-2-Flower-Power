@@ -12,14 +12,14 @@ public class Main extends Application {
         LocationDAO eventDAO = new LocationDAO();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
+        loader.setLocation(getClass().getResource("GUI/View/LoginView.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
-        primaryStage.getScene().getStylesheets().add(getClass().getResource("CSS/Event.css").toExternalForm());
+        //primaryStage.getScene().getStylesheets().add(getClass().getResource("CSS/Event.css").toExternalForm());
 
 
 
-        primaryStage.setTitle("Event Tickets EASV Bar");
+        primaryStage.setTitle("Login page");
        // primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
