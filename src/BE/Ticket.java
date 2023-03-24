@@ -69,6 +69,6 @@ public class Ticket {
     @Override
     public String toString()
     {
-        return first_name + last_name;
+        return first_name + " " +  last_name;
     }
 }

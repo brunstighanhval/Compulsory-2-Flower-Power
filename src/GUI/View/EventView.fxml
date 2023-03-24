@@ -6,39 +6,49 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="acpBackground" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
+<AnchorPane fx:id="acpBackground" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventController">
    <children>
-      <ListView fx:id="lstAllEvents" layoutX="33.0" layoutY="91.0" prefHeight="363.0" prefWidth="200.0" />
-      <Button fx:id="btnCreateNewEvent" layoutX="77.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleCreateNewEvent" text="Create new Event" />
-      <Text layoutX="98.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" />
-      <Text layoutX="332.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information" />
-      <Button fx:id="btnEditEvent" layoutX="325.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleEditEvent" text="Update Event" />
-      <Button fx:id="btnDeleteSelectedEvent" layoutX="474.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ListView fx:id="lstAllEvents" layoutX="34.0" layoutY="88.0" prefHeight="406.0" prefWidth="230.0" />
+      <Button fx:id="btnCreateNewEvent" layoutX="93.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleCreateNewEvent" text="Create new Event" />
+      <Text layoutX="106.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" wrappingWidth="86.8359375">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="422.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Button fx:id="btnEditEvent" layoutX="283.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleEditEvent" text="Update Event" />
+      <Button fx:id="btnDeleteSelectedEvent" layoutX="396.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete" />
+      <ImageView fitHeight="119.0" fitWidth="200.0" layoutX="-2.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Pictures/logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnSignOut" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleSignOut" text="Sign Out" />
-      <TextField fx:id="txtfEventName" alignment="CENTER" layoutX="330.0" layoutY="92.0" prefHeight="26.0" prefWidth="138.0" />
-      <TextField fx:id="txtfDate" layoutX="328.0" layoutY="120.0" prefHeight="26.0" prefWidth="77.0" />
-      <TextField fx:id="txtfStartTime" layoutX="406.0" layoutY="120.0" prefHeight="26.0" prefWidth="66.0" />
-      <TextField fx:id="txtfLocation" layoutX="325.0" layoutY="147.0" prefHeight="26.0" prefWidth="138.0" />
-      <TextField fx:id="txtfEndTime" layoutX="470.0" layoutY="120.0" prefHeight="26.0" prefWidth="62.0" />
-      <TextField fx:id="txtfNotes" layoutX="327.0" layoutY="265.0" prefHeight="26.0" prefWidth="200.0" />
-      <TextField fx:id="txtfEvK" layoutX="332.0" layoutY="188.0" prefHeight="26.0" prefWidth="69.0" />
-      <TextField fx:id="txtfTicketsLeft" layoutX="325.0" layoutY="226.0" prefHeight="26.0" prefWidth="69.0" />
-      <Text layoutX="251.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Name:" wrappingWidth="69.60000000000014" />
-      <Text layoutX="251.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-      <Text layoutX="255.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" />
-      <Text layoutX="254.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created by:" />
-      <Text layoutX="245.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total tickets:" />
-      <Text layoutX="247.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes:" />
-      <ListView fx:id="lstEventTickets" layoutX="571.0" layoutY="88.0" prefHeight="363.0" prefWidth="200.0" />
-      <Text layoutX="628.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets " />
-      <Button fx:id="btnNewTicket" layoutX="571.0" layoutY="476.0" mnemonicParsing="false" onAction="#createTicket" text="New Ticket" />
-      <Button fx:id="btnDeleteTicket" layoutX="715.0" layoutY="477.0" mnemonicParsing="false" onAction="#deleteTicket" text="Button" />
+      <Button fx:id="btnSignOut" layoutX="814.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="55.0" text="Close" />
+      <TextField fx:id="txtfEventName" layoutX="363.0" layoutY="88.0" prefHeight="26.0" prefWidth="251.0" />
+      <TextField fx:id="txtfDate" layoutX="364.0" layoutY="134.0" prefHeight="26.0" prefWidth="113.0" />
+      <TextField fx:id="txtfStartTime" layoutX="489.0" layoutY="134.0" prefHeight="26.0" prefWidth="57.0" />
+      <TextField fx:id="txtfLocation" layoutX="364.0" layoutY="183.0" prefHeight="26.0" prefWidth="247.0" />
+      <TextField fx:id="txtfEndTime" layoutX="554.0" layoutY="134.0" prefHeight="26.0" prefWidth="57.0" />
+      <TextField fx:id="txtfNotes" layoutX="363.0" layoutY="323.0" prefHeight="26.0" prefWidth="249.0" />
+      <TextField fx:id="txtfEvK" layoutX="365.0" layoutY="232.0" prefHeight="26.0" prefWidth="246.0" />
+      <TextField fx:id="txtfTicketsLeft" layoutX="364.0" layoutY="279.0" prefHeight="26.0" prefWidth="247.0" />
+      <Text layoutX="283.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Name:" wrappingWidth="69.60000000000014" />
+      <Text layoutX="285.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Text layoutX="283.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" wrappingWidth="52.5" />
+      <Text layoutX="283.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created by:" wrappingWidth="65.83169555664062" />
+      <Text layoutX="283.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total tickets:" />
+      <Text layoutX="285.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes:" />
+      <ListView fx:id="lstEventTickets" layoutX="650.0" layoutY="88.0" prefHeight="406.0" prefWidth="219.0" />
+      <Text layoutX="709.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Button fx:id="btnNewTicket" layoutX="650.0" layoutY="502.0" mnemonicParsing="false" onAction="#createTicket" text="New Ticket" />
+      <Button fx:id="btnDeleteTicket" layoutX="811.0" layoutY="502.0" mnemonicParsing="false" onAction="#deleteTicket" prefHeight="26.0" prefWidth="57.0" text="Delete" />
    </children>
 </AnchorPane>
