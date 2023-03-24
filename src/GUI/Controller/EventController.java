@@ -3,6 +3,7 @@ package GUI.Controller;
 import BE.Event;
 import BE.Ticket;
 import GUI.Model.EventModel;
+import GUI.Model.TicketModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,27 +21,30 @@ import java.util.ResourceBundle;
 
 public class EventController implements Initializable {
     public ImageView imgLogo;
-    @FXML
-    private Button btnNewTicket;
+
+
     @FXML
     private ListView <Ticket> lstEventTickets;
     @FXML
     private ListView<Event> lstAllEvents;
     @FXML
-    private Button btnCreateNewEvent, btnEditEvent, btnDeleteSelectedEvent;
+    private Button btnCreateNewEvent, btnEditEvent, btnDeleteSelectedEvent, btnNewTicket, btnDeleteTicket;
     @FXML
     private TextField txtfEventName, txtfDate,txtfLocation, txtfNotes, txtfEVK, txtfStartTime, txtfEndTime ,txtfTicketsLeft;
     @FXML
     private String errorText;
     @FXML
     private EventModel eventModel;
+    private TicketModel ticketModel;
 
     Event selectedEvent;
+    Ticket selectedTicket;
 
 
     public EventController() {
         try {
             eventModel = new EventModel();
+            ticketModel = new TicketModel();
         } catch (Exception e) {
             displayError(e);
         }
@@ -158,4 +162,12 @@ public class EventController implements Initializable {
         //root.getStylesheets().add(getClass().getResource("/CSS/CreateEvent.css").toExternalForm());
         stage.showAndWait();
     }
+
+    public void deleteTicket(ActionEvent actionEvent) throws Exception {
+
+        selectedTicket = lstEventTickets.getSelectionModel().getSelectedItem();
+        ticketModel.deleteTicket(selectedTicket);
+        lstEventTickets.refresh();
+    }
+
 }

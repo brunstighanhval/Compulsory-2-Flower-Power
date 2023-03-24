@@ -39,5 +39,6 @@
       <ListView fx:id="lstEventTickets" layoutX="571.0" layoutY="88.0" prefHeight="363.0" prefWidth="200.0" />
       <Text layoutX="628.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets " />
       <Button fx:id="btnNewTicket" layoutX="571.0" layoutY="476.0" mnemonicParsing="false" onAction="#createTicket" text="New Ticket" />
+      <Button fx:id="btnDeleteTicket" layoutX="715.0" layoutY="477.0" mnemonicParsing="false" onAction="#deleteTicket" text="Button" />
    </children>
 </AnchorPane>
