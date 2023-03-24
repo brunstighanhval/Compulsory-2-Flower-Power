@@ -54,4 +54,15 @@ public class EventKoordinator {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "EventKoordinator{" +
+                "id=" + id +
+                ", last_name='" + last_name + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

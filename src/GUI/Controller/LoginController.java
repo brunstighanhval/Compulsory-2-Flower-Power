@@ -1,10 +1,12 @@
 package GUI.Controller;
 
+import DAL.db.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,7 +24,19 @@ public class LoginController {
     @FXML
     private AnchorPane acpBackground;
 
-    public void handleSignIn(ActionEvent actionEvent) throws IOException {
+    public void handleSignIn(ActionEvent actionEvent) throws Exception {
+        UserDAO userDAO = new UserDAO();
+        String email = txtfUsername.getText();
+        String password = paswPassword.getText();
+        boolean flag = userDAO.validate(email, password);
+        if(!flag) {
+            loginFailedAlert();
+        } else {
+            openMainWindow();
+        }
+    }
+
+    private void openMainWindow() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
@@ -33,5 +47,10 @@ public class LoginController {
         stage.show();
         Stage stage1 = (Stage) btnSignIn.getScene().getWindow();
         stage1.close();
+    }
+    private void loginFailedAlert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Wrong username or password");
+        alert.showAndWait();
     }
 }
