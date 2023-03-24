@@ -12,13 +12,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -101,8 +107,9 @@ public class EventController extends BaseController implements Initializable{
             if (event.getClickCount() == 2) { //Ved dobbeltklik kan man starte musikken
                 try {
                     makePdf();
+                    showPdf();
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    displayError(e);
                 }
             }
         });
@@ -209,7 +216,7 @@ public class EventController extends BaseController implements Initializable{
     }
 
 
-    public void makePdf()
+    private void makePdf()
     {
         EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
         try {
@@ -221,6 +228,20 @@ public class EventController extends BaseController implements Initializable{
             displayError(e);
         }
 
+
+    }
+    private void showPdf()
+    {
+        EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
+        try {
+            entranceTicketPDF.showPDF();
+        } catch (IOException e) {
+            displayError(e);
+        }
     }
 
-}
+
+    }
+
+
+

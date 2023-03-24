@@ -12,17 +12,24 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
 
 
-public class EntranceTicketPDF
-{
+public class EntranceTicketPDF {
+        String path = "billet.pdf";
+
+
         public void makePdf(String name, String date, String startTime, String endTime, String note) throws FileNotFoundException, MalformedURLException {
-                String path = "billet.pdf";
+
                 PdfWriter pdfWriter = new PdfWriter(path);
                 PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 
@@ -54,7 +61,7 @@ public class EntranceTicketPDF
                 body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph(date)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph("Tid")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
-                body.addCell(new Cell().add(new Paragraph(startTime+"-"+endTime)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
+                body.addCell(new Cell().add(new Paragraph(startTime + "-" + endTime)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
 
                 document.add(body);
 
@@ -73,17 +80,36 @@ public class EntranceTicketPDF
                 Image image = new Image(imageData);
 
 
-                   image.setFixedPosition(300, 670);
+                image.setFixedPosition(300, 670);
                 //  image.setOpacity(0.1f);
                 document.add(image);
 
 
                 document.close();
-            }
+        }
+
+        public void showPDF() throws IOException {
+
+                boolean filesExits = Files.exists(Path.of(path)); //check om filen eksisterer
+                File file = new File(path);
+
+                try {
+
+                        if (filesExits) {
+
+                                Desktop desktop = Desktop.getDesktop();
 
 
+                                if (file.exists()) desktop.open(file);
+                        } //else
+                        // informationUser("File do not exist!");
+                        // Her kaldes en metode, der viser et vindue med besked om, at filen ikke findes.
+                        // Text file, should be opening in default text editor
+
+                } catch (Exception e) {
+                        throw new RuntimeException(e);
+                }
 
 
-
+        }
 }
-
