@@ -5,15 +5,12 @@ import GUI.Model.EventModel;
 import GUI.Model.TicketModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class CreateTicketController extends BaseController implements Initializable {
+public class CreateTicketController extends BaseController {
     @FXML
     private ComboBox<Event> cbEventList;
     @FXML
@@ -29,7 +26,7 @@ public class CreateTicketController extends BaseController implements Initializa
 
     //Runs as soon as the Window opens
     @Override
-    public void initialize(URL location, ResourceBundle resources)
+    public void setupModel()
     {
         try {
             eventModel = new EventModel();

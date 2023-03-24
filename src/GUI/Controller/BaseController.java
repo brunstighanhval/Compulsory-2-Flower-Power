@@ -19,4 +19,8 @@ public abstract class BaseController {
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
     }
+
+    public abstract void setupModel();
+    //Runs as soon as the Window opens
+
 }

@@ -6,15 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class CreateNewLocationController {
+public class CreateNewLocationController extends BaseController{
     @FXML
-   private LocationModel model;
-
-   @FXML
+    private LocationModel model;
+    @FXML
     private TextField txtfNameOfLocation, txtfAddress, txtZip_Code;
     @FXML
     private Button btnAdd;
+    @Override
+    public void setupModel() {
 
+    }
     public void handleAdd(ActionEvent actionEvent) throws Exception {
      model = new LocationModel();
 
@@ -24,4 +26,6 @@ public class CreateNewLocationController {
 
         model.createLocation(name, address,zip_Code);
     }
+
+
 }
