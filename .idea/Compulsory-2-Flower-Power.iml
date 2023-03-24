@@ -14,5 +14,8 @@
     <orderEntry type="library" name="itextpdf.barcodes" level="project" />
     <orderEntry type="library" name="itextpdf.layout" level="project" />
     <orderEntry type="library" name="itextpdf.io" level="project" />
+    <orderEntry type="library" name="META-INF" level="project" />
+    <orderEntry type="library" name="microsoft" level="project" />
+    <orderEntry type="library" name="com.itextpdf:layout:7.2.5" level="project" />
   </component>
 </module>

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class EventController implements Initializable {
+public class EventController extends BaseController {
     public ImageView imgLogo;
     @FXML
     private Button btnNewTicket;
@@ -36,7 +36,11 @@ public class EventController implements Initializable {
     private EventModel eventModel;
 
     Event selectedEvent;
-
+    @Override
+    public void setupModel() {
+        lstAllEvents.setItems(eventModel.getObservableEvents());
+        listenerLstAllEvents();
+    }
 
     public EventController() {
         try {
@@ -46,14 +50,6 @@ public class EventController implements Initializable {
         }
 
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        lstAllEvents.setItems(eventModel.getObservableEvents());
-        listenerLstAllEvents();
-    }
-
     public void listenerLstAllEvents() {
         lstAllEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
@@ -133,7 +129,7 @@ public class EventController implements Initializable {
         stage.showAndWait();
     }
 
-    private void displayError(Throwable t)
+    public void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -144,6 +140,7 @@ public class EventController implements Initializable {
 
     @FXML
     public void handleSignOut(ActionEvent actionEvent) {
+
     }
 
     public void createTicket(ActionEvent actionEvent) throws IOException
