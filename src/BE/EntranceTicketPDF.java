@@ -1,9 +1,11 @@
 package BE;
+import com.itextpdf.barcodes.BarcodeEAN;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.borders.SolidBorder;
@@ -26,35 +28,49 @@ import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
 public class EntranceTicketPDF {
         String path = "billet.pdf";
+        PdfWriter pdfWriter;
+        PdfDocument pdfDocument;
+        Document document;
 
 
-        public void makePdf(String name, String date, String startTime, String endTime, String note) throws FileNotFoundException, MalformedURLException {
 
-                PdfWriter pdfWriter = new PdfWriter(path);
-                PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        public void makePdf(String name, String date, String startTime, String endTime, String note,int barCode) throws FileNotFoundException, MalformedURLException {
 
+                 pdfWriter = new PdfWriter(path);
+                 pdfDocument = new PdfDocument(pdfWriter);
+                 document = new Document(pdfDocument);
 
                 pdfDocument.setDefaultPageSize(PageSize.A4);
-                Document document = new Document(pdfDocument);
-
-                float fullWidth[] = {600};
-
-                Border gBorder = new SolidBorder(GRAY, 2f);
-                Table divider = new Table(fullWidth);
-                divider.setBorder(gBorder);
-                document.add(divider);
-
-                Paragraph oneSp = new Paragraph("\n").setFontSize(6);
-                document.add(oneSp); //tilføjer en linje med afstand
 
 
-                float oneColumnWidth[] = {400f}; //to kolonner sat i en array
+                createDivider();
+                createOneSpace();
+                createHeader(name);
+                createBody(date, startTime,endTime);
+                createOneSpace();
+                createBottom(note);
 
-                Table header = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
-                header.addCell(new Cell().add(new Paragraph(name)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
-                document.add(header);
+
+                createDivider();
 
 
+                createBarcode(String.format("%08d", barCode), pdfDocument);
+
+                document.close();
+        }
+
+               private void createBottom(String note)
+               {
+                       float oneColumnWidth[] = {400f}; //to kolonner sat i en array
+                       Table bund = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
+                       bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
+
+                       document.add(bund);
+               }
+
+
+        private void createBody(String date,String startTime,String endTime)
+        {
                 float twoColumnWidth[] = {80f, 200f}; //to kolonner sat i en array
 
                 Table body = new Table(twoColumnWidth); //De to kolonner er tilført til en tabel
@@ -64,29 +80,46 @@ public class EntranceTicketPDF {
                 body.addCell(new Cell().add(new Paragraph(startTime + "-" + endTime)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
 
                 document.add(body);
+        }
 
-                Table bund = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
-                bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
-                document.add(oneSp); //tilføjer en linje med afstand
-                document.add(bund);
 
+        private void createHeader(String name)
+        {
+                float oneColumnWidth[] = {400f}; //to kolonner sat i en array
+
+                Table header = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
+                header.addCell(new Cell().add(new Paragraph(name)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
+                document.add(header);
+        }
+
+        private void createOneSpace()
+        {
+                Paragraph oneSp = new Paragraph("\n").setFontSize(6);
                 document.add(oneSp); //tilføjer en linje med afstand
+        }
+
+        private void createDivider() {
+
+                float fullWidth[] = {600};
+
+                Border gBorder = new SolidBorder(GRAY, 2f);
+                Table divider = new Table(fullWidth);
+                divider.setBorder(gBorder);
                 document.add(divider);
+        }
+        private  void createBarcode(String code, PdfDocument pdfDoc) {
+                BarcodeEAN barcode = new BarcodeEAN(pdfDoc);
+                barcode.setCodeType(BarcodeEAN.EAN8);
+                barcode.setCode(code);
 
-
-                String imagePath = "G:\\Mit drev\\Datamatiker\\Java\\PDFFire\\src\\Barcode.png";
-                ImageData imageData = ImageDataFactory.create(imagePath);
-
-                Image image = new Image(imageData);
-
-
-                image.setFixedPosition(300, 670);
-                //  image.setOpacity(0.1f);
+                // Create barcode object to put it to the cell as image
+                PdfFormXObject barcodeObject = barcode.createFormXObject(null, null, pdfDoc);
+                Image image = new Image(barcodeObject);
+                image.setFixedPosition(400, 725);
                 document.add(image);
 
-
-                document.close();
         }
+
 
         public void showPDF() throws IOException {
 

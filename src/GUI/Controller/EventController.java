@@ -221,7 +221,7 @@ public class EventController extends BaseController implements Initializable{
         EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
         try {
             entranceTicketPDF.makePdf(selectedEvent.getName(),selectedEvent.getDate().toString(),selectedEvent.getStart_time().toString(),
-            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes());
+            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes(),selectedEvent.getVenue_id());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (MalformedURLException e) {
