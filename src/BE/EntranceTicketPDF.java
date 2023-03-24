@@ -21,7 +21,7 @@ import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
 public class EntranceTicketPDF
 {
-        public void makePdf() throws FileNotFoundException, MalformedURLException {
+        public void makePdf(String name, String date, String startTime, String endTime, String note) throws FileNotFoundException, MalformedURLException {
                 String path = "billet.pdf";
                 PdfWriter pdfWriter = new PdfWriter(path);
                 PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -44,7 +44,7 @@ public class EntranceTicketPDF
                 float oneColumnWidth[] = {400f}; //to kolonner sat i en array
 
                 Table header = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
-                header.addCell(new Cell().add(new Paragraph("Fisketur - Varde Å")).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
+                header.addCell(new Cell().add(new Paragraph(name)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
                 document.add(header);
 
 
@@ -52,14 +52,14 @@ public class EntranceTicketPDF
 
                 Table body = new Table(twoColumnWidth); //De to kolonner er tilført til en tabel
                 body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
-                body.addCell(new Cell().add(new Paragraph("12-12-2023")).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
+                body.addCell(new Cell().add(new Paragraph(date)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph("Tid")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
-                body.addCell(new Cell().add(new Paragraph("10:00-14:00")).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
+                body.addCell(new Cell().add(new Paragraph(startTime+"-"+endTime)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
 
                 document.add(body);
 
                 Table bund = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
-                bund.addCell(new Cell().add(new Paragraph("Du skal huske at indløse statens fisketegn på nettet")).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
+                bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
                 document.add(oneSp); //tilføjer en linje med afstand
                 document.add(bund);
 
@@ -80,5 +80,10 @@ public class EntranceTicketPDF
 
                 document.close();
             }
+
+
+
+
+
 }
 

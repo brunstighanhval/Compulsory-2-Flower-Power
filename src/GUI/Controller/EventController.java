@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.EntranceTicketPDF;
 import BE.Event;
 import BE.Ticket;
 import GUI.Model.EventModel;
@@ -13,7 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,6 +29,7 @@ public class EventController extends BaseController implements Initializable{
 
     @FXML
     private ListView <Ticket> lstEventTickets;
+
     @FXML
     private ListView<Event> lstAllEvents;
     @FXML
@@ -64,7 +69,12 @@ public class EventController extends BaseController implements Initializable{
     public void setupModel() {
         lstAllEvents.setItems(eventModel.getObservableEvents());
         listenerLstAllEvents();
+        listenerMouseClickTickets();
     }
+
+
+
+
 
 
 
@@ -82,6 +92,23 @@ public class EventController extends BaseController implements Initializable{
             labelsToShow();
         });
     }
+
+
+    public void listenerMouseClickTickets()
+    {
+        lstEventTickets.setOnMouseClicked(event -> {
+
+            if (event.getClickCount() == 2) { //Ved dobbeltklik kan man starte musikken
+                try {
+                    makePdf();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+
 
     private void labelsToShow()
     {
@@ -181,5 +208,19 @@ public class EventController extends BaseController implements Initializable{
         lstEventTickets.refresh();
     }
 
+
+    public void makePdf()
+    {
+        EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
+        try {
+            entranceTicketPDF.makePdf(selectedEvent.getName(),selectedEvent.getDate().toString(),selectedEvent.getStart_time().toString(),
+            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            displayError(e);
+        }
+
+    }
 
 }
