@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class EventController extends BaseController {
+public class EventController extends BaseController implements Initializable{
     public ImageView imgLogo;
 
 
@@ -41,11 +41,11 @@ public class EventController extends BaseController {
 
     Ticket selectedTicket;
 
-
     @Override
-    public void setupModel() {
-        lstAllEvents.setItems(eventModel.getObservableEvents());
-        listenerLstAllEvents();
+    public void initialize(URL location, ResourceBundle resources) {
+
+        setupModel();
+
     }
 
 
@@ -58,6 +58,16 @@ public class EventController extends BaseController {
         }
 
     }
+
+
+    @Override
+    public void setupModel() {
+        lstAllEvents.setItems(eventModel.getObservableEvents());
+        listenerLstAllEvents();
+    }
+
+
+
     public void listenerLstAllEvents() {
         lstAllEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
@@ -170,5 +180,6 @@ public class EventController extends BaseController {
         ticketModel.deleteTicket(selectedTicket);
         lstEventTickets.refresh();
     }
+
 
 }

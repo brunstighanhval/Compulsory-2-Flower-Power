@@ -19,10 +19,9 @@ import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
 
 
-public class entranceTicketPDF
+public class EntranceTicketPDF
 {
-        public static void main(String[] args) throws FileNotFoundException, MalformedURLException {
-            {
+        public void makePdf() throws FileNotFoundException, MalformedURLException {
                 String path = "billet.pdf";
                 PdfWriter pdfWriter = new PdfWriter(path);
                 PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -82,4 +81,4 @@ public class entranceTicketPDF
                 document.close();
             }
 }
-}
+
