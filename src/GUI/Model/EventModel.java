@@ -14,7 +14,6 @@ public class EventModel {
     private Event createdEvent;
     private EventManager eventManager;
 
-    int user=1;
 
     public EventModel() throws Exception
     {

@@ -44,7 +44,6 @@ public class DatabaseConnector {
 
     public static void main(String[] args) throws Exception
     {
-            EventModel eventModel = new EventModel();
-            System.out.println(eventModel.getObservableEvents());
+
     }
 }
