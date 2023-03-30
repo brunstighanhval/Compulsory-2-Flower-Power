@@ -12,7 +12,7 @@ import java.util.List;
 public class EventDAO implements IEventDataAccess{
     private DatabaseConnector databaseConnector;
 
-    public EventDAO() throws IOException {databaseConnector = new DatabaseConnector();}
+    public EventDAO() throws IOException {databaseConnector = DatabaseConnector.getInstance();}
 
 @Override
     public List<Event> getAllEvents() throws Exception {
@@ -85,7 +85,7 @@ public class EventDAO implements IEventDataAccess{
     @Override
     public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
         String sql = "INSERT INTO Event (Name, EvK_ID, Date, Start_Time, End_Time, Max_Tickets, Notes, Venue_ID) VALUES (?,?,?,?,?,?,?,?)";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+        try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, name);
@@ -115,7 +115,7 @@ public class EventDAO implements IEventDataAccess{
     @Override
     public void deleteEvent(Event event) throws Exception {
         String sql = "DELETE FROM Event WHERE Event_ID = ?";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+        try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, event.getId());
             stmt.execute();
@@ -128,7 +128,7 @@ public class EventDAO implements IEventDataAccess{
     @Override
     public void updateEvent(Event updatedEvent) throws Exception {
         String sql = "UPDATE Event SET Name = ?, Date = ?, Start_Time = ?, End_Time = ?, Max_Tickets = ?, Notes = ? WHERE Event_ID = ?";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()) {
+        try(Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, updatedEvent.getName());

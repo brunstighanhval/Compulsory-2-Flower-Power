@@ -2,15 +2,22 @@ package DAL.db;
 
 import BE.EventKoordinator;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
 
+    private DatabaseConnector databaseConnector;
+
+    public UserDAO() throws IOException {
+        databaseConnector = DatabaseConnector.getInstance();
+    }
+
     public List<EventKoordinator> loadAllUsers() throws Exception{
         ArrayList<EventKoordinator> allEvk = new ArrayList<>();
-        try (Connection conn = DatabaseConnector.getInstance().getConnection();
+        try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
             String sql = "SELECT * FROM Event_Koordinator;";
@@ -42,7 +49,7 @@ public class UserDAO {
 
     public boolean validate(String email, String password) throws Exception{
         String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? and Password = ?";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+        try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, password);

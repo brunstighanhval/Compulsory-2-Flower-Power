@@ -10,13 +10,13 @@ public class LocationDAO implements ILocation {
 
     private DatabaseConnector databaseConnector;
 
-    public LocationDAO() throws IOException {DatabaseConnector.getInstance();}
+    public LocationDAO() throws IOException {databaseConnector = DatabaseConnector.getInstance();}
 
     @Override
     public Location createLocation(String name, String address, int zipCode) throws Exception {
 
         String sql = "INSERT INTO Location (Name, Address, Zip_Code) VALUES (?,?,?);";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()) {
+        try(Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //Binding parameters.
@@ -48,7 +48,7 @@ public class LocationDAO implements ILocation {
     @Override
     public List<Location> getAllLocations() throws Exception {
         ArrayList<Location> allLocations = new ArrayList<>();
-        try (Connection conn = DatabaseConnector.getInstance().getConnection()) {
+        try (Connection conn = databaseConnector.getConnection()) {
             //SQL statement.
             String sql = "SELECT * FROM Location;";
             Statement stmt = conn.createStatement();
@@ -66,7 +66,7 @@ public class LocationDAO implements ILocation {
             }
             return allLocations;
 
-        } catch (SQLException | IOException ex){
+        } catch (SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not get locations from database", ex);
         }

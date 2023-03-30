@@ -7,12 +7,12 @@ public class TicketDAO implements ITicket{
 
     private DatabaseConnector databaseConnector;
 
-    public TicketDAO() throws IOException {DatabaseConnector.getInstance();}
+    public TicketDAO() throws IOException {databaseConnector = DatabaseConnector.getInstance();}
 
     @Override
     public Ticket createTicket(int event_Id, String firstName, String lastName, String mail, int type_Id) throws Exception {
         String sql = "INSERT INTO Ticket (Event_ID, First_Name, Last_Name, Mail, Type_ID) VALUES (?,?,?,?,?)";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+        try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setInt(1, event_Id);
@@ -30,7 +30,7 @@ public class TicketDAO implements ITicket{
 
             Ticket ticket = new Ticket(id, event_Id, firstName, lastName, mail, type_Id);
             return ticket;
-        } catch (SQLException | IOException ex){
+        } catch (SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not create a event", ex);
         }
@@ -39,11 +39,11 @@ public class TicketDAO implements ITicket{
     @Override
     public void deleteTicket(Ticket ticket) throws Exception {
         String sql = "DELETE FROM Ticket WHERE Ticket_ID = ?";
-        try(Connection conn = DatabaseConnector.getInstance().getConnection()){
+        try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, ticket.getId());
             stmt.execute();
-        } catch (SQLException | IOException ex){
+        } catch (SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not delete this Ticket", ex);
         }

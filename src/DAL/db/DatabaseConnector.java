@@ -14,7 +14,7 @@ public class DatabaseConnector {
     private final SQLServerDataSource ds;
     private static DatabaseConnector instance = null;
 
-    DatabaseConnector() throws IOException
+   private DatabaseConnector() throws IOException
     {
         Properties databaseProperties = new Properties();
         databaseProperties.load(new FileInputStream(new File(PROP_FILE)));
@@ -41,9 +41,4 @@ public class DatabaseConnector {
     }
 
     public Connection getConnection() throws SQLServerException {return ds.getConnection();}
-
-    public static void main(String[] args) throws Exception
-    {
-
-    }
 }
