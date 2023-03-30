@@ -5,6 +5,7 @@ public class TicketType {
     private String type_name;
     private int price;
 
+
     public TicketType(int id, String type_name, int price)
     {
         this.id = id;
