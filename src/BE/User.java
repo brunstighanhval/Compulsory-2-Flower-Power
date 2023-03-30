@@ -1,18 +1,20 @@
 package BE;
 
-public class EventKoordinator {
+public class User {
     private int id;
     private String last_name;
     private String first_name;
     private String user_name;
     private String password;
+    private int role;
 
-    public EventKoordinator(int id, String last_name, String first_name, String user_name, String password) {
+    public User(int id, String last_name, String first_name, String user_name, String password, int role) {
         this.id = id;
         this.last_name = last_name;
         this.first_name = first_name;
         this.user_name = user_name;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -55,6 +57,8 @@ public class EventKoordinator {
         this.password = password;
     }
 
+    public int getRole(){return role;}
+
     @Override
     public String toString() {
         return "EventKoordinator{" +
@@ -63,6 +67,7 @@ public class EventKoordinator {
                 ", first_name='" + first_name + '\'' +
                 ", user_name='" + user_name + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

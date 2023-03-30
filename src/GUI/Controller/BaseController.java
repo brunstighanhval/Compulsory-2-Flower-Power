@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import GUI.Model.BaseModel;
 import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
 import javafx.scene.control.Alert;
@@ -8,18 +9,12 @@ import javafx.stage.Stage;
 
 public abstract class BaseController {
 
-    LocationModel model;
+    private BaseModel baseModel;
 
 
-    public BaseController() {
-        try {
-            this.model = new LocationModel();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void setModel(BaseModel baseModel){this.baseModel = baseModel;}
+    public BaseModel getModel(){return baseModel;}
 
-
-    }
 
     public void closeWindow(Button btn)
     {
@@ -35,14 +30,7 @@ public abstract class BaseController {
         alert.showAndWait();
     }
 
-    public LocationModel getModel() {
-        return model;
-    }
-    //   public abstract void setup(); //This is here so we can override it in SongViewController
-
-
-
-    public abstract void setupModel();
+    public abstract void setup() throws Exception;
     //Runs as soon as the Window opens
 
 }

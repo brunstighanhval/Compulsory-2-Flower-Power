@@ -49,7 +49,6 @@ public class EventModel {
         eventManager.updateEvent(updatedEvent);
     }
 
-
     public void showList() throws Exception {
         //Update the listview
         eventsToBeViewed.clear();

@@ -5,10 +5,10 @@ import BE.Event;
 import BE.Ticket;
 import GUI.Model.EventModel;
 import GUI.Model.TicketModel;
+import GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,19 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ResourceBundle;
 
-public class EventController extends BaseController implements Initializable{
+public class EventController extends BaseController{
     public ImageView imgLogo;
 
     @FXML
@@ -47,45 +40,24 @@ public class EventController extends BaseController implements Initializable{
     private TextField txtfEventName, txtfDate,txtfLocation, txtfNotes, txtfEVK, txtfStartTime, txtfEndTime ,txtfTicketsLeft;
     @FXML
     private String errorText;
-    @FXML
     private EventModel eventModel;
     private TicketModel ticketModel;
+    private UserModel userModel;
+    private Event selectedEvent;
 
-    Event selectedEvent;
-
-    Ticket selectedTicket;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        setupModel();
-
-    }
-
-
-    public EventController() {
-        try {
-            eventModel = new EventModel();
-            ticketModel = new TicketModel();
-        } catch (Exception e) {
-            displayError(e);
-        }
-
-    }
+    private Ticket selectedTicket;
 
 
     @Override
-    public void setupModel() {
+    public void setup() throws Exception {
+        userModel = getModel().getUserModel();
+        eventModel = getModel().getEventModel();
+        ticketModel = getModel().getTicketModel();
         lstAllEvents.setItems(eventModel.getObservableEvents());
         listenerLstAllEvents();
         listenerMouseClickTickets();
+        adminView();
     }
-
-
-
-
-
-
 
     public void listenerLstAllEvents() {
         lstAllEvents.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
@@ -172,11 +144,15 @@ public class EventController extends BaseController implements Initializable{
     }
 
     @FXML
-    private void handleCreateNewEvent(ActionEvent actionEvent) throws IOException
+    private void handleCreateNewEvent(ActionEvent actionEvent) throws Exception
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateEventView.fxml"));
         Parent root = loader.load();
+
+        CreateEventController controller = loader.load();
+        controller.setModel(super.getModel());
+        controller.setup();
 
         Stage stage = new Stage();
         stage.setTitle("Create new event");
@@ -206,6 +182,10 @@ public class EventController extends BaseController implements Initializable{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateTicketView.fxml"));
         Parent root = loader.load();
+
+        CreateTicketController controller = loader.load();
+        controller.setModel(super.getModel());
+        controller.setup();
 
         Stage stage = new Stage();
         stage.setTitle("Create new Ticket");
@@ -246,6 +226,18 @@ public class EventController extends BaseController implements Initializable{
         }
     }
 
+    private void adminView(){
+        if(userModel.getLoggedinUser().getRole() == 1) {
+            btnCreateNewEvent.setDisable(true);
+            btnCreateNewEvent.setOpacity(0);
+            btnEditEvent.setDisable(true);
+            btnEditEvent.setOpacity(0);
+            btnNewTicket.setDisable(true);
+            btnNewTicket.setOpacity(0);
+            btnDeleteTicket.setDisable(true);
+            btnDeleteTicket.setOpacity(0);
+        }
+    }
 
     }
 

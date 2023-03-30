@@ -3,15 +3,17 @@ package BLL;
 import BE.Event;
 import BE.Ticket;
 import DAL.db.EventDAO;
+import DAL.db.IEventDataAccess;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 public class EventManager {
-    EventDAO eventDAO=new EventDAO();
+    private IEventDataAccess eventDAO;
 
-    public EventManager() throws IOException {}
+    public EventManager() throws IOException {eventDAO = new EventDAO();}
 
     public List<Event> getAllEvents() throws Exception {return eventDAO.getAllEvents();}
 

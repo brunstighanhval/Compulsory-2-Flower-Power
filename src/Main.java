@@ -1,4 +1,7 @@
 import DAL.db.LocationDAO;
+import GUI.Controller.EventController;
+import GUI.Controller.LoginController;
+import GUI.Model.BaseModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +17,11 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GUI/View/LoginView.fxml"));
         Parent root = loader.load();
+
+        LoginController controller = loader.getController();
+        controller.setModel(new BaseModel());
+        controller.setup();
+
         primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Login page");
         root.getScene().getStylesheets().add(getClass().getResource("CSS/Login.css").toExternalForm());

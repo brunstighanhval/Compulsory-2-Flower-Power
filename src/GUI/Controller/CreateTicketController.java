@@ -22,15 +22,15 @@ public class CreateTicketController extends BaseController {
 
     private EventModel eventModel;
     private TicketModel ticketModel;
-    int ticketType;
+    private int ticketType;
 
     //Runs as soon as the Window opens
     @Override
-    public void setupModel()
+    public void setup()
     {
         try {
-            eventModel = new EventModel();
-            ticketModel = new TicketModel();
+            eventModel = getModel().getEventModel();
+            ticketModel = getModel().getTicketModel();
 
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -6,7 +6,6 @@ import GUI.Model.LocationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,12 +14,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ResourceBundle;
 
-public class CreateEventController extends BaseController implements Initializable {
+public class CreateEventController extends BaseController {
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -33,25 +30,22 @@ public class CreateEventController extends BaseController implements Initializab
     @FXML
     private EventModel eventModel;
 
-@Override
-    public void setupModel (){
-
-        try {
-            locationModel = new LocationModel();
-            eventModel = new EventModel();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public void setup() {
+        eventModel = getModel().getEventModel();
+        locationModel = getModel().getLocationModel();
 
         cbbSelectedLocation.setItems(locationModel.getObservableLocations());
     }
 
-    public void handleCreateNewLocation(ActionEvent actionEvent) throws IOException
-    {
+    public void handleCreateNewLocation(ActionEvent actionEvent) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/CreateNewLocationView.fxml"));
         Parent root = loader.load();
+
+        CreateNewLocationController controller = loader.load();
+        controller.setModel(super.getModel());
+        controller.setup();
 
         Stage stage = new Stage();
         stage.setTitle("Create new event");
@@ -60,8 +54,7 @@ public class CreateEventController extends BaseController implements Initializab
         stage.showAndWait();
     }
 
-    public void handleCreateEvent(ActionEvent actionEvent)
-    {
+    public void handleCreateEvent(ActionEvent actionEvent) {
         String name = txtfEventName.getText();
         int EvKId = 1;
         LocalDate date = datePicker.getValue();
@@ -80,10 +73,5 @@ public class CreateEventController extends BaseController implements Initializab
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setupModel();
     }
 }

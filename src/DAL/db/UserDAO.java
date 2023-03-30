@@ -1,13 +1,13 @@
 package DAL.db;
 
-import BE.EventKoordinator;
+import BE.User;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements IUserDataAccess {
 
     private DatabaseConnector databaseConnector;
 
@@ -15,27 +15,29 @@ public class UserDAO {
         databaseConnector = DatabaseConnector.getInstance();
     }
 
-    public List<EventKoordinator> loadAllUsers() throws Exception{
-        ArrayList<EventKoordinator> allEvk = new ArrayList<>();
-        try (Connection conn = databaseConnector.getConnection();
-             Statement stmt = conn.createStatement())
+    public List<User> loadUser(String username, String userPassword) throws Exception{
+        ArrayList<User> allEvk = new ArrayList<>();
+        try (Connection conn = databaseConnector.getConnection())
         {
-            String sql = "SELECT * FROM Event_Koordinator;";
-
-            ResultSet rs = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? AND Password = ?;";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, userPassword);
+            ResultSet rs = stmt.executeQuery();
 
             // Loop through rows from the database result set
             while (rs.next()) {
                 //Map DB row to Song object
-                int id = rs.getInt("EVK_ID");
+                int id = rs.getInt("Id");
                 String last_name = rs.getString("Last_Name");
                 String first_name = rs.getString("First_Name");
                 String user_name = rs.getString("User_Name");
                 String password = rs.getString("Password");
+                int role = rs.getInt("Role");
 
-                EventKoordinator EvK = new EventKoordinator(id, last_name, first_name, user_name, password);
+                User user = new User(id, last_name, first_name, user_name, password, role);
 
-                allEvk.add(EvK);
+                allEvk.add(user);
             }
             return allEvk;
 
@@ -47,11 +49,11 @@ public class UserDAO {
         }
     }
 
-    public boolean validate(String email, String password) throws Exception{
+    public boolean validate(String username, String password) throws Exception{
         String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? and Password = ?";
         try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
+            stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
