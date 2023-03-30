@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
 
         stage.setTitle("Event Tickets EASV Bar");
         stage.setScene(new Scene(root));
-        //root.getStylesheets().add(getClass().getResource("/CSS/Event.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource("/CSS/Event.css").toExternalForm());
         stage.show();
         closeWindow(btnSignIn);
     }

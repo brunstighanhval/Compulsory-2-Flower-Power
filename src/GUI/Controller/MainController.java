@@ -39,9 +39,9 @@ public class MainController extends BaseController{
     @FXML
     private ComboBox<Event> eventBox;
     @FXML
-    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfNotes, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation;
+    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation;
     @FXML
-    private TextArea notesArea;
+    private TextArea notesArea, txtfNotes;
     @FXML
     private DatePicker datePick, datePicker;
     @FXML
@@ -67,6 +67,7 @@ public class MainController extends BaseController{
         lstAllEvents.setItems(eventModel.getObservableEvents());
         eventBox.setItems(eventModel.getObservableEvents());
         locationsBox.setItems(locationModel.getObservableLocations());
+        lstEventTickets.setItems(eventModel.getTicketsFromEvent(lstAllEvents.getItems().get(0)));
         listenerLstAllEvents();
         listenerMouseClickTickets();
         adminView();
@@ -348,7 +349,7 @@ public class MainController extends BaseController{
             standard.setDisable(false);
         }
     }
-    
+
     public void standardAction (ActionEvent actionEvent)
     {
         if(standard.isSelected())

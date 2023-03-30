@@ -1,7 +1,39 @@
 
 #acpBackground{
-    -fx-background-color: f67835;
+    -fx-background-color: ECE8DD;
 }
 .text-field{
-    -fx-background-color: TRANSPARENT;
+
 }
+
+VBox {
+    -fx-background-color: E1D7C6;
+}
+
+Rectangle{
+
+    -fx-stroke: F8F4EA;
+}
+
+Button{
+
+     -fx-background-color: F8F4EA;
+
+}
+
+.list-view .list-cell:even {
+-fx-background-color: E1D7C6;
+-fx-text-fill: black;
+}
+
+.list-view .list-cell:odd {
+-fx-background-color: F8F4EA;
+-fx-text-fill: black;
+}
+
+.list-view:focused .list-cell:filled:focused:selected {
+-fx-background-color: #579BB1;
+
+}
+
+
