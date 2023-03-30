@@ -3,10 +3,14 @@ package GUI.Controller;
 import GUI.Model.LocationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class CreateNewLocationController extends BaseController{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CreateNewLocationController extends BaseController implements Initializable {
     @FXML
     private LocationModel model;
     @FXML
@@ -28,4 +32,8 @@ public class CreateNewLocationController extends BaseController{
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setupModel();
+    }
 }

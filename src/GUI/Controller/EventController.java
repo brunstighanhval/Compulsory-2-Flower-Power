@@ -32,6 +32,9 @@ import java.util.ResourceBundle;
 public class EventController extends BaseController implements Initializable{
     public ImageView imgLogo;
 
+    @FXML
+    private DatePicker datePicker;
+
 
     @FXML
     private ListView <Ticket> lstEventTickets;
@@ -120,7 +123,8 @@ public class EventController extends BaseController implements Initializable{
     private void labelsToShow()
     {
         txtfEventName.setText(selectedEvent.getName());
-        txtfDate.setText(selectedEvent.getDate().toString());
+        //txtfDate.setText(selectedEvent.getDate().toString());
+        datePicker.setValue(selectedEvent.getDate());
         //lblLocation.setText();
         txtfNotes.setText(selectedEvent.getNotes());
         //txtfEVK.setText(selectedEvent.getId()+"");
@@ -135,7 +139,7 @@ public class EventController extends BaseController implements Initializable{
        try{
             Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
             updatedEvent.setName(txtfEventName.getText());
-            updatedEvent.setDate(LocalDate.parse(txtfDate.getText()));
+            updatedEvent.setDate(datePicker.getValue());
             updatedEvent.setStart_time(LocalTime.parse(txtfStartTime.getText()));
             updatedEvent.setEnd_time(LocalTime.parse(txtfEndTime.getText()));
             updatedEvent.setMax_tickets(Integer.parseInt(txtfTicketsLeft.getText()));

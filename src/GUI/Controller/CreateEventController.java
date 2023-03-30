@@ -6,17 +6,23 @@ import GUI.Model.LocationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ResourceBundle;
 
-public class CreateEventController extends BaseController {
+public class CreateEventController extends BaseController implements Initializable {
+    @FXML
+    private DatePicker datePicker;
     @FXML
     private ComboBox<Location> cbbSelectedLocation;
     @FXML
@@ -58,7 +64,9 @@ public class CreateEventController extends BaseController {
     {
         String name = txtfEventName.getText();
         int EvKId = 1;
-        LocalDate date = LocalDate.parse(txtfDate.getText());
+        LocalDate date = datePicker.getValue();
+
+
         LocalTime start_time = LocalTime.parse(txtfStartTime.getText());
         LocalTime end_time = LocalTime.parse(txtfEndTime.getText());
         int max_tickets = Integer.parseInt(txtfTicketAmount.getText());
@@ -72,5 +80,10 @@ public class CreateEventController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setupModel();
     }
 }

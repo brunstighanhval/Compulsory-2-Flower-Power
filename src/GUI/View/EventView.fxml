@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -30,7 +31,6 @@
       </ImageView>
       <Button fx:id="btnSignOut" layoutX="814.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="55.0" text="Close" />
       <TextField fx:id="txtfEventName" layoutX="363.0" layoutY="88.0" prefHeight="26.0" prefWidth="251.0" />
-      <TextField fx:id="txtfDate" layoutX="364.0" layoutY="134.0" prefHeight="26.0" prefWidth="113.0" />
       <TextField fx:id="txtfStartTime" layoutX="489.0" layoutY="134.0" prefHeight="26.0" prefWidth="57.0" />
       <TextField fx:id="txtfLocation" layoutX="364.0" layoutY="183.0" prefHeight="26.0" prefWidth="247.0" />
       <TextField fx:id="txtfEndTime" layoutX="554.0" layoutY="134.0" prefHeight="26.0" prefWidth="57.0" />
@@ -50,5 +50,6 @@
          </font></Text>
       <Button fx:id="btnNewTicket" layoutX="650.0" layoutY="502.0" mnemonicParsing="false" onAction="#createTicket" text="New Ticket" />
       <Button fx:id="btnDeleteTicket" layoutX="811.0" layoutY="502.0" mnemonicParsing="false" onAction="#deleteTicket" prefHeight="26.0" prefWidth="57.0" text="Delete" />
+      <DatePicker fx:id="datePicker" layoutX="366.0" layoutY="134.0" prefHeight="26.0" prefWidth="113.0" />
    </children>
 </AnchorPane>
