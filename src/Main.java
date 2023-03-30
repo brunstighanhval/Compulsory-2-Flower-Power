@@ -1,5 +1,4 @@
 import DAL.db.LocationDAO;
-import GUI.Controller.EventController;
 import GUI.Controller.LoginController;
 import GUI.Model.BaseModel;
 import javafx.application.Application;

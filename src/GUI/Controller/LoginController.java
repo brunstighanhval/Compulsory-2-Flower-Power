@@ -2,7 +2,6 @@ package GUI.Controller;
 
 import BE.User;
 import DAL.db.UserDAO;
-import GUI.Model.EventModel;
 import GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +47,7 @@ public class LoginController extends BaseController {
         loader.setLocation(getClass().getResource("/GUI/View/EventView.fxml"));
         Parent root = loader.load();
 
-        EventController controller = loader.getController();
+        MainController controller = loader.getController();
         controller.setModel(super.getModel());
         controller.setup();
 

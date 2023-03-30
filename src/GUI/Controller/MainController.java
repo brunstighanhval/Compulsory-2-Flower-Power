@@ -12,42 +12,42 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EventController extends BaseController{
-
-    public AnchorPane acpBackground;
-    public ImageView imgLogo;
-    public TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfDate,txtfLocation, txtfNotes, txtfEVK, txtfStartTime, txtfEndTime ,txtfTicketsLeft;
-    public TextArea notesArea;
-    public DatePicker datePick, datePicker;
-    public ComboBox<Location> locationsBox;
-    public ComboBox<Event> eventBox;
-    public VBox createLocationBar, createTicketBar, createEventBar;
-    public Button btnNewLocation, createLocation, btnCreateTicket, btnEditEvent, btnNewTicket, btnDeleteTicket;
-    public RadioButton standard, vip;
+public class MainController extends BaseController{
+    @FXML
+    private AnchorPane acpBackground;
+    @FXML
+    private VBox createLocationBar, createTicketBar, createEventBar;
     @FXML
     private ListView <Ticket> lstEventTickets;
     @FXML
     private ListView<Event> lstAllEvents;
     @FXML
+    private ComboBox<Location> locationsBox;
+    @FXML
+    private ComboBox<Event> eventBox;
+    @FXML
+    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfNotes, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation;
+    @FXML
+    private TextArea notesArea;
+    @FXML
+    private DatePicker datePick, datePicker;
+    @FXML
+    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation;
+    @FXML
+    private RadioButton standard, vip;
     private String errorText;
     private EventModel eventModel;
     private TicketModel ticketModel;
@@ -56,9 +56,7 @@ public class EventController extends BaseController{
     private Event selectedEvent;
     private Ticket selectedTicket;
     private int ticketType;
-
     private boolean isMenuOpen;
-
 
     @Override
     public void setup() throws Exception {
@@ -104,8 +102,6 @@ public class EventController extends BaseController{
             }
         });
     }
-
-
 
     private void labelsToShow()
     {
@@ -177,7 +173,6 @@ public class EventController extends BaseController{
 
     public void createTicket() throws IOException
     {
-        //bpCenter.getChildren().get(bpCenter.getChildren().indexOf(mainViewSidebar)).toFront();
         TranslateTransition transition = new TranslateTransition();
         createTicketBar.toFront();
         transition.setNode(createTicketBar);
@@ -199,12 +194,10 @@ public class EventController extends BaseController{
                 }
             };
             acpBackground.addEventHandler(MouseEvent.MOUSE_CLICKED, menuHandler);
-            //flowPane.setDisable(true);
         } else {
             isMenuOpen = false;
             transition.setToX(900);
             acpBackground.setOpacity(1);
-            //flowPane.setDisable(false);
         }
         transition.play();
     }
@@ -243,8 +236,6 @@ public class EventController extends BaseController{
 
     private void adminView(){
         if(userModel.getLoggedinUser().getRole() == 1) {
-            //btnCreateNewEvent.setDisable(true);
-            //btnCreateNewEvent.setOpacity(0);
             btnEditEvent.setDisable(true);
             btnEditEvent.setOpacity(0);
             btnNewTicket.setDisable(true);
@@ -255,8 +246,6 @@ public class EventController extends BaseController{
     }
 
     public void animationTest() {
-
-        //bpCenter.getChildren().get(bpCenter.getChildren().indexOf(mainViewSidebar)).toFront();
 
         TranslateTransition transition = new TranslateTransition();
         createEventBar.toFront();
@@ -275,12 +264,10 @@ public class EventController extends BaseController{
                 }
             };
             acpBackground.addEventHandler(MouseEvent.MOUSE_CLICKED, menuHandler);
-            //flowPane.setDisable(true);
         } else {
             isMenuOpen = false;
             transition.setToX(-300);
             acpBackground.setOpacity(1);
-            //flowPane.setDisable(false);
         }
         transition.play();
 
@@ -307,7 +294,6 @@ public class EventController extends BaseController{
     }
 
     public void newLocation() {
-        //bpCenter.getChildren().get(bpCenter.getChildren().indexOf(mainViewSidebar)).toFront();
 
         TranslateTransition transition = new TranslateTransition();
         createLocationBar.toFront();
@@ -326,41 +312,30 @@ public class EventController extends BaseController{
                 }
             };
             acpBackground.addEventHandler(MouseEvent.MOUSE_CLICKED, menuHandler);
-            //flowPane.setDisable(true);
         } else {
             isMenuOpen = false;
             transition.setToX(-300);
             acpBackground.setOpacity(1);
-            //flowPane.setDisable(false);
         }
         transition.play();
     }
 
     public void createNewLocation(ActionEvent actionEvent) throws Exception {
-
-
-
         String name = locationName.getText();
         String address = adress.getText();
         int zip_Code = Integer.parseInt(zipCode.getText());
         locationModel.createLocation(name,address,zip_Code);
-
-
-
-
     }
 
     public void publishTicket(ActionEvent actionEvent) throws Exception {
-
         int event_ID = eventBox.getSelectionModel().getSelectedItem().getId();
         String firstName = firstNametxt.getText();
         String lastName = lastNametxt.getText();
         String mail = mailtxt.getText();
         int type = ticketType;
-
         ticketModel.createTicket(event_ID,firstName,lastName,mail,type);
-
     }
+
     public void vipAction(ActionEvent actionEvent)
     {
         if (vip.isSelected())
@@ -373,8 +348,7 @@ public class EventController extends BaseController{
             standard.setDisable(false);
         }
     }
-
-    //When user toggles 'STANDARD' Radio Button
+    
     public void standardAction (ActionEvent actionEvent)
     {
         if(standard.isSelected())
