@@ -61,11 +61,15 @@ public class CreateTicketController extends BaseController implements Initializa
         final String user="mlkaer2@hotmail.com";//change accordingly
         final String password="illidan1ocanada1";//change accordingly
 
-        String host = "localhost";
+        String host = "mail.smtp.host";
+        String host1 = "mail.javatpoint.com";
+        String host2 = "localhost";
         Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.port", "8080");
         properties.put("mail.smtp.auth", "true");
        // "mail.javatpoint.com" localhost
+        //String host = "mail.smtp.host";
+        //String host1 = "mail.javatpoint.com";
         Session session = Session.getDefaultInstance(properties,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
