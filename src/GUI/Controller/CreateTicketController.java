@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-
+import javax.mail.*;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -19,11 +19,19 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import java.io.File;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CreateTicketController extends BaseController implements Initializable {
+    private static final int SMTPNumber = 587;
+    private static final String SMTPName = "outlook.office365.com";
+    private static final String user="mlkaer2@hotmail.com";
+    private static final String password="illidan1ocanada1";
+    private final String from = "mlkaer1@hotmail.com";
+    private final String to = "mlkaer2@hotmail.com";
     @FXML
     private ComboBox<Event> cbEventList;
     @FXML
@@ -58,112 +66,111 @@ public class CreateTicketController extends BaseController implements Initializa
         int type = ticketType;
 
         ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
-        final String user="mlkaer2@hotmail.com";//change accordingly
-        final String password="illidan1ocanada1";//change accordingly
 
-        String host = "mail.smtp.host";
-        String host1 = "mail.javatpoint.com";
-        String host2 = "localhost";
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.port", "8080");
+
+
+        // Assuming you are sending email from localhost
+        String host = "smtp.office365.com";
+        String host1 = "mlkaer2@hotmail.com";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
-       // "mail.javatpoint.com" localhost
-        //String host = "mail.smtp.host";
-        //String host1 = "mail.javatpoint.com";
-        Session session = Session.getDefaultInstance(properties,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user,password);
-                    }
-                });
+        //properties.put("mail.smtp.starttls.enable", "true");
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
 
-        try{
+
+        try {
+            // Create a new MimeMessage object
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user));
-            message.addRecipient(Message.RecipientType.TO,new InternetAddress(mail));
-            message.setSubject("Message Aleart");
 
-            //3) create MimeBodyPart object and set your message text
+            // Set the sender and recipient of the message
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to)); // change this later
+
+            // Set the subject of the message
+            message.setSubject("Message Alert");
+
+            // Create the first MimeBodyPart object and set the text message
             BodyPart messageBodyPart1 = new MimeBodyPart();
             messageBodyPart1.setText("Her er billeten");
 
-            //4) create new MimeBodyPart object and set DataHandler object to this object
+            // Create the second MimeBodyPart object and attach the PDF file to it
             MimeBodyPart messageBodyPart2 = new MimeBodyPart();
-
-            String filename = "BE/Barcode.png";//change accordingly
+            String filename = "GUI/Controller/Test.pdf";
             DataSource source = new FileDataSource(filename);
             messageBodyPart2.setDataHandler(new DataHandler(source));
             messageBodyPart2.setFileName(filename);
 
-
-            //5) create Multipart object and add MimeBodyPart objects to this object
+            // Create a MimeMultipart object and add the MimeBodyPart objects to it
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart1);
             multipart.addBodyPart(messageBodyPart2);
 
-            //6) set the multiplart object to the message object
-            message.setContent(multipart );
+            // Set the content of the email message to the MimeMultipart object
+            message.setContent(multipart);
 
-            //7) send message
+            // Send the email message
             Transport.send(message);
 
-            System.out.println("message sent....");
-        }catch (MessagingException ex) {ex.printStackTrace();}
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // Close the window
         closeWindow(btnFinish);
     }
+    public void sendEmail() {
+        final Session session = Session.getInstance(this.getEmailProperties(), new Authenticator() {
 
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
 
-    //When user toggles 'VIP' Radio Button
-    public void vipAction(ActionEvent actionEvent)
-    {
-        if (rbVIP.isSelected())
-        {
-            ticketType = 2;
-            rbStandard.setDisable(true);
-        }
-        else
-        {
-            rbStandard.setDisable(false);
-        }
+        });
     }
 
-    //When user toggles 'STANDARD' Radio Button
-    public void standardAction (ActionEvent actionEvent)
-    {
-        if(rbStandard.isSelected())
-        {
-            ticketType = 1;
-            rbVIP.setDisable(true);
+        public Properties getEmailProperties () {
+            final Properties config = new Properties();
+            config.put("mail.smtp.auth", "true");
+            config.put("mail.smtp.starttls.enable", "true");
+            config.put("mail.smtp.host", SMTPName);
+            config.put("mail.smtp.port", SMTPNumber);
+            return config;
         }
-        else
+
+
+        //When user toggles 'VIP' Radio Button
+        public void vipAction (ActionEvent actionEvent)
         {
-            rbVIP.setDisable(false);
+            if (rbVIP.isSelected()) {
+                ticketType = 2;
+                rbStandard.setDisable(true);
+            } else {
+                rbStandard.setDisable(false);
+            }
+        }
+
+        //When user toggles 'STANDARD' Radio Button
+        public void standardAction (ActionEvent actionEvent)
+        {
+            if (rbStandard.isSelected()) {
+                ticketType = 1;
+                rbVIP.setDisable(true);
+            } else {
+                rbVIP.setDisable(false);
+            }
+        }
+
+        @Override
+        public void initialize (URL location, ResourceBundle resources){
+            setupModel();
         }
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setupModel();
-    }
-
-}
 
