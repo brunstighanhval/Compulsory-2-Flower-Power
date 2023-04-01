@@ -14,14 +14,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
+<AnchorPane fx:id="background" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
    <children>
       <VBox fx:id="createTicketBar" prefHeight="600.0" prefWidth="300.0" spacing="30.0" translateX="900.0">
          <padding>
             <Insets top="20.0" />
          </padding>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Ticket" textAlignment="CENTER" wrappingWidth="300.0">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="New Ticket" textAlignment="CENTER" wrappingWidth="300.0">
                <font>
                   <Font name="System Bold" size="34.0" />
                </font>
@@ -42,11 +42,11 @@
                <VBox.margin>
                   <Insets left="15.0" right="15.0" />
                </VBox.margin></TextField>
-            <RadioButton fx:id="standard" mnemonicParsing="false" onAction="#standardAction" text="Standard">
+            <RadioButton fx:id="standard" mnemonicParsing="false" onAction="#standardAction" text="Standard" textFill="WHITE">
                <VBox.margin>
                   <Insets left="15.0" />
                </VBox.margin></RadioButton>
-            <RadioButton fx:id="vip" mnemonicParsing="false" onAction="#vipAction" text="VIP">
+            <RadioButton fx:id="vip" mnemonicParsing="false" onAction="#vipAction" text="VIP" textFill="WHITE">
                <VBox.margin>
                   <Insets left="15.0" />
                </VBox.margin></RadioButton>
@@ -62,7 +62,7 @@
             <Insets top="20.0" />
          </padding>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Location" textAlignment="CENTER" wrappingWidth="300.0">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="New Location" textAlignment="CENTER" wrappingWidth="300.0">
                <font>
                   <Font name="System Bold" size="34.0" />
                </font>
@@ -91,7 +91,7 @@
       </VBox>
       <VBox fx:id="createEventBar" prefHeight="600.0" prefWidth="300.0" spacing="30.0" translateX="-300.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Event" textAlignment="CENTER" wrappingWidth="300.0">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="New Event" textAlignment="CENTER" wrappingWidth="300.0">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -143,16 +143,16 @@
       </VBox>
       <AnchorPane fx:id="acpBackground" layoutX="-7.0" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ece8dd" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ece8dd" height="600.0" layoutX="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ece8dd" height="600.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b4252" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b4252" height="600.0" layoutX="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b4252" height="600.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
             <ListView fx:id="lstAllEvents" fixedCellSize="0.0" layoutX="34.0" layoutY="88.0" prefHeight="406.0" prefWidth="230.0" />
-            <Text layoutX="98.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" wrappingWidth="104.8359375">
+            <Text fill="WHITE" layoutX="98.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of events" wrappingWidth="104.8359375">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="392.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information">
+            <Text fill="WHITE" layoutX="392.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Information">
                <font>
                   <Font size="18.0" />
                </font>
@@ -167,7 +167,7 @@
             <TextField fx:id="txtfEvK" layoutX="325.0" layoutY="265.0" prefHeight="26.0" prefWidth="246.0" promptText="Created by" />
             <TextField fx:id="txtfTicketsLeft" layoutX="325.0" layoutY="329.0" prefHeight="26.0" prefWidth="247.0" promptText="Total Tickets" />
             <ListView fx:id="lstEventTickets" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
-            <Text layoutX="691.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">
+            <Text fill="WHITE" layoutX="691.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">
                <font>
                   <Font size="18.0" />
                </font>
