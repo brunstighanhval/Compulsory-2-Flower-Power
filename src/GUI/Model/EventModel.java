@@ -3,35 +3,46 @@ package GUI.Model;
 import BE.Event;
 import BE.Ticket;
 import BLL.EventManager;
+import BLL.Obs;
+import BLL.Update;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class EventModel {
     private ObservableList<Event> eventsToBeViewed;
-    private ObservableList<Ticket> ticketsToBeViewed;
+    private ListProperty<Ticket> ticketsToBeViewed;
     private Event createdEvent;
     private EventManager eventManager;
 
+    private Update update;
 
     public EventModel() throws Exception
     {
         eventManager = new EventManager();
         eventsToBeViewed = FXCollections.observableArrayList();
         eventsToBeViewed.addAll(eventManager.getAllEvents());
-        ticketsToBeViewed = FXCollections.observableArrayList();
+        update=new Update();
+        ticketsToBeViewed=new SimpleListProperty<>();
+
+
     }
 
     public ObservableList<Event> getObservableEvents() {
+
+
         return eventsToBeViewed;
     }
 
     public ObservableList<Ticket> getTicketsFromEvent(Event event) throws Exception
     {
-        ticketsToBeViewed.clear();
-        ticketsToBeViewed.addAll(eventManager.getTicketsFromEvent(event));
-        return ticketsToBeViewed;
+        ticketsToBeViewed.set(FXCollections.observableArrayList(update.getUpdateEvents(event)));
+        return update.getUpdateEvents(event);
     }
 
     public void createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
@@ -54,4 +65,13 @@ public class EventModel {
         eventsToBeViewed.clear();
         eventsToBeViewed.addAll(eventManager.getAllEvents());
     }
+
+    public void startObservable(Event event) throws IOException {
+        Obs obs=new Obs();
+        obs.observe(event);
+
+    }
+
+
+
 }

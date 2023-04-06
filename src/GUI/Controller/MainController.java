@@ -67,7 +67,7 @@ public class MainController extends BaseController{
         lstAllEvents.setItems(eventModel.getObservableEvents());
         eventBox.setItems(eventModel.getObservableEvents());
         locationsBox.setItems(locationModel.getObservableLocations());
-        lstEventTickets.setItems(eventModel.getTicketsFromEvent(lstAllEvents.getItems().get(0)));
+       // lstEventTickets.setItems(eventModel.getTicketsFromEvent(lstAllEvents.getItems().get(0)));
         listenerLstAllEvents();
         listenerMouseClickTickets();
         adminView();
@@ -80,6 +80,7 @@ public class MainController extends BaseController{
             selectedEvent  = lstAllEvents.getSelectionModel().getSelectedItem();
 
             try {
+                eventModel.startObservable(selectedEvent);
                 lstEventTickets.setItems(eventModel.getTicketsFromEvent(selectedEvent));
             } catch (Exception e) {
                 throw new RuntimeException(e);
