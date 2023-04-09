@@ -96,6 +96,7 @@ public class MainController extends BaseController{
 
             if (event.getClickCount() == 2) { //Ved dobbeltklik kan man starte musikken
                 try {
+                    selectedTicket = lstEventTickets.getSelectionModel().getSelectedItem();
                     makePdf();
                     showPdf();
                 } catch (Exception e) {
@@ -217,15 +218,29 @@ public class MainController extends BaseController{
         EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
         try {
             entranceTicketPDF.makePdf(selectedEvent.getName(),selectedEvent.getDate().toString(),selectedEvent.getStart_time().toString(),
-            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes(),123);
+            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes(),makeTicketNumber());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (MalformedURLException e) {
             displayError(e);
         }
-
-
     }
+
+
+        private int makeTicketNumber()
+        {
+            int startNumber=selectedEvent.getVenue_id()*1000000 +selectedTicket.getId();
+
+
+            return startNumber;
+        }
+
+
+
+
+
+
+
     private void showPdf()
     {
         EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
