@@ -211,7 +211,7 @@ public class EventController extends BaseController implements Initializable{
         stage.setTitle("Create new Ticket");
         stage.setScene(new Scene(root));
         //root.getStylesheets().add(getClass().getResource("/CSS/CreateEvent.css").toExternalForm());
-        stage.showAndWait();
+        stage.show();
     }
 
     public void deleteTicket(ActionEvent actionEvent) throws Exception {

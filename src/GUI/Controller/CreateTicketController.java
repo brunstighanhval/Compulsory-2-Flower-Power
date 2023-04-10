@@ -10,28 +10,33 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javax.mail.*;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+
+
 public class CreateTicketController extends BaseController implements Initializable {
+    /*
     private static final int SMTPNumber = 587;
     private static final String SMTPName = "outlook.office365.com";
     private static final String user="mlkaer2@hotmail.com";
     private static final String password="illidan1ocanada1";
     private final String from = "mlkaer1@hotmail.com";
     private final String to = "mlkaer2@hotmail.com";
+
+     */
     @FXML
     private ComboBox<Event> cbEventList;
     @FXML
@@ -58,33 +63,91 @@ public class CreateTicketController extends BaseController implements Initializa
     }
 
     //When user hits 'FINISH' Button
-    public void createTicket(ActionEvent actionEvent) throws Exception {
+    public void createTicket(ActionEvent actionEvent) throws MessagingException, IOException {
+
+
         int event_ID = cbEventList.getSelectionModel().getSelectedItem().getId();
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         String mail = txtMail.getText();
         int type = ticketType;
 
-        ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
+        try {
+            ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        final String PROP_FILE = "Config/settings";
+        Properties prop = new Properties();
 
+        prop.put("mail.smtp.auth",true);
+        prop.put("mail.smtp.starttles.enable","true");
+        prop.put("mail.smtp.host","smtp.simply.com");
+        prop.put("mail.smtp.port","25");
+        prop.put("mail.smtp.ssl.trust", "smtp.simply.com");
 
+        Properties emailProperties = new Properties();
+        emailProperties.load(new FileInputStream( new File(PROP_FILE)));
 
+        String userName=emailProperties.getProperty("userName");
+        String password=emailProperties.getProperty("password");
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
+            }
+        });
+
+        Message message = new MimeMessage(session);
+
+        message.setFrom(new InternetAddress(userName));
+
+        String recipient="Izabellarezmer@gmail.com";
+
+        message.setRecipients(
+                Message.RecipientType.TO, InternetAddress.parse(recipient));
+        message.setSubject("Mail Subject");
+
+        String msg = "this is the email";
+
+        MimeBodyPart mimeBodyPart = new MimeBodyPart();
+        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(mimeBodyPart);
+
+        //Attachment
+
+        MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+
+        String path = "GUI/Controller/billet.pdf";
+        boolean filesExist = Files.exists(Path.of(path)); //ser om filen er der
+
+        if(filesExist)
+        {
+            File file = new File(path);
+            attachmentBodyPart.attachFile(file);
+            multipart.addBodyPart(attachmentBodyPart);
+            message.setContent(multipart);
+        }
+
+        Transport.send(message);
+        System.out.println("The Email has been sent");
+
+        /*
         // Assuming you are sending email from localhost
         String host = "smtp.office365.com";
         String host1 = "mlkaer2@hotmail.com";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "25");
+        properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
-            }
-        });
 
-
+         */
+        /*
         try {
             // Create a new MimeMessage object
             MimeMessage message = new MimeMessage(session);
@@ -121,30 +184,12 @@ public class CreateTicketController extends BaseController implements Initializa
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }
+         */
+
 
         // Close the window
         closeWindow(btnFinish);
     }
-    public void sendEmail() {
-        final Session session = Session.getInstance(this.getEmailProperties(), new Authenticator() {
-
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
-            }
-
-        });
-    }
-
-        public Properties getEmailProperties () {
-            final Properties config = new Properties();
-            config.put("mail.smtp.auth", "true");
-            config.put("mail.smtp.starttls.enable", "true");
-            config.put("mail.smtp.host", SMTPName);
-            config.put("mail.smtp.port", SMTPNumber);
-            return config;
-        }
-
 
         //When user toggles 'VIP' Radio Button
         public void vipAction (ActionEvent actionEvent)
