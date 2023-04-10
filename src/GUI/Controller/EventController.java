@@ -12,20 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -211,7 +204,7 @@ public class EventController extends BaseController implements Initializable{
         stage.setTitle("Create new Ticket");
         stage.setScene(new Scene(root));
         //root.getStylesheets().add(getClass().getResource("/CSS/CreateEvent.css").toExternalForm());
-        stage.show();
+        stage.showAndWait();
     }
 
     public void deleteTicket(ActionEvent actionEvent) throws Exception {

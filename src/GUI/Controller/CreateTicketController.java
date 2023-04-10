@@ -112,7 +112,7 @@ public class CreateTicketController extends BaseController implements Initializa
         String msg = "this is the email";
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+        mimeBodyPart.setContent(msg,"text/html; charset=utf-8");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);
