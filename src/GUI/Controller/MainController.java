@@ -229,13 +229,14 @@ public class MainController extends BaseController{
 
         private int makeTicketNumber()
         {
-            int startNumber=selectedEvent.getVenue_id()*1000000 +selectedTicket.getId();
+            int eventNumbet=selectedEvent.getVenue_id()%100;
+            int ticketNumber=selectedTicket.getId()%1_000_000;
+
+              int startNumber=eventNumbet*1_000_000 +ticketNumber;
 
 
             return startNumber;
         }
-
-
 
 
 
