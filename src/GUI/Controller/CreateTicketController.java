@@ -77,7 +77,8 @@ public class CreateTicketController extends BaseController implements Initializa
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        final String PROP_FILE = "Config/settings";
+
+        final String PROP_FILE = "GUI/Controller/settings";
         Properties prop = new Properties();
 
         prop.put("mail.smtp.auth",true);
@@ -87,7 +88,8 @@ public class CreateTicketController extends BaseController implements Initializa
         prop.put("mail.smtp.ssl.trust", "smtp.simply.com");
 
         Properties emailProperties = new Properties();
-        emailProperties.load(new FileInputStream( new File(PROP_FILE)));
+        emailProperties.load(new FileInputStream(new File(PROP_FILE)));
+        //emailProperties.load(new FileInputStream(PROP_FILE).getClass().getResource(PROP_FILE).openStream());
 
         String userName=emailProperties.getProperty("userName");
         String password=emailProperties.getProperty("password");
@@ -103,7 +105,7 @@ public class CreateTicketController extends BaseController implements Initializa
 
         message.setFrom(new InternetAddress(userName));
 
-        String recipient="Izabellarezmer@gmail.com";
+        String recipient="tomas@muellers.dk";
 
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse(recipient));
