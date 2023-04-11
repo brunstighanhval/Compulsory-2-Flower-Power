@@ -167,7 +167,7 @@
             <TextField fx:id="txtfEvK" layoutX="325.0" layoutY="265.0" prefHeight="26.0" prefWidth="246.0" promptText="Created by" />
             <TextField fx:id="txtfTicketsLeft" layoutX="325.0" layoutY="329.0" prefHeight="26.0" prefWidth="247.0" promptText="Total Tickets" />
             <ListView fx:id="lstEventTickets" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
-            <Text fill="WHITE" layoutX="691.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">
+            <Text fx:id="txtBookedTicketAndEvK" fill="WHITE" layoutX="691.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">
                <font>
                   <Font size="18.0" />
                </font>
@@ -178,6 +178,7 @@
             <Button fx:id="btnTEST" layoutX="52.0" layoutY="514.0" mnemonicParsing="false" onAction="#animationTest" prefHeight="26.0" prefWidth="92.0" text="New Event" />
             <Button fx:id="btnNewLocation" layoutX="157.0" layoutY="514.0" mnemonicParsing="false" onAction="#newLocation" text="New Location" />
             <TextArea fx:id="txtfNotes" layoutX="324.0" layoutY="389.0" prefHeight="105.0" prefWidth="245.0" promptText="Notes..." />
+            <ListView fx:id="lstEventKoordinator" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
          </children>
       </AnchorPane>
    </children>

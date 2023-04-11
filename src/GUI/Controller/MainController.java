@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,6 +27,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MainController extends BaseController{
+    public ListView lstEventKoordinator;
+    @FXML
+    private Text txtBookedTicketAndEvK;
     @FXML
     private AnchorPane acpBackground;
     @FXML
@@ -260,6 +264,17 @@ public class MainController extends BaseController{
             btnNewTicket.setOpacity(0);
             btnDeleteTicket.setDisable(true);
             btnDeleteTicket.setOpacity(0);
+            btnNewLocation.setDisable(true);
+            btnNewLocation.setOpacity(0);
+            btnTEST.setDisable(true);
+            btnTEST.setOpacity(0);
+            lstEventTickets.setDisable(true);
+            lstEventTickets.setOpacity(0);
+            lstEventKoordinator.setItems(userModel.getObservableEventsKoordinator());
+            txtBookedTicketAndEvK.setText("Event Koordinator");
+        } else{
+            lstEventKoordinator.setDisable(true);
+            lstEventKoordinator.setOpacity(0);
         }
     }
 

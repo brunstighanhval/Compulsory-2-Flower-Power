@@ -19,4 +19,7 @@ public class UserManager {
     public boolean validate(String username, String password) throws Exception{
         return userDAO.validate(username, password);
     }
+    public List<User> readEvK() throws Exception{
+    return userDAO.readEvK();
+    }
 }
