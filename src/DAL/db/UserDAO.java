@@ -1,5 +1,6 @@
 package DAL.db;
 
+import BE.Ticket;
 import BE.User;
 
 import java.io.IOException;
@@ -15,10 +16,9 @@ public class UserDAO implements IUserDataAccess {
         databaseConnector = DatabaseConnector.getInstance();
     }
 
-    public List<User> loadUser(String username, String userPassword) throws Exception{
+    public List<User> loadUser(String username, String userPassword) throws Exception {
         ArrayList<User> allEvk = new ArrayList<>();
-        try (Connection conn = databaseConnector.getConnection())
-        {
+        try (Connection conn = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? AND Password = ?;";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
@@ -41,28 +41,53 @@ public class UserDAO implements IUserDataAccess {
             }
             return allEvk;
 
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new Exception("Could not get EventKoordinator from database", ex);
         }
     }
 
-    public boolean validate(String username, String password) throws Exception{
+    public boolean validate(String username, String password) throws Exception {
         String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? and Password = ?";
-        try(Connection conn = databaseConnector.getConnection()){
+        try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Failed to validate", e);
         }
         return false;
+    }
+
+    public List<User> readEvK() throws Exception {
+        ArrayList<User> Evks = new ArrayList<>();
+        String sql = "SELECT * FROM Event_Koordinator WHERE Role = 2";
+        try (Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //Map DB row to Song object
+                int id = rs.getInt("Id");
+                String last_name = rs.getString("Last_Name");
+                String first_name = rs.getString("First_Name");
+                String user_name = rs.getString("User_Name");
+                String password = rs.getString("Password");
+                int role = rs.getInt("Role");
+
+                User user = new User(id, last_name, first_name, user_name, password, role);
+
+                Evks.add(user);
+            }
+            return Evks;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get EventKoordinator from databases", ex);
+        }
     }
 }

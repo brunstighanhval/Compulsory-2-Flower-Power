@@ -61,13 +61,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "EventKoordinator{" +
-                "id=" + id +
-                ", last_name='" + last_name + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return first_name + " " +
+                last_name ;
     }
 }
