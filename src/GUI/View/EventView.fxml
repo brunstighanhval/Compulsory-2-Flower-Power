@@ -162,9 +162,9 @@
             <Button fx:id="btnSignOut" layoutX="805.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="55.0" text="Close" />
             <TextField fx:id="txtfEventName" layoutX="323.0" layoutY="88.0" prefHeight="26.0" prefWidth="251.0" promptText="Event Name" />
             <TextField fx:id="txtfStartTime" layoutX="448.0" layoutY="147.0" prefHeight="26.0" prefWidth="57.0" promptText="Start" />
-            <TextField fx:id="txtfLocation" layoutX="323.0" layoutY="200.0" prefHeight="26.0" prefWidth="247.0" promptText="Location" />
+            <TextField fx:id="txtfLocation" disable="true" layoutX="323.0" layoutY="200.0" prefHeight="26.0" prefWidth="247.0" promptText="Location" />
             <TextField fx:id="txtfEndTime" layoutX="513.0" layoutY="147.0" prefHeight="26.0" prefWidth="57.0" promptText="End" />
-            <TextField fx:id="txtfEvK" layoutX="325.0" layoutY="265.0" prefHeight="26.0" prefWidth="246.0" promptText="Created by" />
+            <TextField fx:id="txtfEvK" disable="true" layoutX="325.0" layoutY="265.0" prefHeight="26.0" prefWidth="246.0" promptText="Created by" />
             <TextField fx:id="txtfTicketsLeft" layoutX="325.0" layoutY="329.0" prefHeight="26.0" prefWidth="247.0" promptText="Total Tickets" />
             <ListView fx:id="lstEventTickets" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
             <Text fx:id="txtBookedTicketAndEvK" fill="WHITE" layoutX="691.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Tickets ">

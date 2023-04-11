@@ -313,7 +313,7 @@ public class MainController extends BaseController{
 
     public void createEventVersionTwo(ActionEvent actionEvent) {
         String name = eventName.getText();
-        int EvKId = 1;
+        int EvKId = userModel.getLoggedinUser().getId();
         LocalDate date = datePick.getValue();
         LocalTime start_time = LocalTime.parse(startTime.getText());
         LocalTime end_time = LocalTime.parse(endTime.getText());
