@@ -1,7 +1,9 @@
 package BLL;
 
 import BE.Event;
+import BE.Location;
 import BE.Ticket;
+import BE.User;
 import DAL.db.EventDAO;
 import DAL.db.IEventDataAccess;
 
@@ -26,4 +28,7 @@ public class EventManager {
     public void deleteEvent(Event event) throws Exception{eventDAO.deleteEvent(event);}
 
     public void updateEvent(Event updatedEvent) throws Exception {eventDAO.updateEvent(updatedEvent);}
+
+    public User getEventKoordinator(int id) throws Exception{return eventDAO.getEventKoordinator(id);}
+    public Location getLocation(int id) throws Exception{return eventDAO.getLocation(id);}
 }

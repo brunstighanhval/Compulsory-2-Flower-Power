@@ -1,7 +1,10 @@
 package DAL.db;
 
 import BE.Event;
+import BE.Location;
 import BE.Ticket;
+import BE.User;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -13,4 +16,6 @@ public interface IEventDataAccess {
     void deleteEvent(Event event) throws Exception;
     void updateEvent(Event event) throws Exception;
     List<Ticket> getTicketsFromEvent(Event event) throws Exception;
+    User getEventKoordinator(int id) throws Exception;
+    Location getLocation(int locationId) throws Exception;
 }

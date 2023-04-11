@@ -1,7 +1,9 @@
 package GUI.Model;
 
 import BE.Event;
+import BE.Location;
 import BE.Ticket;
+import BE.User;
 import BLL.EventManager;
 import BLL.Obs;
 import BLL.Update;
@@ -13,6 +15,7 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class EventModel {
     private ObservableList<Event> eventsToBeViewed;
@@ -72,6 +75,12 @@ public class EventModel {
 
     }
 
+    public User getEventKoordinator(int id) throws Exception{
+        return eventManager.getEventKoordinator(id);
+    }
+    public Location getLocation(int id) throws Exception{
+        return eventManager.getLocation(id);
+    }
 
 
 }

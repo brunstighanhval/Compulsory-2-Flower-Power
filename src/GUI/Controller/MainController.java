@@ -89,7 +89,11 @@ public class MainController extends BaseController{
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            labelsToShow();
+            try {
+                labelsToShow();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
@@ -110,14 +114,13 @@ public class MainController extends BaseController{
         });
     }
 
-    private void labelsToShow()
-    {
+    private void labelsToShow() throws Exception {
         txtfEventName.setText(selectedEvent.getName());
         //txtfDate.setText(selectedEvent.getDate().toString());
         datePicker.setValue(selectedEvent.getDate());
-        //lblLocation.setText();
+        txtfLocation.setText(eventModel.getLocation(selectedEvent.getVenue_id()).toString());
         txtfNotes.setText(selectedEvent.getNotes());
-        //txtfEVK.setText(selectedEvent.getId()+"");
+        txtfEvK.setText(eventModel.getEventKoordinator(selectedEvent.getEvKId()).toString());
         txtfStartTime.setText(selectedEvent.getStart_time().toString());
         txtfEndTime.setText(selectedEvent.getEnd_time().toString());
         txtfTicketsLeft.setText(String.valueOf(selectedEvent.getMax_tickets()));

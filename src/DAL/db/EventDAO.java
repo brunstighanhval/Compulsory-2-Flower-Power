@@ -1,7 +1,10 @@
 package DAL.db;
 
 import BE.Event;
+import BE.Location;
 import BE.Ticket;
+import BE.User;
+
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -143,6 +146,58 @@ public class EventDAO implements IEventDataAccess{
         } catch(SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not edit the event", ex);
+        }
+    }
+
+    @Override
+    public User getEventKoordinator(int evkId) throws Exception{
+        User user = null;
+        String sql = "SELECT * FROM Event_Koordinator WHERE Id = ?";
+        try (Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, evkId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //Map DB row to Song object
+                int id = rs.getInt("Id");
+                String last_name = rs.getString("Last_Name");
+                String first_name = rs.getString("First_Name");
+                String user_name = rs.getString("User_Name");
+                String password = rs.getString("Password");
+                int role = rs.getInt("Role");
+
+                user = new User(id, last_name, first_name, user_name, password, role);
+            }
+            return user;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get EventKoordinator from databases", ex);
+        }
+    }
+
+    @Override
+    public Location getLocation(int LocationId) throws Exception{
+        Location location = null;
+        String sql = "SELECT * FROM Location WHERE Venue_ID = ?";
+        try (Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, LocationId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //Map DB row to Song object
+                int id = rs.getInt("Venue_ID");
+                String name = rs.getString("Name");
+                String address = rs.getString("Address");
+                int zip_code = rs.getInt("Zip_Code");
+
+                location = new Location(id, name, address, zip_code);
+            }
+            return location;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get EventKoordinator from databases", ex);
         }
     }
 }
