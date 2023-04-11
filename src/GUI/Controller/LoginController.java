@@ -12,10 +12,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class  LoginController extends BaseController {
+    @FXML
+    private ImageView logoImgView;
     @FXML
     private TextField txtfUsername;
     @FXML
@@ -66,5 +70,6 @@ public class  LoginController extends BaseController {
     @Override
     public void setup() throws Exception {
         userModel = getModel().getUserModel();
+        logoImgView.setImage(new Image("Pictures/logo.png"));
     }
 }
