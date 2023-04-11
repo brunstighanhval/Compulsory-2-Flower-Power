@@ -17,11 +17,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -37,6 +34,7 @@ public class CreateTicketController extends BaseController implements Initializa
     private final String to = "mlkaer2@hotmail.com";
 
      */
+    private final String from = "tomas@stojerinvest.dk";
     @FXML
     private ComboBox<Event> cbEventList;
     @FXML
@@ -72,6 +70,7 @@ public class CreateTicketController extends BaseController implements Initializa
         String mail = txtMail.getText();
         int type = ticketType;
 
+
         try {
             ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
         } catch (Exception e) {
@@ -79,62 +78,78 @@ public class CreateTicketController extends BaseController implements Initializa
         }
 
         final String PROP_FILE = "GUI/Controller/settings";
-        Properties prop = new Properties();
+        Properties prop = System.getProperties();
 
         prop.put("mail.smtp.auth",true);
         prop.put("mail.smtp.starttles.enable","true");
-        prop.put("mail.smtp.host","smtp.simply.com");
-        prop.put("mail.smtp.port","25");
+        prop.put("mail.smtp.host","smtp.gmail.com");
+        prop.put("mail.smtp.port","587");
         prop.put("mail.smtp.ssl.trust", "smtp.simply.com");
 
-        Properties emailProperties = new Properties();
-        emailProperties.load(new FileInputStream(new File(PROP_FILE)));
+        //Properties emailProperties = new Properties();
+        //emailProperties.load(new FileInputStream(new File(PROP_FILE)));
         //emailProperties.load(new FileInputStream(PROP_FILE).getClass().getResource(PROP_FILE).openStream());
 
-        String userName=emailProperties.getProperty("userName");
-        String password=emailProperties.getProperty("password");
+        //String userName=emailProperties.getProperty("tomas@stojerinvest.dk");
+        //String password=emailProperties.getProperty("kaffeogteT1");
 
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
+                return new PasswordAuthentication("Izabellarezmer@gmail.com", "19961306Izar");
             }
         });
+        session.setDebug(true);
+        try {
+            Message message = new MimeMessage(session);
 
-        Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
 
-        message.setFrom(new InternetAddress(userName));
+            String to = "mlkaer1@hotmail.com";
 
-        String recipient="tomas@muellers.dk";
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject("Mail Subject");
 
-        message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse(recipient));
-        message.setSubject("Mail Subject");
+            String msg = "this is the email";
 
-        String msg = "this is the email";
+            Multipart multipart = new MimeMultipart();
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            attachmentPart.setContent(msg, "text/html; charset=utf-8");
 
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg,"text/html; charset=utf-8");
+            multipart.addBodyPart(attachmentPart);
 
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
+            //Attachment
 
-        //Attachment
+            MimeBodyPart textPart = new MimeBodyPart();
 
-        MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+            String path = "GUI/Controller/billet.pdf";
+            //boolean filesExist = Files.exists(Path.of(path)); //ser om filen er der
+            try{
+                File f = new File ("GUI/Controller/billet.pdf");
 
-        String path = "GUI/Controller/billet.pdf";
-        boolean filesExist = Files.exists(Path.of(path)); //ser om filen er der
+                attachmentPart.attachFile(f);
+                textPart.setText("This is the mail");
+                multipart.addBodyPart(textPart);
+                multipart.addBodyPart(attachmentPart);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            /*
+            if (filesExist) {
+                File file = new File(path);
+                attachmentBodyPart.attachFile(file);
+                multipart.addBodyPart(attachmentBodyPart);
+                message.setContent(multipart);
+            }
 
-        if(filesExist)
-        {
-            File file = new File(path);
-            attachmentBodyPart.attachFile(file);
-            multipart.addBodyPart(attachmentBodyPart);
+             */
             message.setContent(multipart);
-        }
 
-        Transport.send(message);
+
+            Transport.send(message);
+        }catch (MessagingException mex){
+            mex.printStackTrace();
+        }
         System.out.println("The Email has been sent");
 
         /*
