@@ -16,13 +16,12 @@ public class UserDAO implements IUserDataAccess {
         databaseConnector = DatabaseConnector.getInstance();
     }
 
-    public List<User> loadUser(String username, String userPassword) throws Exception {
+    public List<User> loadUser(String username) throws Exception {
         ArrayList<User> allEvk = new ArrayList<>();
         try (Connection conn = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? AND Password = ?;";
+            String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setString(2, userPassword);
             ResultSet rs = stmt.executeQuery();
 
             // Loop through rows from the database result set
@@ -47,12 +46,11 @@ public class UserDAO implements IUserDataAccess {
         }
     }
 
-    public boolean validate(String username, String password) throws Exception {
-        String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ? and Password = ?";
+    public boolean validate(String username) throws Exception {
+        String sql = "SELECT * FROM Event_Koordinator WHERE User_Name = ?";
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return true;

@@ -13,11 +13,11 @@ public class UserManager {
     public UserManager() throws IOException {
         userDAO = new UserDAO();
     }
-    public List<User> loadUser(String username, String userPassword) throws Exception{
-        return userDAO.loadUser(username, userPassword);
+    public List<User> loadUser(String username) throws Exception{
+        return userDAO.loadUser(username);
     }
-    public boolean validate(String username, String password) throws Exception{
-        return userDAO.validate(username, password);
+    public boolean validate(String username) throws Exception{
+        return userDAO.validate(username);
     }
     public List<User> readEvK() throws Exception{
     return userDAO.readEvK();

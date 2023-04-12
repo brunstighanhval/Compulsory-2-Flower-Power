@@ -24,11 +24,11 @@ public class UserModel {
 
         return eventKoordinatorsToBeViewed;
     }
-    public List<User> loadUser(String username, String userPassword)throws Exception{
-        return userManager.loadUser(username, userPassword);
+    public List<User> loadUser(String username)throws Exception{
+        return userManager.loadUser(username);
     }
-    public boolean validate(String username, String password) throws Exception{
-        return userManager.validate(username, password);
+    public boolean validate(String username) throws Exception{
+        return userManager.validate(username);
     }
     public User getLoggedinUser(){return user;}
 

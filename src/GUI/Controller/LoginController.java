@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.BCrypt;
 import BE.User;
 import DAL.db.UserDAO;
 import GUI.Model.UserModel;
@@ -35,11 +36,14 @@ public class  LoginController extends BaseController {
         UserDAO userDAO = new UserDAO();
         String email = txtfUsername.getText();
         String password = paswPassword.getText();
-        boolean flag = userDAO.validate(email, password);
+        boolean flag = userDAO.validate(email);
         if(!flag) {
             loginFailedAlert();
         } else {
-            user = userModel.loadUser(email, password).get(0);
+            user = userModel.loadUser(email).get(0);
+            System.out.println(user.getPassword());
+            if(BCrypt.checkpw(password, user.getPassword()))
+            //user = userModel.loadUser(email, password).get(0);
             userModel.setLoggedinUser(user);
             openMainWindow();
         }
