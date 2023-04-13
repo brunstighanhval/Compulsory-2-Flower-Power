@@ -34,7 +34,7 @@ public class EntranceTicketPDF {
 
 
 
-        public void makePdf(String name, String date, String startTime, String endTime, String note,int barCode) throws FileNotFoundException, MalformedURLException {
+        public void makePdf(String name, String date, String startTime, String endTime, String note,int barCode, int type) throws FileNotFoundException, MalformedURLException {
 
                  pdfWriter = new PdfWriter(path);
                  pdfDocument = new PdfDocument(pdfWriter);

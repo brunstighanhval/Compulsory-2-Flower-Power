@@ -225,7 +225,7 @@ public class MainController extends BaseController{
         EntranceTicketPDF entranceTicketPDF=new EntranceTicketPDF();
         try {
             entranceTicketPDF.makePdf(selectedEvent.getName(),selectedEvent.getDate().toString(),selectedEvent.getStart_time().toString(),
-            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes(),makeTicketNumber());
+            selectedEvent.getEnd_time().toString(),selectedEvent.getNotes(),makeTicketNumber(),getTicketType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (MalformedURLException e) {
@@ -246,6 +246,10 @@ public class MainController extends BaseController{
         }
 
 
+        private int getTicketType()
+        {
+            return selectedTicket.getType_id();
+        }
 
 
 
