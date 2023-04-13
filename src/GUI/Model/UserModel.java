@@ -42,4 +42,9 @@ public class UserModel {
     public void setLoggedinUser(User user){
         this.user = user;
     }
+
+    public void deleteEventKoordinator(User selectedKoordinator) throws Exception {
+        userManager.deleteEventKoordinator(selectedKoordinator);
+        eventKoordinatorsToBeViewed.remove(selectedKoordinator);
+    }
 }

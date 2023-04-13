@@ -114,4 +114,17 @@ public class UserDAO implements IUserDataAccess {
             throw new Exception("Could not add an eventKoordinator", ex);
         }
     }
-}
+
+    @Override
+    public void deleteEventKoordinator(User selectedKoordinator) throws Exception {
+        String sql = "DELETE FROM Event_Koordinator WHERE Id = ?";
+        try(Connection conn = databaseConnector.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, selectedKoordinator.getId());
+            stmt.execute();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not delete this user", ex);
+        }
+        }
+    }

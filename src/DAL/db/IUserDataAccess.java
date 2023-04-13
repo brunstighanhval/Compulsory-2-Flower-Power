@@ -9,4 +9,5 @@ public interface IUserDataAccess {
     boolean validate(String username) throws Exception;
     List<User> readEvK() throws Exception;
     User addNewEventKoordinator(String firstName, String lastName, String username, String password, int role) throws Exception;
+    void deleteEventKoordinator(User selectedKoordinator) throws Exception;
 }

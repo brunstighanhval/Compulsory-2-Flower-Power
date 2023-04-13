@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MainController extends BaseController{
-    public ListView lstEventKoordinator;
+    public ListView<User> lstEventKoordinator;
     @FXML
     private Text txtBookedTicketAndEvK;
     @FXML
@@ -58,6 +58,7 @@ public class MainController extends BaseController{
     private Ticket selectedTicket;
     private int ticketType;
     private boolean isMenuOpen;
+    private User selectedKoordinator;
 
     @Override
     public void setup() throws Exception {
@@ -426,6 +427,20 @@ public class MainController extends BaseController{
     }
 
     public void handleDeleteEventKoordinator(ActionEvent actionEvent) {
+        selectedKoordinator = lstEventKoordinator.getSelectionModel().getSelectedItem();
+        if (selectedKoordinator != null) {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Are you sure you wanna delete " + selectedKoordinator.getFirst_name() + " " + selectedKoordinator.getLast_name());
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    userModel.deleteEventKoordinator(selectedKoordinator);
+                }
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+        }
     }
 
     public void handleAddEventKoordinator(ActionEvent actionEvent) {
@@ -438,6 +453,7 @@ public class MainController extends BaseController{
             password = BCrypt.hashpw(password, salt);
             int role = 2;
             userModel.addNewEventKoordinator(firstName, lastName, username, password, role);
+            handleCreateEventKoordinator();
         } catch (Exception e){
             e.printStackTrace();
         }

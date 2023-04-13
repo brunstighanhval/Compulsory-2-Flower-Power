@@ -26,4 +26,8 @@ public class UserManager {
     public User addNewEventKoordinator(String firstName, String lastName, String username, String password, int role) throws Exception {
         return userDAO.addNewEventKoordinator(firstName, lastName, username, password, role);
     }
+
+    public void deleteEventKoordinator(User selectedKoordinator) throws Exception {
+        userDAO.deleteEventKoordinator(selectedKoordinator);
+    }
 }
