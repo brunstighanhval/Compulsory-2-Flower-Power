@@ -164,7 +164,7 @@
             </Text>
             <Button fx:id="btnEditEvent" layoutX="356.0" layoutY="515.0" mnemonicParsing="false" onAction="#handleEditEvent" text="Update Event" />
             <Button fx:id="btnDeleteSelectedEvent" layoutX="458.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleDeleteSelectedEvent" text="Delete Event" />
-            <Button fx:id="btnSignOut" layoutX="805.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="55.0" text="Close" />
+            <Button fx:id="btnSignOut" layoutX="790.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="70.0" text="Sign Out" />
             <TextField fx:id="txtfEventName" layoutX="323.0" layoutY="88.0" prefHeight="26.0" prefWidth="251.0" promptText="Event Name" />
             <TextField fx:id="txtfStartTime" layoutX="448.0" layoutY="147.0" prefHeight="26.0" prefWidth="57.0" promptText="Start" />
             <TextField fx:id="txtfLocation" disable="true" layoutX="323.0" layoutY="200.0" prefHeight="26.0" prefWidth="247.0" promptText="Location" />

@@ -12,19 +12,23 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 public class MainController extends BaseController{
     public ListView lstEventKoordinator;
@@ -176,9 +180,31 @@ public class MainController extends BaseController{
     }
 
     @FXML
-    public void handleSignOut(ActionEvent actionEvent) {
+    public void handleSignOut(ActionEvent actionEvent) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Are you sure you want to Sign Out");
+        alert.setContentText("Return back to the Login page");
 
-        System.exit(0);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/GUI/View/LoginView.fxml"));
+            Parent root = loader.load();
+
+            LoginController loginController = loader.getController();
+            loginController.setModel(super.getModel());
+            loginController.setup();
+
+            stage.setTitle("Event Tickets EASV Bar");
+            stage.setScene(new Scene(root));
+            root.getStylesheets().add(getClass().getResource("/CSS/Login.css").toExternalForm());
+            stage.show();
+            closeWindow(btnSignOut);
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
 
     }
 
