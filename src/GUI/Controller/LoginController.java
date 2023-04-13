@@ -42,10 +42,10 @@ public class  LoginController extends BaseController {
         } else {
             user = userModel.loadUser(email).get(0);
             System.out.println(user.getPassword());
-            if(BCrypt.checkpw(password, user.getPassword()))
-            //user = userModel.loadUser(email, password).get(0);
-            userModel.setLoggedinUser(user);
-            openMainWindow();
+            if(BCrypt.checkpw(password, user.getPassword())) {
+                userModel.setLoggedinUser(user);
+                openMainWindow();
+            }
         }
     }
 

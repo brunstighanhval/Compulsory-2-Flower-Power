@@ -179,7 +179,42 @@
             <Button fx:id="btnNewLocation" layoutX="157.0" layoutY="514.0" mnemonicParsing="false" onAction="#newLocation" text="New Location" />
             <TextArea fx:id="txtfNotes" layoutX="324.0" layoutY="389.0" prefHeight="105.0" prefWidth="245.0" promptText="Notes..." />
             <ListView fx:id="lstEventKoordinator" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
+            <Button fx:id="btnNewEventKoordinator" layoutX="623.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleCreateEventKoordinator" text="New EventKoordinator" />
+            <Button fx:id="btnDeleteEventKoordinator" layoutX="623.0" layoutY="546.0" mnemonicParsing="false" onAction="#handleDeleteEventKoordinator" prefHeight="26.0" prefWidth="154.0" text="Delete EventKoordinator" />
          </children>
       </AnchorPane>
+      <VBox fx:id="createEventKoordinatorBar" layoutX="-300.0" layoutY="-37.0" prefHeight="600.0" prefWidth="300.0" spacing="30.0">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="New EventKoordinator" textAlignment="CENTER" wrappingWidth="300.0">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtfFirstName" promptText="First Name">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfLastName" promptText="Last Name">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfUsername" promptText="Username">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfPassword" prefHeight="26.0" prefWidth="226.0" promptText="Password" />
+            <Button fx:id="btnAddEventKoordinator" mnemonicParsing="false" onAction="#handleAddEventKoordinator" prefHeight="35.0" prefWidth="300.0" text="Create EventKoordinator">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

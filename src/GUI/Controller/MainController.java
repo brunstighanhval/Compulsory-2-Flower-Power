@@ -33,7 +33,7 @@ public class MainController extends BaseController{
     @FXML
     private AnchorPane acpBackground;
     @FXML
-    private VBox createLocationBar, createTicketBar, createEventBar;
+    private VBox createLocationBar, createTicketBar, createEventBar, createEventKoordinatorBar;
     @FXML
     private ListView <Ticket> lstEventTickets;
     @FXML
@@ -43,13 +43,13 @@ public class MainController extends BaseController{
     @FXML
     private ComboBox<Event> eventBox;
     @FXML
-    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation;
+    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation, txtfFirstName, txtfLastName, txtfUsername, txtfPassword;
     @FXML
     private TextArea notesArea, txtfNotes;
     @FXML
     private DatePicker datePick, datePicker;
     @FXML
-    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation;
+    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator;
     @FXML
     private RadioButton standard, vip;
     private String errorText;
@@ -278,6 +278,10 @@ public class MainController extends BaseController{
         } else{
             lstEventKoordinator.setDisable(true);
             lstEventKoordinator.setOpacity(0);
+            btnNewEventKoordinator.setDisable(true);
+            btnNewEventKoordinator.setOpacity(0);
+            btnDeleteEventKoordinator.setDisable(true);
+            btnDeleteEventKoordinator.setOpacity(0);
         }
     }
 
@@ -396,6 +400,38 @@ public class MainController extends BaseController{
         {
             vip.setDisable(false);
         }
+    }
+
+    public void handleCreateEventKoordinator() {
+        TranslateTransition transition = new TranslateTransition();
+        createEventKoordinatorBar.toFront();
+        transition.setNode(createEventKoordinatorBar);
+        transition.setDuration(Duration.millis(150));
+
+        if(!isMenuOpen) {
+            isMenuOpen = true;
+            transition.setToX(0);
+            acpBackground.setOpacity(0.2);
+            EventHandler<MouseEvent> menuHandler = new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    handleCreateEventKoordinator();
+                    acpBackground.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                }
+            };
+            acpBackground.addEventHandler(MouseEvent.MOUSE_CLICKED, menuHandler);
+        } else {
+            isMenuOpen = false;
+            transition.setToX(-300);
+            acpBackground.setOpacity(1);
+        }
+        transition.play();
+    }
+
+    public void handleDeleteEventKoordinator(ActionEvent actionEvent) {
+    }
+
+    public void handleAddEventKoordinator(ActionEvent actionEvent) {
     }
 }
 
