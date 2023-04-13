@@ -75,6 +75,7 @@ public class MainController extends BaseController{
         listenerLstAllEvents();
         listenerMouseClickTickets();
         adminView();
+
     }
 
     public void listenerLstAllEvents() {
