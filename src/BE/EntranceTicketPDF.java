@@ -16,11 +16,13 @@ import com.itextpdf.layout.element.Table;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 
 import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
@@ -32,7 +34,7 @@ public class EntranceTicketPDF {
         PdfDocument pdfDocument;
         Document document;
 
-
+        ImageData data;
 
         public void makePdf(String name, String date, String startTime, String endTime, String note,int barCode, int type) throws FileNotFoundException, MalformedURLException {
 
@@ -55,6 +57,7 @@ public class EntranceTicketPDF {
 
 
                 createBarcode(String.format("%08d", barCode), pdfDocument);
+                getPicture(type);
 
                 document.close();
         }
@@ -119,6 +122,30 @@ public class EntranceTicketPDF {
                 document.add(image);
 
         }
+
+        private void getPicture(int type) throws FileNotFoundException, MalformedURLException {
+
+
+                switch (type)
+                {
+                        case 1:
+                                 data= ImageDataFactory.create("Resources/Pictures/pexels-wendy-wei-1540406.jpg");
+                                break;
+                        case 2:
+                                 data= ImageDataFactory.create("Resources/Pictures/pexels-wendy-wei-1540406.jpg");
+                                break;
+                        case 3:
+                                data= ImageDataFactory.create("Resources/Pictures/peakpx.jpg");
+                                break;
+                }
+                System.out.println(type);
+                Image image = new Image(data);
+                image.setFixedPosition(1, 1);
+                image.setOpacity(0.2f);
+                document.add(image);
+        }
+
+
 
 
         public void showPDF() throws IOException {
