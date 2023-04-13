@@ -132,10 +132,10 @@ public class EntranceTicketPDF {
                                  data= ImageDataFactory.create("Resources/Pictures/pexels-wendy-wei-1540406.jpg");
                                 break;
                         case 2:
-                                 data= ImageDataFactory.create("Resources/Pictures/pexels-wendy-wei-1540406.jpg");
+                                 data= ImageDataFactory.create("Resources/Pictures/vip.jpg");
                                 break;
                         case 3:
-                                data= ImageDataFactory.create("Resources/Pictures/peakpx.jpg");
+                                data= ImageDataFactory.create("Resources/Pictures/beer.jpg");
                                 break;
                 }
                 System.out.println(type);
