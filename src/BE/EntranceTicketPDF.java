@@ -47,7 +47,7 @@ public class EntranceTicketPDF {
 
                 createDivider();
                 createOneSpace();
-                createHeader(name);
+                createHeader(name, type);
                 createBody(date, startTime,endTime);
                 createOneSpace();
                 createBottom(note);
@@ -86,12 +86,32 @@ public class EntranceTicketPDF {
         }
 
 
-        private void createHeader(String name)
+        private void createHeader(String name, int type)
         {
+                String text="";
+
                 float oneColumnWidth[] = {400f}; //to kolonner sat i en array
 
+                switch (type)
+                {
+                        case 1:
+                                text="ENTRANCE - "+name;
+                                break;
+                        case 2:
+                                text="VIP - "+name;
+
+                                break;
+                        case 3:
+                                text="BEER TICKET - "+name;
+                                break;
+                }
+
+
+
+
+
                 Table header = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
-                header.addCell(new Cell().add(new Paragraph(name)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
+                header.addCell(new Cell().add(new Paragraph(text)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
                 document.add(header);
         }
 
@@ -138,7 +158,7 @@ public class EntranceTicketPDF {
                                 data= ImageDataFactory.create("Resources/Pictures/beer.jpg");
                                 break;
                 }
-                System.out.println(type);
+
                 Image image = new Image(data);
                 image.setFixedPosition(1, 1);
                 image.setOpacity(0.2f);
