@@ -84,7 +84,7 @@ public class CreateTicketController extends BaseController implements Initializa
         prop.put("mail.smtp.starttles.enable","true");
         prop.put("mail.smtp.host","smtp.gmail.com");
         prop.put("mail.smtp.port","587");
-        prop.put("mail.smtp.ssl.trust", "smtp.simply.com");
+        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         //Properties emailProperties = new Properties();
         //emailProperties.load(new FileInputStream(new File(PROP_FILE)));
