@@ -1,6 +1,5 @@
 package GUI.Controller;
 
-import DAL.db.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class LoginController {
@@ -25,15 +25,9 @@ public class LoginController {
     private AnchorPane acpBackground;
 
     public void handleSignIn(ActionEvent actionEvent) throws Exception {
-        UserDAO userDAO = new UserDAO();
-        String email = txtfUsername.getText();
-        String password = paswPassword.getText();
-        boolean flag = userDAO.validate(email, password);
-        if(!flag) {
-            loginFailedAlert();
-        } else {
+
             openMainWindow();
-        }
+
     }
 
     private void openMainWindow() throws IOException {

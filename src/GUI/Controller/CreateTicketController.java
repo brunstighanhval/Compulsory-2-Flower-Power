@@ -19,6 +19,8 @@ import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -82,21 +84,21 @@ public class CreateTicketController extends BaseController implements Initializa
 
         prop.put("mail.smtp.auth",true);
         prop.put("mail.smtp.starttles.enable","true");
-        prop.put("mail.smtp.host","smtp.gmail.com");
-        prop.put("mail.smtp.port","587");
-        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        prop.put("mail.smtp.host","smtp.simply.com");
+        prop.put("mail.smtp.port","25");
+        prop.put("mail.smtp.ssl.trust", "smtp.simply.com");
 
-        //Properties emailProperties = new Properties();
+        Properties emailProperties = new Properties();
         //emailProperties.load(new FileInputStream(new File(PROP_FILE)));
         //emailProperties.load(new FileInputStream(PROP_FILE).getClass().getResource(PROP_FILE).openStream());
 
-        //String userName=emailProperties.getProperty("tomas@stojerinvest.dk");
-        //String password=emailProperties.getProperty("kaffeogteT1");
+        String userName=emailProperties.getProperty("tomas@stojerinvest.dk");
+        String password=emailProperties.getProperty("kaffeogteT1");
 
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("Izabellarezmer@gmail.com", "19961306Izar");
+                return new PasswordAuthentication("tomas@stojerinvest.dk", "kaffeogteT1");
             }
         });
         session.setDebug(true);
@@ -105,9 +107,10 @@ public class CreateTicketController extends BaseController implements Initializa
 
             message.setFrom(new InternetAddress(from));
 
-            String to = "mlkaer1@hotmail.com";
+            String recipient="tomas@muellers.dk";
 
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setRecipients(
+                    Message.RecipientType.TO, InternetAddress.parse(recipient));
             message.setSubject("Mail Subject");
 
             String msg = "this is the email";
@@ -121,9 +124,10 @@ public class CreateTicketController extends BaseController implements Initializa
             //Attachment
 
             MimeBodyPart textPart = new MimeBodyPart();
+            MimeBodyPart attachmentBodyPart = new MimeBodyPart();
 
             String path = "GUI/Controller/billet.pdf";
-            //boolean filesExist = Files.exists(Path.of(path)); //ser om filen er der
+            boolean filesExist = Files.exists(Path.of(path)); //ser om filen er der
             try{
                 File f = new File ("GUI/Controller/billet.pdf");
 
@@ -134,15 +138,16 @@ public class CreateTicketController extends BaseController implements Initializa
             } catch (IOException e){
                 e.printStackTrace();
             }
-            /*
-            if (filesExist) {
+
+            if (filesExist)
+            {
                 File file = new File(path);
                 attachmentBodyPart.attachFile(file);
                 multipart.addBodyPart(attachmentBodyPart);
                 message.setContent(multipart);
             }
 
-             */
+
             message.setContent(multipart);
 
 
