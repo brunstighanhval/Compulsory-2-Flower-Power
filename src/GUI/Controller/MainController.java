@@ -1,9 +1,6 @@
 package GUI.Controller;
 
-import BE.EntranceTicketPDF;
-import BE.Event;
-import BE.Location;
-import BE.Ticket;
+import BE.*;
 import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
 import GUI.Model.TicketModel;
@@ -30,13 +27,13 @@ import java.time.LocalTime;
 import java.util.Optional;
 
 public class MainController extends BaseController{
-    public ListView lstEventKoordinator;
+    public ListView<User> lstEventKoordinator;
     @FXML
     private Text txtBookedTicketAndEvK;
     @FXML
     private AnchorPane acpBackground;
     @FXML
-    private VBox createLocationBar, createTicketBar, createEventBar;
+    private VBox createLocationBar, createTicketBar, createEventBar, createEventKoordinatorBar;
     @FXML
     private ListView <Ticket> lstEventTickets;
     @FXML
@@ -46,13 +43,13 @@ public class MainController extends BaseController{
     @FXML
     private ComboBox<Event> eventBox;
     @FXML
-    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation;
+    private TextField eventName, startTime, endTime, ticketAmount, locationName, adress, zipCode, firstNametxt, lastNametxt, mailtxt, txtfEventName, txtfStartTime, txtfEndTime ,txtfTicketsLeft, txtfEvK, txtfLocation, txtfFirstName, txtfLastName, txtfUsername, txtfPassword;
     @FXML
     private TextArea notesArea, txtfNotes;
     @FXML
     private DatePicker datePick, datePicker;
     @FXML
-    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation;
+    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator;
     @FXML
     private RadioButton standard, vip, radioExtra;
     private String errorText;
@@ -64,6 +61,7 @@ public class MainController extends BaseController{
     private Ticket selectedTicket;
     private int ticketType;
     private boolean isMenuOpen;
+    private User selectedKoordinator;
 
     @Override
     public void setup() throws Exception {
@@ -308,6 +306,10 @@ public class MainController extends BaseController{
         } else{
             lstEventKoordinator.setDisable(true);
             lstEventKoordinator.setOpacity(0);
+            btnNewEventKoordinator.setDisable(true);
+            btnNewEventKoordinator.setOpacity(0);
+            btnDeleteEventKoordinator.setDisable(true);
+            btnDeleteEventKoordinator.setOpacity(0);
         }
     }
 
@@ -433,6 +435,70 @@ public class MainController extends BaseController{
         }
     }
 
+    public void extraTicket(ActionEvent actionEvent) {
+
+    }
+
+
+        
+    public void handleCreateEventKoordinator() {
+        TranslateTransition transition = new TranslateTransition();
+        createEventKoordinatorBar.toFront();
+        transition.setNode(createEventKoordinatorBar);
+        transition.setDuration(Duration.millis(150));
+
+        if(!isMenuOpen) {
+            isMenuOpen = true;
+            transition.setToX(0);
+            acpBackground.setOpacity(0.2);
+            EventHandler<MouseEvent> menuHandler = new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    handleCreateEventKoordinator();
+                    acpBackground.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                }
+            };
+            acpBackground.addEventHandler(MouseEvent.MOUSE_CLICKED, menuHandler);
+        } else {
+            isMenuOpen = false;
+            transition.setToX(-300);
+            acpBackground.setOpacity(1);
+        }
+        transition.play();
+    }
+
+    public void handleDeleteEventKoordinator(ActionEvent actionEvent) {
+        selectedKoordinator = lstEventKoordinator.getSelectionModel().getSelectedItem();
+        if (selectedKoordinator != null) {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Are you sure you wanna delete " + selectedKoordinator.getFirst_name() + " " + selectedKoordinator.getLast_name());
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    userModel.deleteEventKoordinator(selectedKoordinator);
+                }
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void handleAddEventKoordinator(ActionEvent actionEvent) {
+        try {
+            String firstName = txtfFirstName.getText();
+            String lastName = txtfLastName.getText();
+            String username = txtfUsername.getText();
+            String password = txtfPassword.getText();
+            String salt = BCrypt.gensalt(12);
+            password = BCrypt.hashpw(password, salt);
+            int role = 2;
+            userModel.addNewEventKoordinator(firstName, lastName, username, password, role);
+            handleCreateEventKoordinator();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 
 
