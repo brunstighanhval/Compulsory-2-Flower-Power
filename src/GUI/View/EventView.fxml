@@ -146,6 +146,42 @@
             <Insets top="20.0" />
          </padding>
       </VBox>
+      <VBox fx:id="createEventKoordinatorBar" prefHeight="600.0" prefWidth="300.0" spacing="30.0" translateX="-300.0">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="New EventKoordinator" textAlignment="CENTER" wrappingWidth="300.0">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtfFirstName" promptText="First Name">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfLastName" promptText="Last Name">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfUsername" promptText="Username">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtfPassword" promptText="Password">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin></TextField>
+            <Button fx:id="btnAddEventKoordinator" mnemonicParsing="false" onAction="#handleAddEventKoordinator" prefHeight="35.0" prefWidth="300.0" text="Create EventKoordinator">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
       <AnchorPane fx:id="acpBackground" layoutX="-7.0" prefHeight="600.0" prefWidth="900.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b4252" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
@@ -184,6 +220,8 @@
             <Button fx:id="btnNewLocation" layoutX="157.0" layoutY="514.0" mnemonicParsing="false" onAction="#newLocation" text="New Location" />
             <TextArea fx:id="txtfNotes" layoutX="324.0" layoutY="389.0" prefHeight="105.0" prefWidth="245.0" promptText="Notes..." />
             <ListView fx:id="lstEventKoordinator" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
+            <Button fx:id="btnNewEventKoordinator" layoutX="623.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleCreateEventKoordinator" text="New EventKoordinator" />
+            <Button fx:id="btnDeleteEventKoordinator" layoutX="623.0" layoutY="546.0" mnemonicParsing="false" onAction="#handleDeleteEventKoordinator" prefHeight="26.0" prefWidth="154.0" text="Delete EventKoordinator" />
          </children>
       </AnchorPane>
    </children>
