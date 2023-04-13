@@ -69,6 +69,13 @@ public class Ticket {
     @Override
     public String toString()
     {
-        return first_name + " " +  last_name;
+
+        if(type_id == 3)
+        {
+            return first_name + " " +  last_name + " " + "'TILKØB'";
+        }else {
+            return first_name + " " +  last_name;
+        }
+
     }
 }

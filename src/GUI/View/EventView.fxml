@@ -50,6 +50,11 @@
                <VBox.margin>
                   <Insets left="15.0" />
                </VBox.margin></RadioButton>
+            <RadioButton fx:id="radioExtra" mnemonicParsing="false" onAction="#extraTicket" text="Beer" textFill="#fffefe">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </RadioButton>
             <Button fx:id="btnCreateTicket" mnemonicParsing="false" onAction="#publishTicket" prefHeight="35.0" prefWidth="300.0" text="Publish Ticket">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" />

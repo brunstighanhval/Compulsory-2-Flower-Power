@@ -51,7 +51,7 @@ public class MainController extends BaseController{
     @FXML
     private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation;
     @FXML
-    private RadioButton standard, vip;
+    private RadioButton standard, vip, radioExtra;
     private String errorText;
     private EventModel eventModel;
     private TicketModel ticketModel;
@@ -375,6 +375,11 @@ public class MainController extends BaseController{
         String mail = mailtxt.getText();
         int type = ticketType;
         ticketModel.createTicket(event_ID,firstName,lastName,mail,type);
+
+        if (radioExtra.isSelected())
+        {
+            ticketModel.createExtraTicket(event_ID, firstName, lastName, mail, 3);
+        }
     }
 
     public void vipAction(ActionEvent actionEvent)
@@ -401,6 +406,12 @@ public class MainController extends BaseController{
         {
             vip.setDisable(false);
         }
+    }
+
+    public void extraTicket(ActionEvent actionEvent) {
+
+
+
     }
 }
 

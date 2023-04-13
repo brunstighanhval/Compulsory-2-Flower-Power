@@ -29,6 +29,14 @@ public class TicketModel {
         //showList(selectedEvent);
     }
 
+    public void createExtraTicket(int event_Id, String firstName, String lastName, String mail, int type_Id) throws Exception {
+        createdTicket = ticketManager.createTicket(event_Id, firstName, lastName, mail, type_Id);
+        ticketsToBeViewed.add(createdTicket);
+        //showList(selectedEvent);
+    }
+
+
+
     public void deleteTicket(Ticket ticket) throws Exception{
         ticketManager.deleteTicket(ticket);
         ticketsToBeViewed.remove(ticket);
