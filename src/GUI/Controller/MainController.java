@@ -22,7 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -75,7 +74,7 @@ public class MainController extends BaseController{
         lstAllEvents.setItems(eventModel.getObservableEvents());
         eventBox.setItems(eventModel.getObservableEvents());
         locationsBox.setItems(locationModel.getObservableLocations());
-       // lstEventTickets.setItems(eventModel.getTicketsFromEvent(lstAllEvents.getItems().get(0)));
+        lstEventTickets.setItems(eventModel.getTicketsFromEvent(lstAllEvents.getItems().get(0)));
         listenerLstAllEvents();
         listenerMouseClickTickets();
         adminView();
@@ -107,7 +106,7 @@ public class MainController extends BaseController{
     {
         lstEventTickets.setOnMouseClicked(event -> {
 
-            if (event.getClickCount() == 2) { //Ved dobbeltklik kan man starte musikken
+            if (event.getClickCount() == 2) {
                 try {
                     selectedTicket = lstEventTickets.getSelectionModel().getSelectedItem();
                     makePdf();
@@ -434,11 +433,6 @@ public class MainController extends BaseController{
         }
     }
 
-    public void extraTicket(ActionEvent actionEvent) {
-
-
-
-    }
 }
 
 
