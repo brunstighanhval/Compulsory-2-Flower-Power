@@ -166,7 +166,10 @@
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="txtfPassword" prefHeight="26.0" prefWidth="226.0" promptText="Password" />
+            <TextField fx:id="txtfPassword" promptText="Password">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin></TextField>
             <Button fx:id="btnAddEventKoordinator" mnemonicParsing="false" onAction="#handleAddEventKoordinator" prefHeight="35.0" prefWidth="300.0" text="Create EventKoordinator">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" />

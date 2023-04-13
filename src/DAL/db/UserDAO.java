@@ -88,4 +88,30 @@ public class UserDAO implements IUserDataAccess {
             throw new Exception("Could not get EventKoordinator from databases", ex);
         }
     }
+
+    @Override
+    public User addNewEventKoordinator(String firstName, String lastName, String username, String password, int role) throws Exception {
+        String sql = "INSERT INTO Event_Koordinator (Last_Name, First_Name, User_Name, Password, Role) VALUES(?,?,?,?,?)";
+        try (Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, lastName);
+            stmt.setString(2, firstName);
+            stmt.setString(3, username);
+            stmt.setString(4, password);
+            stmt.setInt(5, role);
+            stmt.execute();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            int id = 0;
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+            User eventKoordinator = new User(id, lastName, firstName, username, password, role);
+            return eventKoordinator;
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not add an eventKoordinator", ex);
+        }
+    }
 }

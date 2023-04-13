@@ -36,7 +36,7 @@ public class  LoginController extends BaseController {
         UserDAO userDAO = new UserDAO();
         String email = txtfUsername.getText();
         String password = paswPassword.getText();
-        boolean flag = userDAO.validate(email);
+        boolean flag = userModel.validate(email);
         if(!flag) {
             loginFailedAlert();
         } else {

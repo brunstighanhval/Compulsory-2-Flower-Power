@@ -1,9 +1,6 @@
 package GUI.Controller;
 
-import BE.EntranceTicketPDF;
-import BE.Event;
-import BE.Location;
-import BE.Ticket;
+import BE.*;
 import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
 import GUI.Model.TicketModel;
@@ -432,6 +429,18 @@ public class MainController extends BaseController{
     }
 
     public void handleAddEventKoordinator(ActionEvent actionEvent) {
+        try {
+            String firstName = txtfFirstName.getText();
+            String lastName = txtfLastName.getText();
+            String username = txtfUsername.getText();
+            String password = txtfPassword.getText();
+            String salt = BCrypt.gensalt(12);
+            password = BCrypt.hashpw(password, salt);
+            int role = 2;
+            userModel.addNewEventKoordinator(firstName, lastName, username, password, role);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 
