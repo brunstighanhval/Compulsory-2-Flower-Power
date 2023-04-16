@@ -1,8 +1,12 @@
 package DAL.db;
 
+import BE.Location;
 import BE.Ticket;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketDAO implements ITicket{
 
     private DatabaseConnector databaseConnector;
@@ -63,8 +67,6 @@ public class TicketDAO implements ITicket{
             throw new Exception("Could not create a event", ex);
         }
     }
-
-
 
 
     @Override

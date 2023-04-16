@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 public class MainController extends BaseController{
@@ -401,13 +402,30 @@ public class MainController extends BaseController{
         String lastName = lastNametxt.getText();
         String mail = mailtxt.getText();
         int type = ticketType;
-        ticketModel.createTicket(event_ID,firstName,lastName,mail,type);
 
-        if (radioExtra.isSelected())
-        {
+         int selectedEventMaxTickets = eventBox.getSelectionModel().getSelectedItem().getMax_tickets();
+         List<Ticket> selectedEventTicketsCreated = eventModel.getTicketsFromEvent(eventBox.getSelectionModel().getSelectedItem());
+
+        if (selectedEventMaxTickets >= selectedEventTicketsCreated.size()+1) {
+            ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
+        }
+        else {
+            System.out.println("lol fuck off");
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Event is SOLD OUT!");
+            alert.showAndWait();
+
+        }
+
+        if (radioExtra.isSelected() && selectedEventMaxTickets >= selectedEventTicketsCreated.size()+1 ) {
             ticketModel.createExtraTicket(event_ID, firstName, lastName, mail, 3);
         }
+        firstNametxt.clear();
+        lastNametxt.clear();
+        mailtxt.clear();
     }
+
 
     public void vipAction(ActionEvent actionEvent)
     {
