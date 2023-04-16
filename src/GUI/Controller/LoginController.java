@@ -63,6 +63,7 @@ public class  LoginController extends BaseController {
         stage.setScene(new Scene(root));
         root.getStylesheets().add(getClass().getResource("/CSS/Event.css").toExternalForm());
         stage.show();
+        stage.setResizable(false);
         closeWindow(btnSignIn);
     }
     private void loginFailedAlert(){

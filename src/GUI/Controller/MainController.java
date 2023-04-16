@@ -410,12 +410,9 @@ public class MainController extends BaseController{
             ticketModel.createTicket(event_ID, firstName, lastName, mail, type);
         }
         else {
-            System.out.println("lol fuck off");
-
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Event is SOLD OUT!");
             alert.showAndWait();
-
         }
 
         if (radioExtra.isSelected() && selectedEventMaxTickets >= selectedEventTicketsCreated.size()+1 ) {
