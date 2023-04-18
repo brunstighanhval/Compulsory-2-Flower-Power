@@ -48,8 +48,8 @@ public class EventModel {
         return update.getUpdateEvents(event);
     }
 
-    public void createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
-        createdEvent = eventManager.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id);
+    public void createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id, int verified) throws Exception {
+        createdEvent = eventManager.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id, verified);
         eventsToBeViewed.add(createdEvent);
         showList();
     }
@@ -81,6 +81,8 @@ public class EventModel {
     public Location getLocation(int id) throws Exception{
         return eventManager.getLocation(id);
     }
-
+    public void updateVerficationStatus(Event updatedEvent) throws Exception {
+        eventManager.updateVerficationStatus(updatedEvent);
+    }
 
 }

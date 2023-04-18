@@ -41,8 +41,9 @@ public class EventDAO implements IEventDataAccess{
                 int maxTickets = rs.getInt("Max_Tickets");
                 String notes = rs.getString("Notes");
                 int VenueID = rs.getInt("Venue_ID");
+                int verified = rs.getInt("Verified");
 
-                Event event = new Event(eventId, name, evKId, date, startTime, endTime,maxTickets,notes,VenueID);
+                Event event = new Event(eventId, name, evKId, date, startTime, endTime,maxTickets,notes,VenueID,verified);
                 allEvents.add(event);
             }
             return allEvents;
@@ -86,8 +87,8 @@ public class EventDAO implements IEventDataAccess{
     }
 
     @Override
-    public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
-        String sql = "INSERT INTO Event (Name, EvK_ID, Date, Start_Time, End_Time, Max_Tickets, Notes, Venue_ID) VALUES (?,?,?,?,?,?,?,?)";
+    public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id, int verified) throws Exception {
+        String sql = "INSERT INTO Event (Name, EvK_ID, Date, Start_Time, End_Time, Max_Tickets, Notes, Venue_ID, Verified) VALUES (?,?,?,?,?,?,?,?,?)";
         try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -99,6 +100,7 @@ public class EventDAO implements IEventDataAccess{
             stmt.setInt(6, max_tickets);
             stmt.setString(7, notes);
             stmt.setInt(8, venue_id);
+            stmt.setInt(9, verified);
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -107,7 +109,7 @@ public class EventDAO implements IEventDataAccess{
                 id = rs.getInt(1);
             }
 
-            Event event = new Event(id, name, EvKId, date, start_time, end_time, max_tickets, notes , venue_id);
+            Event event = new Event(id, name, EvKId, date, start_time, end_time, max_tickets, notes , venue_id, verified);
             return event;
         } catch (SQLException ex){
             ex.printStackTrace();
@@ -198,6 +200,21 @@ public class EventDAO implements IEventDataAccess{
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new Exception("Could not get EventKoordinator from databases", ex);
+        }
+    }
+    @Override
+    public void updateVerficationStatus(Event updatedEvent) throws Exception {
+        String sql = "UPDATE Event SET Verified = ? WHERE Event_ID = ?";
+        try(Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, updatedEvent.getVerified());
+            stmt.setInt(2, updatedEvent.getId());
+
+            stmt.execute();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not edit the event", ex);
         }
     }
 }

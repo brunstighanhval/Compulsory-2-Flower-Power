@@ -223,6 +223,7 @@
             <Button fx:id="btnNewEventKoordinator" layoutX="623.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleCreateEventKoordinator" text="New EventKoordinator" />
             <Button fx:id="btnDeleteEventKoordinator" layoutX="623.0" layoutY="546.0" mnemonicParsing="false" onAction="#handleDeleteEventKoordinator" prefHeight="26.0" prefWidth="154.0" text="Delete EventKoordinator" />
             <Button fx:id="emailTicket" layoutX="623.0" layoutY="547.0" mnemonicParsing="false" onAction="#emailTicketAction" prefHeight="25.0" prefWidth="83.0" text="Email ticket" />
+            <Button fx:id="btnVerify" layoutX="51.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleVerify" prefHeight="26.0" prefWidth="195.0" text="Verify event" />
          </children>
       </AnchorPane>
    </children>
