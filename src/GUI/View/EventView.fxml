@@ -222,6 +222,7 @@
             <ListView fx:id="lstEventKoordinator" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />
             <Button fx:id="btnNewEventKoordinator" layoutX="623.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleCreateEventKoordinator" text="New EventKoordinator" />
             <Button fx:id="btnDeleteEventKoordinator" layoutX="623.0" layoutY="546.0" mnemonicParsing="false" onAction="#handleDeleteEventKoordinator" prefHeight="26.0" prefWidth="154.0" text="Delete EventKoordinator" />
+            <Button fx:id="btnVerify" layoutX="51.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleVerify" prefHeight="26.0" prefWidth="195.0" text="Verify event" />
          </children>
       </AnchorPane>
    </children>

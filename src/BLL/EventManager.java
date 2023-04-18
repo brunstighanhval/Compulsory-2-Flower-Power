@@ -21,8 +21,8 @@ public class EventManager {
 
     public List<Ticket> getTicketsFromEvent(Event event) throws Exception {return eventDAO.getTicketsFromEvent(event);}
 
-    public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id) throws Exception {
-        return eventDAO.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id);
+    public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id, int verified) throws Exception {
+        return eventDAO.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id, verified);
     }
 
     public void deleteEvent(Event event) throws Exception{eventDAO.deleteEvent(event);}
@@ -31,4 +31,8 @@ public class EventManager {
 
     public User getEventKoordinator(int id) throws Exception{return eventDAO.getEventKoordinator(id);}
     public Location getLocation(int id) throws Exception{return eventDAO.getLocation(id);}
+
+    public void updateVerficationStatus(Event updatedEvent) throws Exception {
+        eventDAO.updateVerficationStatus(updatedEvent);
+    }
 }

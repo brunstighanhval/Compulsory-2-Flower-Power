@@ -27,7 +27,8 @@ import java.time.LocalTime;
 import java.util.Optional;
 
 public class MainController extends BaseController{
-    public ListView<User> lstEventKoordinator;
+    @FXML
+    private ListView<User> lstEventKoordinator;
     @FXML
     private Text txtBookedTicketAndEvK;
     @FXML
@@ -49,7 +50,7 @@ public class MainController extends BaseController{
     @FXML
     private DatePicker datePick, datePicker;
     @FXML
-    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator;
+    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator, btnVerify;
     @FXML
     private RadioButton standard, vip, radioExtra;
     private String errorText;
@@ -310,6 +311,8 @@ public class MainController extends BaseController{
             btnNewEventKoordinator.setOpacity(0);
             btnDeleteEventKoordinator.setDisable(true);
             btnDeleteEventKoordinator.setOpacity(0);
+            btnVerify.setDisable(true);
+            btnVerify.setOpacity(0);
         }
     }
 
@@ -352,9 +355,10 @@ public class MainController extends BaseController{
         int max_tickets = Integer.parseInt(ticketAmount.getText());
         String notes = notesArea.getText();
         int venue_id = locationsBox.getSelectionModel().getSelectedItem().getId();
+        int verified = 0;
 
         try {
-            eventModel.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id);
+            eventModel.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id, verified);
             animationTest();
         } catch (Exception e) {
             e.printStackTrace();
@@ -497,6 +501,17 @@ public class MainController extends BaseController{
             handleCreateEventKoordinator();
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void handleVerify(ActionEvent actionEvent) throws Exception {
+        Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are you sure you wanna verify " + selectedEvent.getName());
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.OK){
+            updatedEvent.setVerified(1);
+            eventModel.updateVerficationStatus(updatedEvent);
         }
     }
 }

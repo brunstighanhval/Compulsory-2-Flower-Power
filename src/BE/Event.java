@@ -10,8 +10,9 @@ public class Event {
     private LocalTime start_time, end_time;
     private String notes,name;
     private int venue_id;
+    private int verified;
 
-    public Event(int id, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id){
+    public Event(int id, String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id, int verified){
         this.id = id;
         this.name=name;
         this.EvKId=EvKId;
@@ -21,6 +22,7 @@ public class Event {
         this.max_tickets = max_tickets;
         this.notes = notes;
         this.venue_id = venue_id;
+        this.verified = verified;
     }
 
     public int getEvKId() {
@@ -95,8 +97,18 @@ public class Event {
         this.venue_id = venue_id;
     }
 
+    public int getVerified(){return verified;}
+
+    public void setVerified(int verified){this.verified = verified;}
+
     @Override
     public String toString() {
-        return name;
+        String verified = "(Verified)";
+        if(getVerified() == 1) {
+            return name + " " + verified;
+        }
+        else{
+            return name;
+        }
     }
 }
