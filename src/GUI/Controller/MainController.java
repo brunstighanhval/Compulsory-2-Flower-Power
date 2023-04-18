@@ -5,6 +5,7 @@ import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
 import GUI.Model.TicketModel;
 import GUI.Model.UserModel;
+import jakarta.mail.MessagingException;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +30,7 @@ import java.util.Optional;
 
 public class MainController extends BaseController{
     public ListView<User> lstEventKoordinator;
+
     @FXML
     private Text txtBookedTicketAndEvK;
     @FXML
@@ -50,7 +52,9 @@ public class MainController extends BaseController{
     @FXML
     private DatePicker datePick, datePicker;
     @FXML
-    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket, btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent, createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator;
+    private Button btnEditEvent, btnNewTicket, btnDeleteTicket, btnCreateTicket,
+            btnNewLocation, btnTEST, btnSignOut, btnDeleteSelectedEvent, createEvent,
+            createLocation, btnAddEventKoordinator, btnDeleteEventKoordinator, btnNewEventKoordinator,emailTicket;
     @FXML
     private RadioButton standard, vip, radioExtra;
     private String errorText;
@@ -304,6 +308,8 @@ public class MainController extends BaseController{
             lstEventTickets.setOpacity(0);
             lstEventKoordinator.setItems(userModel.getObservableEventsKoordinator());
             txtBookedTicketAndEvK.setText("Event Koordinator");
+            emailTicket.setDisable(true);
+            emailTicket.setOpacity(0);
         } else{
             lstEventKoordinator.setDisable(true);
             lstEventKoordinator.setOpacity(0);
@@ -311,6 +317,7 @@ public class MainController extends BaseController{
             btnNewEventKoordinator.setOpacity(0);
             btnDeleteEventKoordinator.setDisable(true);
             btnDeleteEventKoordinator.setOpacity(0);
+
         }
     }
 
@@ -513,6 +520,15 @@ public class MainController extends BaseController{
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void emailTicketAction(ActionEvent actionEvent) throws MessagingException, IOException {
+
+        Mail mail=new Mail();
+
+    //    if (selectedTicket!=null)
+        //    mail.sendMail(selectedTicket.getMail()); //Udkommenteret da programmet ikke kan sende mail pga. it systemet.
+
     }
 }
 
