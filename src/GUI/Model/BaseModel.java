@@ -1,6 +1,5 @@
 package GUI.Model;
 
-import java.time.LocalDate;
 
 public class BaseModel {
 

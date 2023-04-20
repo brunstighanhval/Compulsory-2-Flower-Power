@@ -216,7 +216,7 @@
             <Button fx:id="btnNewTicket" layoutX="680.0" layoutY="514.0" mnemonicParsing="false" onAction="#createTicket" text="New Ticket" />
             <Button fx:id="btnDeleteTicket" layoutX="769.0" layoutY="514.0" mnemonicParsing="false" onAction="#deleteTicket" prefHeight="26.0" prefWidth="91.0" text="Delete Ticket" />
             <DatePicker fx:id="datePicker" layoutX="323.0" layoutY="147.0" prefHeight="26.0" prefWidth="113.0" promptText="Date" />
-            <Button fx:id="btnTEST" layoutX="52.0" layoutY="514.0" mnemonicParsing="false" onAction="#animationTest" prefHeight="26.0" prefWidth="92.0" text="New Event" />
+            <Button fx:id="btnTEST" layoutX="52.0" layoutY="514.0" mnemonicParsing="false" onAction="#openCreateNewEvent" prefHeight="26.0" prefWidth="92.0" text="New Event" />
             <Button fx:id="btnNewLocation" layoutX="157.0" layoutY="514.0" mnemonicParsing="false" onAction="#newLocation" text="New Location" />
             <TextArea fx:id="txtfNotes" layoutX="324.0" layoutY="389.0" prefHeight="105.0" prefWidth="245.0" promptText="Notes..." />
             <ListView fx:id="lstEventKoordinator" layoutX="638.0" layoutY="88.0" prefHeight="406.0" prefWidth="226.0" />

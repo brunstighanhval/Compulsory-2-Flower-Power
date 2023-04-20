@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.*;
+import DAL.db.BCrypt;
 import GUI.Model.EventModel;
 import GUI.Model.LocationModel;
 import GUI.Model.TicketModel;
@@ -123,9 +124,12 @@ public class MainController extends BaseController{
         });
     }
 
+    /**
+     * Sets all the content of the textfields when an event is selected.
+     * @throws Exception
+     */
     private void labelsToShow() throws Exception {
         txtfEventName.setText(selectedEvent.getName());
-        //txtfDate.setText(selectedEvent.getDate().toString());
         datePicker.setValue(selectedEvent.getDate());
         txtfLocation.setText(eventModel.getLocation(selectedEvent.getVenue_id()).toString());
         txtfNotes.setText(selectedEvent.getNotes());
@@ -135,9 +139,12 @@ public class MainController extends BaseController{
         txtfTicketsLeft.setText(String.valueOf(selectedEvent.getMax_tickets()));
     }
 
+    /**
+     * Getting the values of the textfields and using them to update the selected event.
+     * @param actionEvent
+     */
     @FXML
-    private void handleEditEvent(ActionEvent actionEvent)
-    {
+    private void handleEditEvent(ActionEvent actionEvent) {
        try{
             Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
             updatedEvent.setName(txtfEventName.getText());
@@ -153,10 +160,14 @@ public class MainController extends BaseController{
        }
     }
 
+    /**
+     * Deleting a selected event if the user agrees to it.
+     * @param actionEvent
+     */
     @FXML
-    public void handleDeleteSelectedEvent(ActionEvent actionEvent)
-    {
+    public void handleDeleteSelectedEvent(ActionEvent actionEvent) {
         selectedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
+        //If the user has selected an event an alert window shows which makes sure the user wants to delete the event.
         if(selectedEvent!= null){
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -164,16 +175,18 @@ public class MainController extends BaseController{
                 alert.showAndWait();
                 if (alert.getResult() == ButtonType.OK) {
                     eventModel.deleteEvent(selectedEvent);
-
                 }
-            } catch (Exception e) {
+            }catch (Exception e) {
                 displayError(e);
                 e.printStackTrace();
             }
         }
     }
 
-
+    /**
+     * Shows an alert if the program fails.
+     * @param t
+     */
     public void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -294,6 +307,9 @@ public class MainController extends BaseController{
         }
     }
 
+    /**
+     * Make the difference between event koordinator view and admin view by clearing and disabling buttons.
+     */
     private void adminView(){
         if(userModel.getLoggedinUser().getRole() == 1) {
             btnEditEvent.setDisable(true);
@@ -324,8 +340,10 @@ public class MainController extends BaseController{
         }
     }
 
-    public void animationTest() {
-
+    /**
+     * Opens the create new event box.
+     */
+    public void openCreateNewEvent() {
         TranslateTransition transition = new TranslateTransition();
         createEventBar.toFront();
         transition.setNode(createEventBar);
@@ -338,7 +356,7 @@ public class MainController extends BaseController{
             EventHandler<MouseEvent> menuHandler = new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    animationTest();
+                    openCreateNewEvent();
                     acpBackground.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
                 }
             };
@@ -354,7 +372,12 @@ public class MainController extends BaseController{
 
     }
 
+    /**
+     * Gets all the information needed to create a new event and calling the method from the model.
+     * @param actionEvent
+     */
     public void createEventVersionTwo(ActionEvent actionEvent) {
+        //Creating varibles and giving them values.
         String name = eventName.getText();
         int EvKId = userModel.getLoggedinUser().getId();
         LocalDate date = datePick.getValue();
@@ -365,9 +388,10 @@ public class MainController extends BaseController{
         int venue_id = locationsBox.getSelectionModel().getSelectedItem().getId();
         int verified = 0;
 
+        //Sending the values to the model.
         try {
             eventModel.createEvent(name, EvKId, date, start_time, end_time, max_tickets, notes, venue_id, verified);
-            animationTest();
+            openCreateNewEvent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -466,7 +490,9 @@ public class MainController extends BaseController{
     }
 
 
-        
+    /**
+     * Opening the JavaFX VBox for when a new eventkoordinator needs to be created.
+     */
     public void handleCreateEventKoordinator() {
         TranslateTransition transition = new TranslateTransition();
         createEventKoordinatorBar.toFront();
@@ -493,8 +519,13 @@ public class MainController extends BaseController{
         transition.play();
     }
 
+    /**
+     * Deleting an eventkoordinator after making sure the admin wants to.
+     * @param actionEvent
+     */
     public void handleDeleteEventKoordinator(ActionEvent actionEvent) {
         selectedKoordinator = lstEventKoordinator.getSelectionModel().getSelectedItem();
+        //If the user has selected an eventkoordinator an alert window shows which makes sure the user wants to delete the eventkoordinator.
         if (selectedKoordinator != null) {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -510,8 +541,13 @@ public class MainController extends BaseController{
         }
     }
 
+    /**
+     * Gets all the information needed to create a new eventkoordinator and calling the method from the model.
+     * @param actionEvent
+     */
     public void handleAddEventKoordinator(ActionEvent actionEvent) {
         try {
+            //Binding all the data to the variables.
             String firstName = txtfFirstName.getText();
             String lastName = txtfLastName.getText();
             String username = txtfUsername.getText();
@@ -519,6 +555,8 @@ public class MainController extends BaseController{
             String salt = BCrypt.gensalt(12);
             password = BCrypt.hashpw(password, salt);
             int role = 2;
+
+            //Sending the variables to the model.
             userModel.addNewEventKoordinator(firstName, lastName, username, password, role);
             handleCreateEventKoordinator();
         } catch (Exception e){
@@ -535,14 +573,22 @@ public class MainController extends BaseController{
         //    mail.sendMail(selectedTicket.getMail()); //Udkommenteret da programmet ikke kan sende mail pga. it systemet.
     }
 
+    /**
+     * Asks and runs the method call for verifying an event.
+     * @param actionEvent
+     * @throws Exception
+     */
     public void handleVerify(ActionEvent actionEvent) throws Exception {
         Event updatedEvent = lstAllEvents.getSelectionModel().getSelectedItem();
+        //If the user has selected an event an alert will show. If the admin clicks okay, the event will be verified.
+        if(updatedEvent != null){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Are you sure you wanna verify " + selectedEvent.getName());
         alert.showAndWait();
-        if(alert.getResult() == ButtonType.OK){
+        if(alert.getResult() == ButtonType.OK) {
             updatedEvent.setVerified(1);
             eventModel.updateVerficationStatus(updatedEvent);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2006 Damien Miller <djm@mindrot.org>
+package DAL.db;// Copyright (c) 2006 Damien Miller <djm@mindrot.org>
 //
 // Permission to use, copy, modify, and distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -12,13 +12,11 @@
 // ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-package BE;
-
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
 /**
- * BCrypt implements OpenBSD-style Blowfish password hashing using
+ * DAL.db.BCrypt implements OpenBSD-style Blowfish password hashing using
  * the scheme described in "A Future-Adaptable Password Scheme" by
  * Niels Provos and David Mazieres.
  * <p>
@@ -32,14 +30,14 @@ import java.security.SecureRandom;
  * call the hashpw method with a random salt, like this:
  * <p>
  * <code>
- * String pw_hash = BCrypt.hashpw(plain_password, BCrypt.gensalt()); <br />
+ * String pw_hash = DAL.db.BCrypt.hashpw(plain_password, DAL.db.BCrypt.gensalt()); <br />
  * </code>
  * <p>
  * To check whether a plaintext password matches one that has been
  * hashed previously, use the checkpw method:
  * <p>
  * <code>
- * if (BCrypt.checkpw(candidate_password, stored_hash))<br />
+ * if (DAL.db.BCrypt.checkpw(candidate_password, stored_hash))<br />
  * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("It matches");<br />
  * else<br />
  * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("It does not match");<br />
@@ -49,8 +47,8 @@ import java.security.SecureRandom;
  * that determines the computational complexity of the hashing:
  * <p>
  * <code>
- * String strong_salt = BCrypt.gensalt(10)<br />
- * String stronger_salt = BCrypt.gensalt(12)<br />
+ * String strong_salt = DAL.db.BCrypt.gensalt(10)<br />
+ * String stronger_salt = DAL.db.BCrypt.gensalt(12)<br />
  * </code>
  * <p>
  * The amount of work increases exponentially (2**log_rounds), so 
@@ -61,7 +59,7 @@ import java.security.SecureRandom;
  * @version 0.2
  */
 public class BCrypt {
-	// BCrypt parameters
+	// DAL.db.BCrypt parameters
 	private static final int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
 	private static final int BCRYPT_SALT_LEN = 16;
 
@@ -644,7 +642,7 @@ public class BCrypt {
 	 * Hash a password using the OpenBSD bcrypt scheme
 	 * @param password	the password to hash
 	 * @param salt	the salt to hash with (perhaps generated
-	 * using BCrypt.gensalt)
+	 * using DAL.db.BCrypt.gensalt)
 	 * @return	the hashed password
 	 */
 	public static String hashpw(String password, String salt) {
@@ -703,7 +701,7 @@ public class BCrypt {
 	}
 
 	/**
-	 * Generate a salt for use with the BCrypt.hashpw() method
+	 * Generate a salt for use with the DAL.db.BCrypt.hashpw() method
 	 * @param log_rounds	the log2 of the number of rounds of
 	 * hashing to apply - the work factor therefore increases as
 	 * 2**log_rounds.
@@ -730,7 +728,7 @@ public class BCrypt {
 	}
 
 	/**
-	 * Generate a salt for use with the BCrypt.hashpw() method
+	 * Generate a salt for use with the DAL.db.BCrypt.hashpw() method
 	 * @param log_rounds	the log2 of the number of rounds of
 	 * hashing to apply - the work factor therefore increases as
 	 * 2**log_rounds.
@@ -741,7 +739,7 @@ public class BCrypt {
 	}
 
 	/**
-	 * Generate a salt for use with the BCrypt.hashpw() method,
+	 * Generate a salt for use with the DAL.db.BCrypt.hashpw() method,
 	 * selecting a reasonable default for the number of hashing
 	 * rounds to apply
 	 * @return	an encoded salt value

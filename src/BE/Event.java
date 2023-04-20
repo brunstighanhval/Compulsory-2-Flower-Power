@@ -25,82 +25,52 @@ public class Event {
         this.verified = verified;
     }
 
-    public int getEvKId() {
-        return EvKId;
-    }
+    /**
+     * Getters and setters for the entire class.
+     */
+    public int getEvKId() {return EvKId;}
 
-    public void setEvKId(int evKId) {
-        EvKId = evKId;
-    }
+    public void setEvKId(int evKId) {EvKId = evKId;}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
-    public LocalDate getDate() {
-        return date;
-    }
+    public LocalDate getDate() {return date;}
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    public void setDate(LocalDate date) {this.date = date;}
 
-    public LocalTime getStart_time() {
-        return start_time;
-    }
+    public LocalTime getStart_time() {return start_time;}
 
-    public void setStart_time(LocalTime start_time) {
-        this.start_time = start_time;
-    }
+    public void setStart_time(LocalTime start_time) {this.start_time = start_time;}
 
-    public LocalTime getEnd_time(){
-        return end_time;
-    }
+    public LocalTime getEnd_time(){return end_time;}
 
-    public void setEnd_time(LocalTime end_time){
-        this.end_time = end_time;
-    }
+    public void setEnd_time(LocalTime end_time){this.end_time = end_time;}
 
-    public int getMax_tickets() {
-        return max_tickets;
-    }
+    public int getMax_tickets() {return max_tickets;}
 
-    public void setMax_tickets(int max_tickets) {
-        this.max_tickets = max_tickets;
-    }
+    public void setMax_tickets(int max_tickets) {this.max_tickets = max_tickets;}
 
-    public String getNotes() {
-        return notes;
-    }
+    public String getNotes() {return notes;}
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
+    public void setNotes(String notes) {this.notes = notes;}
 
-    public int getVenue_id() {
-        return venue_id;
-    }
+    public int getVenue_id() {return venue_id;}
 
-    public void setVenue_id(int venue_id) {
-        this.venue_id = venue_id;
-    }
+    public void setVenue_id(int venue_id) {this.venue_id = venue_id;}
 
     public int getVerified(){return verified;}
 
     public void setVerified(int verified){this.verified = verified;}
 
+    /**
+     *The customized toString method.
+     */
     @Override
     public String toString() {
         String verified = "(Verified)";

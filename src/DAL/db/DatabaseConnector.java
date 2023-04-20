@@ -1,6 +1,5 @@
 package DAL.db;
 
-import GUI.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.File;

@@ -14,6 +14,9 @@ public class Location {
         this.zip_code = zip_code;
     }
 
+    /**
+     * Getters and setters for the entire class.
+     */
     public int getId() {
         return id;
     }

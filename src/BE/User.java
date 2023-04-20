@@ -17,6 +17,9 @@ public class User {
         this.role = role;
     }
 
+    /**
+     * Getters and setters for the entire class.
+     */
     public int getId() {
         return id;
     }
@@ -59,6 +62,9 @@ public class User {
 
     public int getRole(){return role;}
 
+    /**
+     *The customized toString method.
+     */
     @Override
     public String toString() {
         return first_name + " " +

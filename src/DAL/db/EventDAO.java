@@ -17,21 +17,26 @@ public class EventDAO implements IEventDataAccess{
 
     public EventDAO() throws IOException {databaseConnector = DatabaseConnector.getInstance();}
 
-@Override
+    /**
+     * Getting a list of all the events from the database.
+     * @return
+     * @throws Exception
+     */
+    @Override
     public List<Event> getAllEvents() throws Exception {
         ArrayList<Event> allEvents = new ArrayList<>();
-
-        try (Connection conn = databaseConnector.getConnection();
-             Statement stmt = conn.createStatement())
-        {
-            String sql = "SELECT * FROM dbo.Event;";
+        //SQL query.
+        String sql = "SELECT * FROM dbo.Event;";
+        //Getting connection to the database.
+        try (Connection conn = databaseConnector.getConnection()){
+            Statement stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(sql);
 
             // Loop through rows from the database result set
             while (rs.next()) {
 
-                //Map DB row to Song object
+                //Map DB row to event object
                 int eventId = rs.getInt("Event_ID");
                 String name = rs.getString("Name");
                 int evKId = rs.getInt("EvK_ID");
@@ -43,30 +48,36 @@ public class EventDAO implements IEventDataAccess{
                 int VenueID = rs.getInt("Venue_ID");
                 int verified = rs.getInt("Verified");
 
+                //Initializing a new event.
                 Event event = new Event(eventId, name, evKId, date, startTime, endTime,maxTickets,notes,VenueID,verified);
                 allEvents.add(event);
             }
             return allEvents;
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not get Songs from database", ex);
         }
     }
 
+    /**
+     *Getting a list of all tickets for a selected event.
+     * @param event
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Ticket> getTicketsFromEvent(Event event) throws Exception {
         ArrayList<Ticket> ticketsFromEvent = new ArrayList<>();
+        //SQL Query.
+        String sql = "SELECT * FROM Ticket WHERE Event_ID = ?";
+        //Getting connection to the database.
         try (Connection conn = databaseConnector.getConnection()){
-
-            String sql = "SELECT * FROM Ticket WHERE Event_ID = ?";
 
              PreparedStatement stmt = conn.prepareStatement(sql);
              stmt.setInt(1, event.getId());
 
             ResultSet rs = stmt.executeQuery();
-
+            // Loop through rows from the database result set
             while (rs.next()) {
                 int ticket_Id = rs.getInt("Ticket_ID");
                 int event_Id = rs.getInt("Event_ID");
@@ -75,23 +86,40 @@ public class EventDAO implements IEventDataAccess{
                 String mail = rs.getString("Mail");
                 int type_Id = rs.getInt("Type_ID");
 
+                //Initializing a new ticket.
                 Ticket ticket = new Ticket(ticket_Id, event_Id, firstName, lastName, mail, type_Id);
                 ticketsFromEvent.add(ticket);
             }
-        }catch (SQLException ex)
-        {
+        }catch (SQLException ex){
             ex.printStackTrace();
             throw new Exception("Could not get Tickets from database", ex);
         }
         return ticketsFromEvent;
     }
 
+    /**
+     * Creating a new event and adding it to the database.
+     * @param name
+     * @param EvKId
+     * @param date
+     * @param start_time
+     * @param end_time
+     * @param max_tickets
+     * @param notes
+     * @param venue_id
+     * @param verified
+     * @return
+     * @throws Exception
+     */
     @Override
     public Event createEvent(String name, int EvKId, LocalDate date, LocalTime start_time, LocalTime end_time, int max_tickets, String notes, int venue_id, int verified) throws Exception {
+        //SQL Query.
         String sql = "INSERT INTO Event (Name, EvK_ID, Date, Start_Time, End_Time, Max_Tickets, Notes, Venue_ID, Verified) VALUES (?,?,?,?,?,?,?,?,?)";
+        //Getting database connection.
         try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+            //Setting the parameters for the event.
             stmt.setString(1, name);
             stmt.setInt(2, EvKId);
             stmt.setDate(3, Date.valueOf(date));
@@ -108,7 +136,7 @@ public class EventDAO implements IEventDataAccess{
             if(rs.next()){
                 id = rs.getInt(1);
             }
-
+            //Initializing the event.
             Event event = new Event(id, name, EvKId, date, start_time, end_time, max_tickets, notes , venue_id, verified);
             return event;
         } catch (SQLException ex){
@@ -117,11 +145,19 @@ public class EventDAO implements IEventDataAccess{
         }
     }
 
+    /**
+     * Deleting a selected event from the database.
+     * @param event
+     * @throws Exception
+     */
     @Override
     public void deleteEvent(Event event) throws Exception {
+        //SQL Query.
         String sql = "DELETE FROM Event WHERE Event_ID = ?";
+        //Getting connection to the database.
         try(Connection conn = databaseConnector.getConnection()){
             PreparedStatement stmt = conn.prepareStatement(sql);
+            //Setting the parameter and executing the query.
             stmt.setInt(1, event.getId());
             stmt.execute();
         } catch (SQLException ex){
@@ -130,12 +166,20 @@ public class EventDAO implements IEventDataAccess{
         }
     }
 
+    /**
+     * Updating a selected event from the database.
+     * @param updatedEvent
+     * @throws Exception
+     */
     @Override
     public void updateEvent(Event updatedEvent) throws Exception {
+        //SQL Query.
         String sql = "UPDATE Event SET Name = ?, Date = ?, Start_Time = ?, End_Time = ?, Max_Tickets = ?, Notes = ? WHERE Event_ID = ?";
+        //Getting the connection to the database.
         try(Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
+            //Setting the parameters and executing it.
             stmt.setString(1, updatedEvent.getName());
             stmt.setDate(2, Date.valueOf(updatedEvent.getDate()));
             stmt.setTime(3, Time.valueOf(updatedEvent.getStart_time()));
@@ -154,14 +198,16 @@ public class EventDAO implements IEventDataAccess{
     @Override
     public User getEventKoordinator(int evkId) throws Exception{
         User user = null;
+        //SQL Query.
         String sql = "SELECT * FROM Event_Koordinator WHERE Id = ?";
+        //Getting connection to the database.
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, evkId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                //Map DB row to Song object
+                //Map DB row to user object
                 int id = rs.getInt("Id");
                 String last_name = rs.getString("Last_Name");
                 String first_name = rs.getString("First_Name");
@@ -172,23 +218,31 @@ public class EventDAO implements IEventDataAccess{
                 user = new User(id, last_name, first_name, user_name, password, role);
             }
             return user;
-        } catch (Exception ex) {
+        } catch (Exception ex){
             ex.printStackTrace();
             throw new Exception("Could not get EventKoordinator from databases", ex);
         }
     }
 
+    /**
+     * Getting the location from the database.
+     * @param LocationId
+     * @return
+     * @throws Exception
+     */
     @Override
     public Location getLocation(int LocationId) throws Exception{
         Location location = null;
+        //SQL Query.
         String sql = "SELECT * FROM Location WHERE Venue_ID = ?";
+        //Getting the database connection.
         try (Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, LocationId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                //Map DB row to Song object
+                //Map DB row to location.
                 int id = rs.getInt("Venue_ID");
                 String name = rs.getString("Name");
                 String address = rs.getString("Address");
@@ -202,12 +256,21 @@ public class EventDAO implements IEventDataAccess{
             throw new Exception("Could not get EventKoordinator from databases", ex);
         }
     }
+
+    /**
+     * Update the verification status based on the selected event.
+     * @param updatedEvent
+     * @throws Exception
+     */
     @Override
     public void updateVerficationStatus(Event updatedEvent) throws Exception {
+        //SQL Query.
         String sql = "UPDATE Event SET Verified = ? WHERE Event_ID = ?";
+        //Getting the database connection.
         try(Connection conn = databaseConnector.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
+            //Setting the parameters and executing the statement.
             stmt.setInt(1, updatedEvent.getVerified());
             stmt.setInt(2, updatedEvent.getId());
 
