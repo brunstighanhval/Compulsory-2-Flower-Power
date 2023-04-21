@@ -43,7 +43,7 @@ public class Mail {
 
 
         String path = "billet.pdf";
-        boolean filesExits = Files.exists(Path.of(path)); //check om filen eksisterer
+        boolean filesExits = Files.exists(Path.of(path)); //check if the file exists
 
         if (filesExits)
         {
@@ -55,6 +55,7 @@ public class Mail {
     }
 
     private void emailMessage(String mail) throws MessagingException {
+
         message = new MimeMessage(session);
 
         message.setFrom(new InternetAddress(userName));
@@ -67,14 +68,15 @@ public class Mail {
         message.setSubject("Mail Subject");
 
         String msg = "This is my first email using JavaMailer";
-
+        //mimeBodyPart is a MimeBodyPart object that represents the email message text.
         mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 
     }
-
+    //The emailSettings() method loads the email settings from a
+    // configuration file and sets them in the prop object
     private void emailSettings() throws IOException {
-
+        //prop is a Properties object that contains email settings.
         final String PROP_FILE = "Config/email.settings";
 
 

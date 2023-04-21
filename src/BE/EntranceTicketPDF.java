@@ -1,4 +1,5 @@
 package BE;
+
 import com.itextpdf.barcodes.BarcodeEAN;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -16,13 +17,11 @@ import com.itextpdf.layout.element.Table;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 
 import static com.itextpdf.kernel.colors.DeviceGray.GRAY;
 
@@ -64,8 +63,8 @@ public class EntranceTicketPDF {
 
                private void createBottom(String note)
                {
-                       float oneColumnWidth[] = {400f}; //to kolonner sat i en array
-                       Table bund = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
+                       float oneColumnWidth[] = {400f}; //two columns put in an array
+                       Table bund = new Table(oneColumnWidth); //The two columns are added to a table
                        bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
 
                        document.add(bund);
@@ -74,9 +73,9 @@ public class EntranceTicketPDF {
 
         private void createBody(String date,String startTime,String endTime)
         {
-                float twoColumnWidth[] = {80f, 200f}; //to kolonner sat i en array
+                float twoColumnWidth[] = {80f, 200f}; //two columns put in an array
 
-                Table body = new Table(twoColumnWidth); //De to kolonner er tilført til en tabel
+                Table body = new Table(twoColumnWidth); //The two columns are added to a table
                 body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph(date)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph("Tid")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
@@ -90,7 +89,7 @@ public class EntranceTicketPDF {
         {
                 String text="";
 
-                float oneColumnWidth[] = {400f}; //to kolonner sat i en array
+                float oneColumnWidth[] = {400f}; //two columns put in an array
 
                 switch (type)
                 {
@@ -110,7 +109,7 @@ public class EntranceTicketPDF {
 
 
 
-                Table header = new Table(oneColumnWidth); //De to kolonner er tilført til en tabel
+                Table header = new Table(oneColumnWidth); //The two columns are added to a table
                 header.addCell(new Cell().add(new Paragraph(text)).setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
                 document.add(header);
         }
@@ -118,7 +117,7 @@ public class EntranceTicketPDF {
         private void createOneSpace()
         {
                 Paragraph oneSp = new Paragraph("\n").setFontSize(6);
-                document.add(oneSp); //tilføjer en linje med afstand
+                document.add(oneSp); //adds a spaced line
         }
 
         private void createDivider() {
@@ -170,7 +169,7 @@ public class EntranceTicketPDF {
 
         public void showPDF() throws IOException {
 
-                boolean filesExits = Files.exists(Path.of(path)); //check om filen eksisterer
+                boolean filesExits = Files.exists(Path.of(path)); //check if the file exists
                 File file = new File(path);
 
                 try {
@@ -183,7 +182,7 @@ public class EntranceTicketPDF {
                                 if (file.exists()) desktop.open(file);
                         } //else
                         // informationUser("File do not exist!");
-                        // Her kaldes en metode, der viser et vindue med besked om, at filen ikke findes.
+                        // A method is called here that displays a window with a message that the file does not exist.
                         // Text file, should be opening in default text editor
 
                 } catch (Exception e) {
