@@ -33,7 +33,7 @@ public class Mail {
 
     }
 
-    private void emailAttachment() throws MessagingException, IOException {
+    private void emailAttachment() throws MessagingException, IOException { //Her tilføjes attachment
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);
@@ -67,8 +67,13 @@ public class Mail {
                 Message.RecipientType.TO, InternetAddress.parse(recipient));
         message.setSubject("Mail Subject");
 
+
         String msg = "This is my first email using JavaMailer";
         //mimeBodyPart is a MimeBodyPart object that represents the email message text.
+
+        String msg = "This is your ticket";
+
+
         mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 

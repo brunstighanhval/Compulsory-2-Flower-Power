@@ -63,9 +63,15 @@ public class EntranceTicketPDF {
 
                private void createBottom(String note)
                {
+
                        float oneColumnWidth[] = {400f}; //two columns put in an array
                        Table bund = new Table(oneColumnWidth); //The two columns are added to a table
                        bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
+
+                       float oneColumnWidth[] = {400f}; //en kolonner sat i en array
+                       Table bund = new Table(oneColumnWidth); //en kolonner er tilført til en tabel
+                       bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold()); //En celle får note en String.
+
 
                        document.add(bund);
                }
@@ -74,9 +80,12 @@ public class EntranceTicketPDF {
         private void createBody(String date,String startTime,String endTime)
         {
                 float twoColumnWidth[] = {80f, 200f}; //two columns put in an array
-
                 Table body = new Table(twoColumnWidth); //The two columns are added to a table
                 body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
+
+                Table body = new Table(twoColumnWidth); //De to kolonner er tilført til en tabel
+                body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold()); //Tilføjer 4 celler i to rækker
+
                 body.addCell(new Cell().add(new Paragraph(date)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph("Tid")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
                 body.addCell(new Cell().add(new Paragraph(startTime + "-" + endTime)).setFontSize(12f).setBorder(Border.NO_BORDER).setBold());
@@ -120,7 +129,7 @@ public class EntranceTicketPDF {
                 document.add(oneSp); //adds a spaced line
         }
 
-        private void createDivider() {
+        private void createDivider() { //Laver en grå streg
 
                 float fullWidth[] = {600};
 
@@ -180,10 +189,12 @@ public class EntranceTicketPDF {
 
 
                                 if (file.exists()) desktop.open(file);
+
                         } //else
                         // informationUser("File do not exist!");
                         // A method is called here that displays a window with a message that the file does not exist.
-                        // Text file, should be opening in default text editor
+
+
 
                 } catch (Exception e) {
                         throw new RuntimeException(e);
