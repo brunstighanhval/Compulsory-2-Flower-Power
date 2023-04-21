@@ -32,6 +32,10 @@ public class Mail {
         Transport.send(message);
 
     }
+    /**
+     * Making the attachment to a mail.
+     * @throws Exception
+     */
 
     private void emailAttachment() throws MessagingException, IOException { //Her tilføjes attachment
 
@@ -54,6 +58,13 @@ public class Mail {
         }
     }
 
+    /**
+     * Givning the Message in the mail.
+     * @param mail
+     * @throws Exception
+     */
+
+
     private void emailMessage(String mail) throws MessagingException {
 
         message = new MimeMessage(session);
@@ -68,9 +79,6 @@ public class Mail {
         message.setSubject("Mail Subject");
 
 
-        String msg = "This is my first email using JavaMailer";
-        //mimeBodyPart is a MimeBodyPart object that represents the email message text.
-
         String msg = "This is your ticket";
 
 
@@ -80,6 +88,14 @@ public class Mail {
     }
     //The emailSettings() method loads the email settings from a
     // configuration file and sets them in the prop object
+
+
+    /**
+     * Setting up the email settings
+     * @throws Exception
+     */
+
+
     private void emailSettings() throws IOException {
         //prop is a Properties object that contains email settings.
         final String PROP_FILE = "Config/email.settings";

@@ -68,9 +68,7 @@ public class EntranceTicketPDF {
                        Table bund = new Table(oneColumnWidth); //The two columns are added to a table
                        bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold());
 
-                       float oneColumnWidth[] = {400f}; //a column set in an array
-                       Table bund = new Table(oneColumnWidth); //a column is added to a table
-                       bund.addCell(new Cell().add(new Paragraph(note)).setFontSize(10f).setBorder(Border.NO_BORDER).setBold()); //En celle får note en String.
+
 
 
                        document.add(bund);
@@ -80,8 +78,7 @@ public class EntranceTicketPDF {
         private void createBody(String date,String startTime,String endTime)
         {
                 float twoColumnWidth[] = {80f, 200f}; //two columns put in an array
-                Table body = new Table(twoColumnWidth); //The two columns are added to a table
-                body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold());
+
 
                 Table body = new Table(twoColumnWidth); //The two columns are added to a table
                 body.addCell(new Cell().add(new Paragraph("Dato")).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setBold()); //Tilføjer 4 celler i to rækker
